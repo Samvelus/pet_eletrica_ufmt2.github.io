@@ -4,7 +4,14 @@
         {
             "id": 6,
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "Acessibilidade": "False",
+                "Andar": "1",
+                "Bloco": "FAET",
+                "Capacidade": "null",
+                "Nome": "Laboratório de topografia",
+                "Tipo": "Laboratório"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -37,19 +44,10 @@
             "id": "polygon_1753385750735_ejsrefljd",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T19:35:50.735Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T19:35:50.735Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T19:35:50.735Z",
-                "featureId": "polygon_1753385750735_ejsrefljd",
-                "id": "polygon_1753385750735_ejsrefljd",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
+                "nome": "AU 04",
                 "tipo": "Sala"
             },
             "geometry": {
@@ -64,8 +62,8 @@
                             -15.608250237034648
                         ],
                         [
-                            -56.064488,
-                            -15.608344
+                            -56.06448685163045,
+                            -15.608343336387433
                         ],
                         [
                             -56.064405272763274,
@@ -84,19 +82,10 @@
             "id": "polygon_1753385719596_5e455r7ch",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T19:35:19.596Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T19:35:19.596Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T19:35:19.596Z",
-                "featureId": "polygon_1753385719596_5e455r7ch",
-                "id": "polygon_1753385719596_5e455r7ch",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
+                "nome": "AU 03",
                 "tipo": "Sala"
             },
             "geometry": {
@@ -131,19 +120,10 @@
             "id": "polygon_1753385671758_zz19cbpfs",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T19:34:31.758Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T19:34:31.758Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T19:34:31.759Z",
-                "featureId": "polygon_1753385671758_zz19cbpfs",
-                "id": "polygon_1753385671758_zz19cbpfs",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
+                "nome": "AU 02",
                 "tipo": "Sala"
             },
             "geometry": {
@@ -178,19 +158,10 @@
             "id": "polygon_1753385493206_sw221iht3",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T19:31:33.206Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T19:31:33.206Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T19:31:33.206Z",
-                "featureId": "polygon_1753385493206_sw221iht3",
-                "id": "polygon_1753385493206_sw221iht3",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
+                "nome": "AU 01",
                 "tipo": "Sala"
             },
             "geometry": {
@@ -225,20 +196,11 @@
             "id": "polygon_1753371356430_4pm9brdeb",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T15:35:56.430Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T15:35:56.430Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T15:35:56.431Z",
-                "featureId": "polygon_1753371356430_4pm9brdeb",
-                "id": "polygon_1753371356430_4pm9brdeb",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "CA Física",
+                "tipo": "Centro acadêmico"
             },
             "geometry": {
                 "coordinates": [
@@ -272,20 +234,11 @@
             "id": "polygon_1753371371989_hke396hky",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T15:36:11.989Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T15:36:11.989Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T15:36:11.989Z",
-                "featureId": "polygon_1753371371989_hke396hky",
-                "id": "polygon_1753371371989_hke396hky",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "CA Química",
+                "tipo": "Centro acadêmico"
             },
             "geometry": {
                 "coordinates": [
@@ -319,20 +272,11 @@
             "id": "polygon_1753371385933_byfve6yh5",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T15:36:25.933Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T15:36:25.933Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T15:36:25.933Z",
-                "featureId": "polygon_1753371385933_byfve6yh5",
-                "id": "polygon_1753371385933_byfve6yh5",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "CA Engenharia elétrica",
+                "tipo": "Centro acadêmico"
             },
             "geometry": {
                 "coordinates": [
@@ -366,20 +310,11 @@
             "id": "polygon_1753371418485_q0e62e3ma",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T15:36:58.485Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T15:36:58.485Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T15:36:58.486Z",
-                "featureId": "polygon_1753371418485_q0e62e3ma",
-                "id": "polygon_1753371418485_q0e62e3ma",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "CA Engenharia sanitária",
+                "tipo": "Centro acadêmico"
             },
             "geometry": {
                 "coordinates": [
@@ -413,20 +348,11 @@
             "id": "polygon_1753382754159_bbzxvz2zy",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T18:45:54.159Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T18:45:54.159Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T18:45:54.160Z",
-                "featureId": "polygon_1753382754159_bbzxvz2zy",
-                "id": "polygon_1753382754159_bbzxvz2zy",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "ENE 104 Laboratório de Conversão de energia",
+                "tipo": "Laboratório"
             },
             "geometry": {
                 "coordinates": [
@@ -460,19 +386,10 @@
             "id": "polygon_1753382660104_oyt8zf6xg",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T18:44:20.104Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T18:44:20.104Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T18:44:20.104Z",
-                "featureId": "polygon_1753382660104_oyt8zf6xg",
-                "id": "polygon_1753382660104_oyt8zf6xg",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
+                "nome": "109",
                 "tipo": "Sala"
             },
             "geometry": {
@@ -507,20 +424,11 @@
             "id": "polygon_1753382783487_3wki9qqe5",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T18:46:23.487Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T18:46:23.487Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T18:46:23.487Z",
-                "featureId": "polygon_1753382783487_3wki9qqe5",
-                "id": "polygon_1753382783487_3wki9qqe5",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "ENE Laboratório de medidas elétricas",
+                "tipo": "Laboratório"
             },
             "geometry": {
                 "coordinates": [
@@ -554,19 +462,10 @@
             "id": "polygon_1753382633848_emh1zpfoy",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T18:43:53.848Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T18:43:53.848Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T18:43:53.848Z",
-                "featureId": "polygon_1753382633848_emh1zpfoy",
-                "id": "polygon_1753382633848_emh1zpfoy",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
+                "nome": "ENE 110ALMOXARIFADO",
                 "tipo": "Sala"
             },
             "geometry": {
@@ -601,20 +500,11 @@
             "id": "polygon_1753382808323_tzvayz6r4",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T18:46:48.323Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T18:46:48.323Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T18:46:48.324Z",
-                "featureId": "polygon_1753382808323_tzvayz6r4",
-                "id": "polygon_1753382808323_tzvayz6r4",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "ENE 106 Laboratório de eletrônica de potência",
+                "tipo": "Laboratório"
             },
             "geometry": {
                 "coordinates": [
@@ -648,19 +538,10 @@
             "id": "polygon_1753382607689_0lmppxlvk",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T18:43:27.689Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T18:43:27.689Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T18:43:27.689Z",
-                "featureId": "polygon_1753382607689_0lmppxlvk",
-                "id": "polygon_1753382607689_0lmppxlvk",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
+                "nome": "ENE 111 LAB. Circuitos",
                 "tipo": "Sala"
             },
             "geometry": {
@@ -695,20 +576,11 @@
             "id": "polygon_1753381509898_jnqcl01gn",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T18:25:09.898Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T18:25:09.898Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T18:25:09.899Z",
-                "featureId": "polygon_1753381509898_jnqcl01gn",
-                "id": "polygon_1753381509898_jnqcl01gn",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "ENE 107 Laboratório de microprocessadores",
+                "tipo": "Laboratório"
             },
             "geometry": {
                 "coordinates": [
@@ -726,8 +598,8 @@
                             -15.607969110642191
                         ],
                         [
-                            -56.063943493464144,
-                            -15.607939348170188
+                            -56.06394231999764,
+                            -15.607939832538815
                         ],
                         [
                             -56.063994931343906,
@@ -742,20 +614,11 @@
             "id": "polygon_1753381493698_hhmx622gj",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T18:24:53.698Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T18:24:53.698Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T18:24:53.699Z",
-                "featureId": "polygon_1753381493698_hhmx622gj",
-                "id": "polygon_1753381493698_hhmx622gj",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "ENE 112 Laboratório de qualidade de energia",
+                "tipo": "Laboratório"
             },
             "geometry": {
                 "coordinates": [
@@ -786,70 +649,14 @@
             }
         },
         {
-            "id": "polygon_1753381915806_t20on87q6",
-            "type": "Feature",
-            "properties": {
-                "_created": "2025-07-24T18:31:55.807Z",
-                "_geometry_type": "Polygon",
-                "acessibilidade": false,
-                "addedToStore": "2025-07-24T18:31:55.807Z",
-                "andar": 1,
-                "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T18:31:55.807Z",
-                "featureId": "polygon_1753381915806_t20on87q6",
-                "id": "polygon_1753381915806_t20on87q6",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
-                "tipo": "Sala"
-            },
-            "geometry": {
-                "coordinates": [
-                    [
-                        [
-                            -56.06394336547506,
-                            -15.60793952443931
-                        ],
-                        [
-                            -56.06398328763297,
-                            -15.607969343922981
-                        ],
-                        [
-                            -56.06392511235582,
-                            -15.608039975963875
-                        ],
-                        [
-                            -56.06388607930432,
-                            -15.60801026954619
-                        ],
-                        [
-                            -56.06394336547506,
-                            -15.60793952443931
-                        ]
-                    ]
-                ],
-                "type": "Polygon"
-            }
-        },
-        {
             "id": "polygon_1753381886495_h6q7bmal3",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T18:31:26.495Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T18:31:26.495Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T18:31:26.499Z",
-                "featureId": "polygon_1753381886495_h6q7bmal3",
-                "id": "polygon_1753381886495_h6q7bmal3",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "ENE 108 Laboratório telecomunicações",
+                "tipo": "Laboratório"
             },
             "geometry": {
                 "coordinates": [
@@ -859,12 +666,12 @@
                             -15.60790934560966
                         ],
                         [
-                            -56.06394313287942,
-                            -15.607939701416685
+                            -56.063983407466914,
+                            -15.607969303769822
                         ],
                         [
-                            -56.06388637991782,
-                            -15.608010319460314
+                            -56.0639248954362,
+                            -15.608040234987735
                         ],
                         [
                             -56.063843744013184,
@@ -883,19 +690,10 @@
             "id": "polygon_1753382010526_362fv26rv",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T18:33:30.526Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T18:33:30.526Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T18:33:30.526Z",
-                "featureId": "polygon_1753382010526_362fv26rv",
-                "id": "polygon_1753382010526_362fv26rv",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
+                "nome": "ENE 113A",
                 "tipo": "Sala"
             },
             "geometry": {
@@ -930,19 +728,10 @@
             "id": "polygon_1753382204068_rfquu5fl4",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T18:36:44.068Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T18:36:44.068Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T18:36:44.068Z",
-                "featureId": "polygon_1753382204068_rfquu5fl4",
-                "id": "polygon_1753382204068_rfquu5fl4",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
+                "nome": "Sala de pesquisa (Operação de sistemas elétricos e redes digitais)",
                 "tipo": "Sala"
             },
             "geometry": {
@@ -977,20 +766,11 @@
             "id": "polygon_1753382920429_zj310zhqu",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T18:48:40.429Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T18:48:40.430Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T18:48:40.430Z",
-                "featureId": "polygon_1753382920429_zj310zhqu",
-                "id": "polygon_1753382920429_zj310zhqu",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "LAMINE",
+                "tipo": "Laboratório"
             },
             "geometry": {
                 "coordinates": [
@@ -1032,20 +812,11 @@
             "id": "polygon_1753382883318_o993udtbz",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T18:48:03.318Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T18:48:03.318Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T18:48:03.318Z",
-                "featureId": "polygon_1753382883318_o993udtbz",
-                "id": "polygon_1753382883318_o993udtbz",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "ENE 102 Laboratório de máquinas",
+                "tipo": "Laboratório"
             },
             "geometry": {
                 "coordinates": [
@@ -1079,20 +850,11 @@
             "id": "polygon_1753382845278_ktguso6o1",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T18:47:25.278Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T18:47:25.278Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T18:47:25.279Z",
-                "featureId": "polygon_1753382845278_ktguso6o1",
-                "id": "polygon_1753382845278_ktguso6o1",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "ENE 103 Laboratório Eletrotécnica",
+                "tipo": "Laboratório"
             },
             "geometry": {
                 "coordinates": [
@@ -1126,20 +888,11 @@
             "id": "polygon_1753380209998_7usgix7ku",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T18:03:29.998Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T18:03:29.999Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "created": "2025-07-24T18:03:29.999Z",
-                "featureId": "polygon_1753380209998_7usgix7ku",
-                "id": "polygon_1753380209998_7usgix7ku",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "modified": "2025-07-24T18:28:20.895Z",
                 "nome": "FAETINF",
-                "tipo": "Sala"
+                "tipo": "Laboratório"
             },
             "geometry": {
                 "coordinates": [
@@ -1177,21 +930,11 @@
             "id": "polygon_1753380903560_v3f5tjxpp",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T18:15:03.560Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T18:15:03.560Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T18:15:03.561Z",
-                "featureId": "polygon_1753380903560_v3f5tjxpp",
-                "id": "polygon_1753380903560_v3f5tjxpp",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "modified": "2025-07-24T18:29:46.271Z",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "AU 116",
+                "tipo": "Ateliê"
             },
             "geometry": {
                 "coordinates": [
@@ -1225,20 +968,10 @@
             "id": "polygon_1753381455171_o76n397mo",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T18:24:15.171Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T18:24:15.171Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T18:24:15.172Z",
-                "featureId": "polygon_1753381455171_o76n397mo",
-                "id": "polygon_1753381455171_o76n397mo",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "modified": "2025-07-24T18:30:28.287Z",
-                "nome": "???",
+                "nome": "ENC 115",
                 "tipo": "Sala"
             },
             "geometry": {
@@ -1273,20 +1006,11 @@
             "id": "polygon_1753382436482_9pohg7koj",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T18:40:36.482Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T18:40:36.483Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T18:40:36.484Z",
-                "featureId": "polygon_1753382436482_9pohg7koj",
-                "id": "polygon_1753382436482_9pohg7koj",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "OHMEGA",
+                "tipo": "Laboratório"
             },
             "geometry": {
                 "coordinates": [
@@ -1320,19 +1044,10 @@
             "id": "polygon_1753386424518_5d77vs7aq",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T19:47:04.518Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T19:47:04.518Z",
                 "andar": 1,
-                "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T19:47:04.518Z",
-                "featureId": "polygon_1753386424518_5d77vs7aq",
-                "id": "polygon_1753386424518_5d77vs7aq",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
+                "bloco": "PROAD",
+                "nome": "Sala 16",
                 "tipo": "Sala"
             },
             "geometry": {
@@ -1343,16 +1058,16 @@
                             -15.608641
                         ],
                         [
-                            -56.064308,
-                            -15.608593
+                            -56.06430351043947,
+                            -15.608589125057778
                         ],
                         [
-                            -56.064358,
-                            -15.608536
+                            -56.064348332370784,
+                            -15.608536968737212
                         ],
                         [
-                            -56.064417,
-                            -15.608586
+                            -56.06441264796124,
+                            -15.608588095772985
                         ],
                         [
                             -56.064367,
@@ -1367,43 +1082,34 @@
             "id": "polygon_1753386363518_4ppa3ycyb",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T19:46:03.518Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T19:46:03.518Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T19:46:03.519Z",
-                "featureId": "polygon_1753386363518_4ppa3ycyb",
-                "id": "polygon_1753386363518_4ppa3ycyb",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "Laboratório de conforto ambiental",
+                "tipo": "Laboratório"
             },
             "geometry": {
                 "coordinates": [
                     [
                         [
-                            -56.06426156463571,
-                            -15.608446231060954
+                            -56.064282480876166,
+                            -15.608422930922304
                         ],
                         [
                             -56.06419735740965,
                             -15.608519361498322
                         ],
                         [
-                            -56.06428053716613,
-                            -15.608584487454266
+                            -56.064278675283745,
+                            -15.60858430813353
                         ],
                         [
-                            -56.064344,
-                            -15.608512
+                            -56.06436093144405,
+                            -15.608488750333914
                         ],
                         [
-                            -56.06426156463571,
-                            -15.608446231060954
+                            -56.064282480876166,
+                            -15.608422930922304
                         ]
                     ]
                 ],
@@ -1414,43 +1120,34 @@
             "id": "polygon_1753386316233_ed9ydjuke",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T19:45:16.233Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T19:45:16.233Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T19:45:16.233Z",
-                "featureId": "polygon_1753386316233_ed9ydjuke",
-                "id": "polygon_1753386316233_ed9ydjuke",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "NAU",
+                "tipo": "Laboratório"
             },
             "geometry": {
                 "coordinates": [
                     [
                         [
-                            -56.06430165179276,
-                            -15.608398292162311
+                            -56.06433610398399,
+                            -15.60835997494336
                         ],
                         [
-                            -56.06438365179276,
-                            -15.608464292162312
+                            -56.06441592468922,
+                            -15.608424360383198
                         ],
                         [
-                            -56.06434365179276,
-                            -15.608511292162312
+                            -56.06436116677573,
+                            -15.6084888168728
                         ],
                         [
-                            -56.064261400177,
-                            -15.608446171555107
+                            -56.06428246397948,
+                            -15.608422431992215
                         ],
                         [
-                            -56.06430165179276,
-                            -15.608398292162311
+                            -56.06433610398399,
+                            -15.60835997494336
                         ]
                     ]
                 ],
@@ -1461,89 +1158,34 @@
             "id": "polygon_1753386272111_0vefra7fl",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T19:44:32.111Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T19:44:32.111Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "created": "2025-07-24T19:44:32.114Z",
-                "featureId": "polygon_1753386272111_0vefra7fl",
-                "id": "polygon_1753386272111_0vefra7fl",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "NAU",
-                "tipo": "Sala"
+                "nome": "Laboratório ergonomia",
+                "tipo": "Laboratório"
             },
             "geometry": {
                 "coordinates": [
                     [
                         [
-                            -56.064356474452566,
-                            -15.608337365377622
+                            -56.06440454491006,
+                            -15.608280916699414
                         ],
                         [
-                            -56.06443877141104,
-                            -15.608400302478362
+                            -56.064486841868536,
+                            -15.608343853800154
                         ],
                         [
-                            -56.06438347445256,
-                            -15.608463365377622
+                            -56.06441633551365,
+                            -15.608424737697169
                         ],
                         [
-                            -56.06430143915802,
-                            -15.608398045430969
+                            -56.06433641908246,
+                            -15.608359764921156
                         ],
                         [
-                            -56.064356474452566,
-                            -15.608337365377622
-                        ]
-                    ]
-                ],
-                "type": "Polygon"
-            }
-        },
-        {
-            "id": "polygon_1753385818542_621ce723j",
-            "type": "Feature",
-            "properties": {
-                "_created": "2025-07-24T19:36:58.542Z",
-                "_geometry_type": "Polygon",
-                "acessibilidade": false,
-                "addedToStore": "2025-07-24T19:36:58.542Z",
-                "andar": 1,
-                "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T19:36:58.543Z",
-                "featureId": "polygon_1753385818542_621ce723j",
-                "id": "polygon_1753385818542_621ce723j",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
-                "tipo": "Sala"
-            },
-            "geometry": {
-                "coordinates": [
-                    [
-                        [
-                            -56.06440513431073,
-                            -15.608280387366763
-                        ],
-                        [
-                            -56.064488,
-                            -15.608344
-                        ],
-                        [
-                            -56.0644392094547,
-                            -15.608399213192628
-                        ],
-                        [
-                            -56.06435670245351,
-                            -15.608336968001748
-                        ],
-                        [
-                            -56.06440513431073,
-                            -15.608280387366763
+                            -56.06440454491006,
+                            -15.608280916699414
                         ]
                     ]
                 ],
@@ -1554,20 +1196,10 @@
             "id": "polygon_1753371547180_8ck6k3nxe",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T15:39:07.180Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T15:39:07.180Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T15:39:07.180Z",
-                "featureId": "polygon_1753371547180_8ck6k3nxe",
-                "id": "polygon_1753371547180_8ck6k3nxe",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "modified": "2025-07-24T15:40:01.363Z",
-                "nome": "???",
+                "nome": "Departamento de estatística",
                 "tipo": "Sala"
             },
             "geometry": {
@@ -1602,19 +1234,10 @@
             "id": "polygon_1753371494092_fq304m2we",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T15:38:14.092Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T15:38:14.092Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T15:38:14.093Z",
-                "featureId": "polygon_1753371494092_fq304m2we",
-                "id": "polygon_1753371494092_fq304m2we",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
+                "nome": "",
                 "tipo": "Sala"
             },
             "geometry": {
@@ -1649,20 +1272,10 @@
             "id": "polygon_1753371559819_oub2385hw",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T15:39:19.819Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T15:39:19.819Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T15:39:19.820Z",
-                "featureId": "polygon_1753371559819_oub2385hw",
-                "id": "polygon_1753371559819_oub2385hw",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "modified": "2025-07-24T15:40:39.906Z",
-                "nome": "???",
+                "nome": "",
                 "tipo": "Sala"
             },
             "geometry": {
@@ -1697,20 +1310,11 @@
             "id": "polygon_1753371509467_x88mkupm4",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T15:38:29.467Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T15:38:29.468Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T15:38:29.468Z",
-                "featureId": "polygon_1753371509467_x88mkupm4",
-                "id": "polygon_1753371509467_x88mkupm4",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "CA Engenharia civil",
+                "tipo": "Centro acadêmico"
             },
             "geometry": {
                 "coordinates": [
@@ -1748,20 +1352,10 @@
             "id": "polygon_1753372719601_7h48c6sfo",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T15:58:39.601Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T15:58:39.601Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T15:58:39.602Z",
-                "featureId": "polygon_1753372719601_7h48c6sfo",
-                "id": "polygon_1753372719601_7h48c6sfo",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "modified": "2025-07-24T16:05:16.893Z",
-                "nome": "???",
+                "nome": "Sala dos professores estatística",
                 "tipo": "Sala"
             },
             "geometry": {
@@ -1796,21 +1390,11 @@
             "id": "polygon_1753371524875_su3l2x1j9",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T15:38:44.876Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T15:38:44.876Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T15:38:44.876Z",
-                "featureId": "polygon_1753371524875_su3l2x1j9",
-                "id": "polygon_1753371524875_su3l2x1j9",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "modified": "2025-07-24T16:06:22.436Z",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "CA Matemática",
+                "tipo": "Centro acadêmico"
             },
             "geometry": {
                 "coordinates": [
@@ -1844,19 +1428,10 @@
             "id": "polygon_1753371128407_tm0m7bytb",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T15:32:08.407Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T15:32:08.407Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T15:32:08.407Z",
-                "featureId": "polygon_1753371128407_tm0m7bytb",
-                "id": "polygon_1753371128407_tm0m7bytb",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "nome": "???",
+                "nome": "Pós graduação",
                 "tipo": "Sala"
             },
             "geometry": {
@@ -1891,20 +1466,10 @@
             "id": "polygon_1753371170527_103xfy8ur",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T15:32:50.527Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T15:32:50.527Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T15:32:50.528Z",
-                "featureId": "polygon_1753371170527_103xfy8ur",
-                "id": "polygon_1753371170527_103xfy8ur",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "modified": "2025-07-24T15:59:46.448Z",
-                "nome": "???",
+                "nome": "Pós graduação",
                 "tipo": "Sala"
             },
             "geometry": {
@@ -1947,20 +1512,11 @@
             "id": "polygon_1753371048424_nqv09mqp9",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T15:30:48.424Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T15:30:48.424Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "created": "2025-07-24T15:30:48.424Z",
-                "featureId": "polygon_1753371048424_nqv09mqp9",
-                "id": "polygon_1753371048424_nqv09mqp9",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "modified": "2025-07-24T15:34:50.013Z",
-                "nome": "ICET 2",
-                "tipo": "Sala"
+                "nome": "ICET DEST Laboratório de pesquisa e extensão",
+                "tipo": "Laboratório"
             },
             "geometry": {
                 "coordinates": [
@@ -2044,19 +1600,10 @@
             "id": "polygon_1753371027064_wfr83hqr0",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T15:30:27.064Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T15:30:27.065Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "created": "2025-07-24T15:30:27.065Z",
-                "featureId": "polygon_1753371027064_wfr83hqr0",
-                "id": "polygon_1753371027064_wfr83hqr0",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "modified": "2025-07-24T15:42:19.513Z",
-                "nome": "ICET",
+                "nome": "Saala de estudos ICET",
                 "tipo": "Sala"
             },
             "geometry": {
@@ -2099,20 +1646,10 @@
             "id": "polygon_1753371111919_ltnf6a197",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T15:31:51.919Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T15:31:51.920Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T15:31:51.920Z",
-                "featureId": "polygon_1753371111919_ltnf6a197",
-                "id": "polygon_1753371111919_ltnf6a197",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "modified": "2025-07-24T15:57:37.234Z",
-                "nome": "???",
+                "nome": "ALIQUAM",
                 "tipo": "Sala"
             },
             "geometry": {
@@ -2194,21 +1731,11 @@
             "id": "polygon_1753372744504_rehkxc4i9",
             "type": "Feature",
             "properties": {
-                "_created": "2025-07-24T15:59:04.504Z",
-                "_geometry_type": "Polygon",
                 "acessibilidade": false,
-                "addedToStore": "2025-07-24T15:59:04.504Z",
                 "andar": 1,
                 "bloco": "FAET",
-                "capacidade": null,
-                "created": "2025-07-24T15:59:04.505Z",
-                "featureId": "polygon_1753372744504_rehkxc4i9",
-                "id": "polygon_1753372744504_rehkxc4i9",
-                "layerId": "vector_layer_1753370699830_k8klanfkj",
-                "layerName": "salas",
-                "modified": "2025-07-24T16:05:38.820Z",
-                "nome": "???",
-                "tipo": "Sala"
+                "nome": "CA Arquitetura",
+                "tipo": "Centro acadêmico"
             },
             "geometry": {
                 "coordinates": [
@@ -2292,7 +1819,13 @@
         {
             "id": "KKb3eGvaYlnvdccr5OmVr7aLxD2yui1v",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "LAPE",
+                "tipo": "Laboratório"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2324,7 +1857,13 @@
         {
             "id": "UESjSsxy0oLBeR8kgIoKo7Hkz2BD5JzK",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "Laboratorio de Materias de Construção",
+                "tipo": "Sala"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2364,7 +1903,13 @@
         {
             "id": "LZUaEOv4sLR3nczGJeSoUAGHv2cE7cqQ",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "ENC 108",
+                "tipo": "Sala"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2396,7 +1941,13 @@
         {
             "id": "v1Bp0Xm2WzK2kcnQNChMhlQGfLJ3U96L",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "ENC 109",
+                "tipo": "Sala"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2428,7 +1979,13 @@
         {
             "id": "wTPdNthWnL8CMU81IzM965JXoXxRF0Q5",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "Laboratório de mecânica do solo (apoio)",
+                "tipo": "Laboratório"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2460,7 +2017,13 @@
         {
             "id": "ZbZgKx77jfniBvIcVMLIp5hwxSeLuTNw",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "Sala de monitoria ENC",
+                "tipo": "Sala"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2492,7 +2055,13 @@
         {
             "id": "nOLu1d5Dms7ywde1NFAKIlxqINDguKX5",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "Laboratório materiais de construção(apoio)",
+                "tipo": "Laboratório"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2524,7 +2093,13 @@
         {
             "id": "qsJoq35uALeiwAfSXsgmppXSBwzoFT12",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "Cantina",
+                "tipo": "Cantina"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2556,7 +2131,13 @@
         {
             "id": "Pyt1QxZmUPtUB0KnAjyLSimSPHlPXz9e",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "Laboratório dinâmica de estruturas",
+                "tipo": "Laboratório"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2588,7 +2169,13 @@
         {
             "id": "JKruNuSpXJN7MWH0SLfna3FAgac613m8",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "DARQ FAET",
+                "tipo": "Sala"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2620,7 +2207,13 @@
         {
             "id": "tRUifzJTF1JKb834Ih9kjKKvHtn5NcdZ",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "LIAMA",
+                "tipo": "Laboratório"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2652,7 +2245,13 @@
         {
             "id": "LxecSVUR3feMO1mOag062y5x3uc0TBGR",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "ENC 105",
+                "tipo": "Sala"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2684,7 +2283,13 @@
         {
             "id": "BGbuafLW52JowdfhUl1yVVkQzhQVHWMq",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "Sala de estudos arquitetura",
+                "tipo": "Sala"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2716,7 +2321,13 @@
         {
             "id": "qVYoMflN4zgfDsVBtMlFdgTshrtFKl5f",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "AU 101",
+                "tipo": "Sala"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2748,7 +2359,13 @@
         {
             "id": "z0pOSTwpsxjEczXeZ9OpKC34iMEJwM8R",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "Laboratório aquário",
+                "tipo": "Laboratório"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2780,7 +2397,13 @@
         {
             "id": "UTVXMogy33s2aNHyvUegScdCNh1ozlbG",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "Laboratório Vera Sandanielo",
+                "tipo": "Laboratório"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2816,7 +2439,13 @@
         {
             "id": "MQ0wiAmixVXSieMNwA0ZJxyBvS7ltD4x",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "Sala 13",
+                "tipo": "Sala"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2848,7 +2477,13 @@
         {
             "id": "tz82TLRRfjfxdrd0u1pWl0Ob2syWeXLu",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "Laboratório de mecânica dos solos",
+                "tipo": "Laboratório"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2880,7 +2515,13 @@
         {
             "id": "zkNLqqc86hrRsp7MITbq3bB50G3eAiUt",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "REAMEC",
+                "tipo": "Sala"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2912,7 +2553,13 @@
         {
             "id": "0JS8rAP2wP3RnNYJR8wvIyK8u48PGffH",
             "type": "Feature",
-            "properties": {},
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "Laboratório asfalto",
+                "tipo": "Laboratório"
+            },
             "geometry": {
                 "coordinates": [
                     [
@@ -2935,6 +2582,234 @@
                         [
                             -56.064365,
                             -15.608116
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "TPUmc1ogiutDb1lLr1gg5e8U4laV51DG",
+            "type": "Feature",
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "PROAD",
+                "nome": "Proad 01",
+                "tipo": "Sala"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.06449686655641,
+                            -15.608651943807814
+                        ],
+                        [
+                            -56.064558278395225,
+                            -15.608703263611446
+                        ],
+                        [
+                            -56.06451031294128,
+                            -15.60875563868241
+                        ],
+                        [
+                            -56.06444834567874,
+                            -15.608703562185113
+                        ],
+                        [
+                            -56.06449686655641,
+                            -15.608651943807814
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "BK5v8KIbntXNzv0hR76er2OTbNGMTd3t",
+            "type": "Feature",
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "PROAD",
+                "nome": "Proad 02",
+                "tipo": "Sala"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.06455859047661,
+                            -15.608703498818457
+                        ],
+                        [
+                            -56.06461480372005,
+                            -15.608749544187788
+                        ],
+                        [
+                            -56.06456572189332,
+                            -15.608799413196422
+                        ],
+                        [
+                            -56.064510287968645,
+                            -15.608754565934447
+                        ],
+                        [
+                            -56.06455859047661,
+                            -15.608703498818457
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "HvwI9YbgOD7e1hux1Y51go4VLeeao2I8",
+            "type": "Feature",
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "PROAD",
+                "nome": "Proad 03",
+                "tipo": "Sala"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.06466519440609,
+                            -15.608790808462842
+                        ],
+                        [
+                            -56.064614968598306,
+                            -15.608749784658528
+                        ],
+                        [
+                            -56.0645658247428,
+                            -15.608799736107017
+                        ],
+                        [
+                            -56.06461742971747,
+                            -15.608843478908824
+                        ],
+                        [
+                            -56.06466519440609,
+                            -15.608790808462842
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "Vr55irTrPlUZ0UN4qE0oFHWfHQ1N8uVw",
+            "type": "Feature",
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "PROAD",
+                "nome": "Proad 04",
+                "tipo": "Sala"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.06460193855021,
+                            -15.608569315983218
+                        ],
+                        [
+                            -56.064559068032665,
+                            -15.608615766725364
+                        ],
+                        [
+                            -56.06460301031308,
+                            -15.608652927311496
+                        ],
+                        [
+                            -56.064647958422356,
+                            -15.60860795873404
+                        ],
+                        [
+                            -56.06460193855021,
+                            -15.608569315983218
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "veOme6dF5r6e3cxxOxBLr14JXnNIOWAa",
+            "type": "Feature",
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "PROAD",
+                "nome": "Proad 05",
+                "tipo": "Sala"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.064648087071205,
+                            -15.60860748573829
+                        ],
+                        [
+                            -56.064603438468794,
+                            -15.608652875179345
+                        ],
+                        [
+                            -56.06464567420355,
+                            -15.608691298351587
+                        ],
+                        [
+                            -56.064689885825885,
+                            -15.60864154960943
+                        ],
+                        [
+                            -56.064648087071205,
+                            -15.60860748573829
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "gBL3MDGGlfluDnxbhiffiJtJiLxJogas",
+            "type": "Feature",
+            "properties": {
+                "acessibilidade": false,
+                "andar": 1,
+                "bloco": "FAET",
+                "nome": "GEPEMAT",
+                "tipo": "Sala"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.06474150546728,
+                            -15.608053395360997
+                        ],
+                        [
+                            -56.06465819303541,
+                            -15.607988534470039
+                        ],
+                        [
+                            -56.06470887476499,
+                            -15.607928354243
+                        ],
+                        [
+                            -56.06479010438579,
+                            -15.607994552491775
+                        ],
+                        [
+                            -56.06474150546728,
+                            -15.608053395360997
                         ]
                     ]
                 ],
