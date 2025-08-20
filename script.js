@@ -48,9 +48,9 @@ function initMap() {
 async function loadGeoJSONData() {
     try {
         const [salasResponse, rotasResponse, banheirosResponse] = await Promise.all([
-            fetch('data/salas_1.geojson'),
-            fetch('data/rotas.geojson'),
-            fetch('data/banheiros.geojson')
+            fetch('salas_1.geojson'),
+            fetch('rotas.geojson'),
+            fetch('banheiros.geojson')
         ]);
 
         salasData = await salasResponse.json();
@@ -290,3 +290,4 @@ function drawRoute(destinationSalaName, accessibilityNeeded) {
         alert("Nenhuma rota encontrada para esta sala com o perfil escolhido.");
     }
 }
+
