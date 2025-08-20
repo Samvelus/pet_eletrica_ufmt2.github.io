@@ -290,4 +290,3 @@ function drawRoute(destinationSalaName, accessibilityNeeded) {
         alert("Nenhuma rota encontrada para esta sala com o perfil escolhido.");
     }
 }
-
