@@ -48,7 +48,7 @@ function initMap() {
 async function loadGeoJSONData() {
     try {
         const [salasResponse, rotasResponse, banheirosResponse] = await Promise.all([
-            fetch('https://github.com/Samvelus/pet_eletrica_ufmt.github.io/blob/201f0c067b6ccb166af42dd1f663b373f8b44d6d/salas_1.geojson'),
+            fetch('salas_1.geojson'),
             fetch('rotas.geojson'),
             fetch('banheiros.geojson')
         ]);
@@ -290,5 +290,6 @@ function drawRoute(destinationSalaName, accessibilityNeeded) {
         alert("Nenhuma rota encontrada para esta sala com o perfil escolhido.");
     }
 }
+
 
 
