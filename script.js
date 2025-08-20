@@ -48,7 +48,7 @@ function initMap() {
 async function loadGeoJSONData() {
     try {
         const [salasResponse, rotasResponse, banheirosResponse] = await Promise.all([
-            fetch('data\salas_1.geojson'),
+            fetch('data/salas_1.geojson'),
             fetch('data/rotas.geojson'),
             fetch('data/banheiros.geojson')
         ]);
@@ -93,7 +93,7 @@ function drawSalas() {
         style: function(feature) {
             const isSelected = feature.properties.nome === currentSelectedSala;
             return {
-                fillColor: isSelected ? 'red' : 'gray',
+                fillColor: isSelected ? 'red' : '#3b89f6ff', // Cor da sala selecionada
                 color: 'black',
                 weight: 1,
                 fillOpacity: 0.6
