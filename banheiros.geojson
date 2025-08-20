@@ -1,0 +1,107 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "id": "4XJT1SZiAmGHo2jqtDnaEHUTIZIrMMtP",
+            "type": "Feature",
+            "properties": {
+                "tipo": "banheiro",
+                "bloco": "FAET",
+                "andar": "1",
+                "acessivel": false
+            },
+            "geometry": {
+                "coordinates": [
+                    -56.064979201440266,
+                    -15.608227510078976
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "id": "OkGcv60dZS5JS0OphTI4OyfobbKmPvKj",
+            "type": "Feature",
+            "properties": {
+                "tipo": "banheiro",
+                "bloco": "FAET",
+                "andar": "1",
+                "acessivel": true
+            },
+            "geometry": {
+                "coordinates": [
+                    -56.06492154235576,
+                    -15.608291830271696
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "id": "nGLSJqBX1VC4j9AfKy8BxxbqY4PDh0D0",
+            "type": "Feature",
+            "properties": {
+                "tipo": "banheiro",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessivel": false
+            },
+            "geometry": {
+                "coordinates": [
+                    -56.06455142411063,
+                    -15.6083776896876
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "id": "dOPzvCkknVQRmritij9FxUhPMhYA2Sm8",
+            "type": "Feature",
+            "properties": {
+                "tipo": "banheiro",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessivel": true
+            },
+            "geometry": {
+                "coordinates": [
+                    -56.064507008871445,
+                    -15.608425780984092
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "id": "nGLSJqBX1VC4j9AfKy8BxxbqY4PDh0D0",
+            "type": "Feature",
+            "properties": {
+                "tipo": "banheiro",
+                "bloco": "FAET",
+                "andar": "1",
+                "acessivel": false
+            },
+            "geometry": {
+                "coordinates": [
+                    -56.06455142411063,
+                    -15.6083776896876
+                ],
+                "type": "Point"
+            }
+        },
+        {
+            "id": "dOPzvCkknVQRmritij9FxUhPMhYA2Sm8",
+            "type": "Feature",
+            "properties": {
+                "tipo": "banheiro",
+                "bloco": "FAET",
+                "andar": "1",
+                "acessivel": true
+            },
+            "geometry": {
+                "coordinates": [
+                    -56.064507008871445,
+                    -15.608425780984092
+                ],
+                "type": "Point"
+            }
+        }
+    ]
+}
