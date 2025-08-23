@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: "abcd",
             maxZoom: 25,
+            rotate: true,
         }).addTo(map);
 
         loadGeoJSONData();
@@ -233,4 +234,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById("mostrar-info-checkbox").addEventListener("change", drawSalas);
 });
+
 
