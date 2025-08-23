@@ -8,61 +8,72 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
      crossorigin=""/>
-    <!-- Nosso CSS -->
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Universidade Federal de Mato Grosso</h1>
-        <p>Bem-vindo ao Totem da UFMT!</p>
-        <hr>
-    </header>
-
-    <main>
-        <div class="container">
-            <div id="map"></div>
-            <div id="sidebar">
-                <h2>Mapa do Campus</h2>
-                <p>Explore o mapa do campus para encontrar locais importantes.</p>
-
-                <div class="controls">
-                    <label for="sala-select">PESQUISA LOCAL:</label>
-                    <select id="sala-select">
-                        <option value="">Selecione ou digite o local...</option>
-                    </select>
-
-                    <label>
-                        <input type="checkbox" id="acessibilidade-checkbox"> Preciso de acessibilidade
-                    </label>
-
-                    <button id="mostrar-rota-btn">Como chegar?</button>
-
-                    <h3>Tipo de Mapa</h3>
-                    <div class="radio-group">
-                        <label><input type="radio" name="map-type" value="Normal" checked> Normal</label>
-                        <label><input type="radio" name="map-type" value="Híbrido"> Híbrido</label>
-                        <label><input type="radio" name="map-type" value="Satélite"> Satélite</label>
+    <!-- A Barra Lateral (Sidebar) -->
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>Navegação</h3>
+        </div>
+        <div class="sidebar-menu">
+            <div class="map-controls controls">
+                <div class="control-section">
+                    <label for="sala-input">Para onde quer ir?</label>
+                    <div class="autocomplete-container">
+                        <input type="text" id="sala-input" placeholder="Digite o nome da sala...">
+                        <div id="suggestions-container" class="suggestions"></div>
                     </div>
+                    <button id="mostrar-rota-btn">Como chegar?</button>
+                </div>
 
-                    <label>
-                        <input type="checkbox" id="mostrar-pontos-checkbox" checked> Mostrar Pontos de Interesse
-                    </label>
-                    <label>
-                        <input type="checkbox" id="mostrar-rotas-checkbox"> Mostrar Rotas
-                    </label>
-                    <label>
-                        <input type="checkbox" id="mostrar-info-checkbox" checked> Mostrar Informações do Local
-                    </label>
+                <div class="control-section">
+                    <h4>Opções de Rota</h4>
+                    <div class="checkbox-group">
+                         <label>
+                            <input type="checkbox" id="acessibilidade-checkbox"> Rota Acessível
+                        </label>
+                    </div>
+                </div>
+               
+                <div class="control-section">
+                    <h4>Exibição do Mapa</h4>
+                     <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" id="mostrar-pontos-checkbox" checked> Mostrar Banheiros
+                        </label>
+                        <label>
+                            <input type="checkbox" id="mostrar-info-checkbox" checked> Mostrar Nomes no Mapa
+                        </label>
+                    </div>
+                    <label>Tipo de Mapa:</label>
+                    <select id="map-type-select" style="width:100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+                        <option value="Normal">Normal</option>
+                        <option value="Híbrido">Híbrido</option>
+                        <option value="Satélite">Satélite</option>
+                    </select>
                 </div>
             </div>
         </div>
-    </main>
+    </aside>
 
+    <!-- Conteúdo Principal -->
+    <main id="main-content">
+        <button id="toggle-sidebar-btn" class="toggle-btn">
+            &#9776; <!-- Ícone "hamburger" -->
+        </button>
+        <div id="map-container">
+            <!-- O MAPA LEAFLET SERÁ INICIALIZADO AQUI -->
+        </div>
+    </main>
+    
     <!-- Leaflet JavaScript -->
    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
-    <!-- Nosso JavaScript -->
+    <!-- JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
+
