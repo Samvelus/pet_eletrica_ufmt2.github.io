@@ -80,26 +80,58 @@ document.addEventListener('DOMContentLoaded', function () {
             alert("Erro ao carregar dados do mapa. Verifique se a pasta 'data' está no local correto e tente novamente.");
         }
     }
+    
+function drawSalas() {
+    if (salasLayer) map.removeLayer(salasLayer);
 
-    function drawSalas() {
-        if (salasLayer) map.removeLayer(salasLayer);
+    // Filtra as salas com base no andar selecionado
+    const salasFiltradas = salasData.features.filter(feature =>
+        feature.properties.andar == andarSelecionadoAtual
+    );
+    const salasGeoJsonFiltrado = { ...salasData, features: salasFiltradas };
 
-        salasLayer = L.geoJson(salasData, {
-            style: (feature) => ({
-                fillColor: feature.properties.nome === salaSelecionadaAtual ? "#0056b3" : "gray",
-                color: "black",
-                weight: 1,
-                fillOpacity: 0.6,
-            }),
-            onEachFeature: (feature, layer) => {
-                if (feature.properties && feature.properties.nome) {
-                    if (document.getElementById("mostrar-info-checkbox").checked) {
-                        layer.bindTooltip(feature.properties.nome);
-                    }
+
+    salasLayer = L.geoJson(salasGeoJsonFiltrado, {
+        style: (feature) => ({
+            fillColor: feature.properties.nome === salaSelecionadaAtual ? "#0056b3" : "gray",
+            color: feature.properties.nome === salaSelecionadaAtual ? "#003366" : "black", // Borda mais escura na seleção
+            weight: feature.properties.nome === salaSelecionadaAtual ? 2 : 1,
+            fillOpacity: 0.6,
+        }),
+        onEachFeature: (feature, layer) => {
+            // Evento de clique na sala
+            layer.on('click', (e) => {
+                salaSelecionadaAtual = feature.properties.nome;
+                document.getElementById('sala-input').value = salaSelecionadaAtual;
+                drawSalas(); // Redesenha para destacar a sala clicada
+
+                // Cria e abre o popup
+                const props = feature.properties;
+                let popupContent = `<b>${props.nome || 'Sem nome'}</b><br>`;
+                popupContent += `<b>Bloco:</b> ${props.bloco || 'N/A'}<br>`;
+                popupContent += `<b>Andar:</b> ${props.andar == 0 ? 'Térreo' : props.andar + '° Andar'}<br>`;
+                popupContent += `<b>Tipo:</b> ${props.tipo || 'N/A'}`;
+                if (props.imagem) {
+                    popupContent += `<br><img src="${props.imagem}" alt="Imagem de ${props.nome}">`;
                 }
-            },
-        }).addTo(map);
-    }
+
+                L.popup()
+                    .setLatLng(e.latlng)
+                    .setContent(popupContent)
+                    .openOn(map);
+            });
+
+            // Adiciona tooltip (ao passar o rato)
+            if (feature.properties && feature.properties.nome) {
+                if (document.getElementById("mostrar-info-checkbox").checked) {
+                    layer.bindTooltip(feature.properties.nome);
+                }
+            }
+        },
+    }).addTo(map);
+
+    updateLabels();
+}
 
     function drawPontos() {
         if (pontosLayer) map.removeLayer(pontosLayer);
@@ -234,5 +266,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById("mostrar-info-checkbox").addEventListener("change", drawSalas);
 });
+
 
 
