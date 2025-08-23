@@ -62,9 +62,9 @@ document.addEventListener('DOMContentLoaded', function () {
     async function loadGeoJSONData() {
         try {
             const [salasResponse, rotasResponse, banheirosResponse] = await Promise.all([
-                fetch("data/salas_1.geojson"),
-                fetch("data/rotas.geojson"),
-                fetch("data/banheiros.geojson"),
+                fetch("salas_1.geojson"),
+                fetch("rotas.geojson"),
+                fetch("banheiros.geojson"),
             ]);
 
             salasData = await salasResponse.json();
@@ -233,3 +233,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById("mostrar-info-checkbox").addEventListener("change", drawSalas);
 });
+
