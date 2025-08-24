@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let map;
     let salasLayer, rotasLayer, pontosLayer; // Camadas
     let salaSelecionadaAtual = null; // Inicia sem seleção de sala
-    let andarSelecionadoAtual = '0'; // Inicia no Térreo
+    let andarSelecionadoAtual = '1'; // Inicia no Térreo
     let salasData, rotasData, pontosData;
     let salasLabelsLayer;
 
@@ -308,6 +308,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById("mostrar-info-checkbox").addEventListener("change", drawSalas);
 });
+
 
 
 
