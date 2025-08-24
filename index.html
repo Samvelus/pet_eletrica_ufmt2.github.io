@@ -41,11 +41,13 @@
                
                 <div class="control-section">
                     <h4>Exibição do Mapa</h4>
-                        <select id="andar-filter-select">
-                            <option value="0">Térreo</option>
-                            <option value="1">1° Andar</option>
-                            <option value="2">2° Andar</option>
-                        </select>
+                    <label>Andar:</label>
+                    <select id="andar-filter-select">
+                        <option value="0">Térreo</option>
+                        <option value="1">1° Andar</option>
+                        <option value="2">2° Andar</option>
+                    </select>
+                    <hr style="border: 1px solid #eee; margin: 15px 0;">
                      <div class="checkbox-group">
                         <label>
                             <input type="checkbox" id="mostrar-pontos-checkbox" checked> Mostrar Banheiros
@@ -79,10 +81,13 @@
    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
+    <!-- Leaflet Rotate Plugin JS -->
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-map-rotate/dist/leaflet-map-rotate.min.js"></script>
     <!-- JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
