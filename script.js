@@ -35,12 +35,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const MAX_LAT = -15.606074048769116;
     const CENTRO_LAT = (MIN_LAT + MAX_LAT) / 2;
     const CENTRO_LON = (MIN_LON + MAX_LON) / 2;
+    const LABEL_ZOOM_THRESHOLD = 18; // ou o zoom mínimo
+
 
     let map;
     let salasLayer, rotasLayer, pontosLayer; // Camadas
     let salaSelecionadaAtual = null; // Inicia sem seleção de sala
     let andarSelecionadoAtual = '0'; // Inicia no Térreo
     let salasData, rotasData, pontosData;
+    let salasLabelsLayer;
 
     function initMap() {
         map = L.map("map-container", {
@@ -171,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
         salasLabelsLayer.addTo(map);
-        }
+    }
 
 
     function drawPontos() {
@@ -307,6 +310,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById("mostrar-info-checkbox").addEventListener("change", drawSalas);
 });
+
 
 
 
