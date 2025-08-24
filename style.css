@@ -22,6 +22,26 @@ html {
     background-color: #fff;
 }
 
+ /* Estilo do Popup do Leaflet */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+}
+
+.leaflet-popup-content {
+    font-size: 14px;
+}
+
+.leaflet-popup-content b {
+    color: #003366;
+}
+
+.leaflet-popup-content img {
+    width: 100%;
+    max-width: 200px;
+    margin-top: 8px;
+    border-radius: 4px;
+}
+
 /* --- Estilos da Sidebar --- */
 .sidebar {
     height: 100%;
@@ -165,3 +185,4 @@ html {
 .toggle-btn:hover {
     background-color: #f0f2f5;
 }
+
