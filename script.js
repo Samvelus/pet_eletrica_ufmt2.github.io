@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         map.addControl(new L.Control.Rotate());
 
-        loadGeoJSONData(); // Carrega os dados e desenha o mapa inicial
+        loadGeoJSONData();
         map.on('zoomend moveend', updateLabels);
 
         map.on('click', () => {
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (rotasLayer) {
             map.removeLayer(rotasLayer);
         }
-        drawLayers(); // Redesenha para remover destaque
+        drawLayers();
     }
 
     async function loadGeoJSONData() {
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
             pontosData = await banheirosResponse.json();
 
             setupAutocomplete();
-            drawLayers(); // CORREÇÃO: Garante que o mapa é desenhado após carregar os dados
+            drawLayers();
             
         } catch (error) {
             console.error("Erro ao carregar dados GeoJSON:", error);
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const salasFiltradas = salasData.features.filter(f => f.properties.andar == andarSelecionadoAtual);
         
         if (salasFiltradas.length === 0) {
-            console.warn(`Nenhuma sala encontrada para o andar ${andarSelecionadoAtual}. Verifique os dados no GeoJSON.`);
+            console.warn(`Nenhuma sala encontrada para o andar ${andarSelecionadoAtual}.`);
         }
 
         const salasGeoJsonFiltrado = { ...salasData, features: salasFiltradas };
@@ -121,21 +121,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 weight: feature.properties.nome === salaSelecionadaAtual ? 2 : 1,
                 fillOpacity: 0.6,
             }),
-            // ALTERADO: Lógica de clique unificada (removemos o duplo clique)
             onEachFeature: (feature, layer) => {
                 layer.on('click', (e) => {
-                    L.DomEvent.stopPropagation(e); // Impede que o clique se propague para o mapa
-
-                    // --- 1. Seleciona a sala como destino ---
+                    L.DomEvent.stopPropagation(e);
                     salaSelecionadaAtual = feature.properties.nome;
                     document.getElementById('sala-input').value = salaSelecionadaAtual;
-                    drawLayers(); // Redesenha para destacar a sala clicada
+                    drawLayers();
 
-                    // --- 2. Abre o Pop-up estilizado ---
                     const props = feature.properties;
                     const andarTexto = props.andar == 0 ? 'Térreo' : `${props.andar}° Andar`;
-
-                    // NOVO: HTML mais estruturado para o pop-up
                     let popupContent = `
                         <div class="custom-popup">
                             <h3>${props.nome || 'Sem nome'}</h3>
@@ -145,16 +139,9 @@ document.addEventListener('DOMContentLoaded', function () {
                             ${props.imagem ? `<img src="${props.imagem}" alt="Imagem de ${props.nome}">` : ''}
                         </div>
                     `;
+                    L.popup({ closeButton: true, className: 'custom-popup-container' })
+                     .setLatLng(e.latlng).setContent(popupContent).openOn(map);
                     
-                    L.popup({
-                        closeButton: true,
-                        className: 'custom-popup-container' // Classe para o container do Leaflet
-                    })
-                    .setLatLng(e.latlng)
-                    .setContent(popupContent)
-                    .openOn(map);
-                    
-                    // --- 3. (Opcional) Abre a sidebar ---
                     if (!sidebar.classList.contains('visible')) {
                         toggleSidebar();
                     }
@@ -163,7 +150,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }).addTo(map);
     }
 
-    // ... (Função updateLabels não foi alterada) ...
     function updateLabels() {
         if (!salasData) return;
         if (salasLabelsLayer) map.removeLayer(salasLabelsLayer);
@@ -187,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 iconSize: [100, 20],
                                 iconAnchor: [50, 10],
                             }),
-                            interactive: false, // CORREÇÃO: Garante que o texto não é clicável
+                            interactive: false,
                         });
                         salasLabelsLayer.addLayer(label);
                     }
@@ -197,46 +183,150 @@ document.addEventListener('DOMContentLoaded', function () {
         salasLabelsLayer.addTo(map);
     }
     
-    // ... (As funções drawPontos, drawRotas, updateMapTiles, setupAutocomplete não foram alteradas e podem ser mantidas como no seu código original) ...
-    function drawPontos() { /* ... (sem alterações) ... */ }
-    function drawRotas(destinationSalaName, accessibilityNeeded) { /* ... (sem alterações) ... */ }
-    function updateMapTiles(type) { /* ... (sem alterações) ... */ }
-    function setupAutocomplete() { /* ... (sem alterações) ... */ }
+    // --- FUNÇÕES RESTAURADAS ---
 
+    function drawPontos() {
+        if (pontosLayer) map.removeLayer(pontosLayer);
+        pontosLayer = L.geoJson(pontosData, {
+            pointToLayer: (feature, latlng) => L.marker(latlng, {
+                icon: L.icon({
+                    iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png",
+                    shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+                    iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41],
+                }),
+            }).bindPopup(feature.properties.nome || "Ponto de Interesse"),
+        }).addTo(map);
+    }
+
+    function drawRotas(destinationSalaName, accessibilityNeeded) {
+        if (rotasLayer) map.removeLayer(rotasLayer);
+        const filteredRoutes = rotasData.features.filter((feature) => {
+            const isDestination = feature.properties.destino === destinationSalaName;
+            const hasAccessibility = String(feature.properties.acessibilidade).toLowerCase() === "true";
+            return isDestination && (!accessibilityNeeded || hasAccessibility);
+        });
+        if (filteredRoutes.length > 0) {
+            rotasLayer = L.geoJson({ type: "FeatureCollection", features: filteredRoutes }, {
+                style: () => ({ color: "#0056b3", weight: 5, opacity: 0.9 }),
+                onEachFeature: (feature, layer) => {
+                    if (feature.properties && feature.properties.destino) {
+                        layer.bindTooltip("Rota até " + feature.properties.destino);
+                    }
+                },
+            }).addTo(map);
+            map.fitBounds(rotasLayer.getBounds());
+        } else {
+            alert("Nenhuma rota encontrada para este local com o perfil de acessibilidade escolhido.");
+        }
+    }
+
+    function updateMapTiles(type) {
+        let tileUrl, attribution;
+        map.eachLayer((layer) => { if (layer instanceof L.TileLayer) map.removeLayer(layer); });
+
+        switch (type) {
+            case "Híbrido":
+                tileUrl = "https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png";
+                attribution = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, ...';
+                break;
+            case "Satélite":
+                tileUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+                attribution = 'Tiles &copy; Esri &mdash; Source: Esri, ...';
+                break;
+            default: // "Normal"
+                tileUrl = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
+                attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
+        }
+        
+        L.tileLayer(tileUrl, { attribution, subdomains: "abcd", maxZoom: 25 }).addTo(map);
+    }
+
+    function setupAutocomplete() {
+        const salaInput = document.getElementById('sala-input');
+        const suggestionsContainer = document.getElementById('suggestions-container');
+        salaInput.addEventListener('input', () => {
+            const query = salaInput.value.toLowerCase().trim();
+            suggestionsContainer.innerHTML = '';
+            suggestionsContainer.style.display = 'none';
+
+            if (query.length === 0) return;
+
+            const filteredSalas = salasData.features
+                .filter(feature => feature.properties.nome && feature.properties.nome.toLowerCase().includes(query))
+                .sort((a, b) => a.properties.nome.localeCompare(b.properties.nome));
+
+            if (filteredSalas.length > 0) {
+                suggestionsContainer.style.display = 'block';
+                filteredSalas.forEach(feature => {
+                    const props = feature.properties;
+                    const suggestionItem = document.createElement('div');
+                    suggestionItem.classList.add('suggestion-item');
+                    const andarLabel = props.andar == 0 ? 'Térreo' : `${props.andar}° Andar`;
+                    suggestionItem.textContent = `${props.nome} (${andarLabel})`;
+
+                    suggestionItem.addEventListener('click', () => {
+                        salaInput.value = props.nome;
+                        suggestionsContainer.innerHTML = '';
+                        suggestionsContainer.style.display = 'none';
+                        
+                        andarSelecionadoAtual = props.andar;
+                        salaSelecionadaAtual = props.nome;
+
+                        // Simula o clique no botão do andar correspondente para atualizar a UI
+                        document.querySelector(`.andar-btn[data-andar='${props.andar}']`)?.click();
+                        
+                        drawLayers(); // Redesenha com a sala selecionada
+
+                        const salaAlvo = salasData.features.find(f => f.properties.nome === salaSelecionadaAtual);
+                        if (salaAlvo) {
+                            const centroid = L.geoJson(salaAlvo).getBounds().getCenter();
+                            map.setView(centroid, 20);
+                        }
+                    });
+                    suggestionsContainer.appendChild(suggestionItem);
+                });
+            }
+        });
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.autocomplete-container')) {
+                suggestionsContainer.innerHTML = '';
+                suggestionsContainer.style.display = 'none';
+            }
+        });
+    }
 
     // --- Event Listeners ---
     document.getElementById("mostrar-rota-btn").addEventListener("click", () => {
         if (!salaSelecionadaAtual) {
-            alert("Por favor, selecione um local de destino clicando no mapa.");
+            alert("Por favor, selecione um local de destino clicando no mapa ou buscando na barra lateral.");
             return;
         }
         drawRotas(salaSelecionadaAtual, document.getElementById("acessibilidade-checkbox").checked);
     });
 
-    // CORREÇÃO: Adiciona listeners para os botões de andar
-    // Certifique-se que seus botões no HTML tenham a classe "andar-btn" e o atributo "data-andar"
-    // Exemplo: <button class="andar-btn active" data-andar="0">Térreo</button>
     document.querySelectorAll('.andar-btn').forEach(button => {
         button.addEventListener('click', function() {
             const novoAndar = this.getAttribute('data-andar');
             if (novoAndar !== andarSelecionadoAtual) {
                 andarSelecionadoAtual = novoAndar;
-
-                // Atualiza visualmente qual botão está ativo
                 document.querySelectorAll('.andar-btn').forEach(btn => btn.classList.remove('active'));
                 this.classList.add('active');
-                
-                clearSelection(); // Limpa a rota e a seleção ao trocar de andar
-                drawLayers(); // Redesenha o mapa para o novo andar
+                clearSelection();
+                drawLayers();
             }
         });
     });
 
     document.getElementById("map-type-select").addEventListener("change", (event) => updateMapTiles(event.target.value));
+    
     document.getElementById("mostrar-pontos-checkbox").addEventListener("change", (event) => {
-        if (event.target.checked) drawPontos();
-        else if (pontosLayer) map.removeLayer(pontosLayer);
+        if (event.target.checked) {
+            drawPontos();
+        } else if (pontosLayer) {
+            map.removeLayer(pontosLayer);
+        }
     });
+
     document.getElementById("mostrar-info-checkbox").addEventListener("change", updateLabels);
 
     const clearBtn = document.getElementById("clear-selection-btn");
