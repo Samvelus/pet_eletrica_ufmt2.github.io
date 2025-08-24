@@ -37,8 +37,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const CENTRO_LON = (MIN_LON + MAX_LON) / 2;
 
     let map;
-    let salasLayer, rotasLayer, pontosLayer;
-    let salaSelecionadaAtual = null;
+    let salasLayer, rotasLayer, pontosLayer; // Camadas
+    let salaSelecionadaAtual = null; // Inicia sem seleção de sala
+    let andarSelecionadoAtual = '0'; // Inicia no Térreo
     let salasData, rotasData, pontosData;
 
     function initMap() {
@@ -266,6 +267,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById("mostrar-info-checkbox").addEventListener("change", drawSalas);
 });
+
 
 
 
