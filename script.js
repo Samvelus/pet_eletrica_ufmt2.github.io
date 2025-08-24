@@ -133,8 +133,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             },
         }).addTo(map);
-    
-        updateLabels();
     }
 
     function updateLabels() {
@@ -310,6 +308,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById("mostrar-info-checkbox").addEventListener("change", drawSalas);
 });
+
 
 
 
