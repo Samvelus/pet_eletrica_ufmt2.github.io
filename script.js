@@ -1,6 +1,4 @@
-// import L from 'leaflet';
-// import 'leaflet/dist/leaflet.css';
-
+// CÓDIGO COMPLETO ATUALIZADO
 document.addEventListener('DOMContentLoaded', function () {
 
     // --- SIDEBAR ---
@@ -11,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function toggleSidebar() {
         sidebar.classList.toggle('visible');
         if (sidebar.classList.contains('visible')) {
-            toggleButton.style.right = '355px'; // 340px da sidebar + 15px de margem
+            toggleButton.style.right = '355px';
         } else {
             toggleButton.style.right = '15px';
         }
@@ -35,15 +33,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const MAX_LAT = -15.606074048769116;
     const CENTRO_LAT = (MIN_LAT + MAX_LAT) / 2;
     const CENTRO_LON = (MIN_LON + MAX_LON) / 2;
-    const LABEL_ZOOM_THRESHOLD = 18; // ou o zoom mínimo
-
+    const LABEL_ZOOM_THRESHOLD = 18;
 
     let map;
-    let salasLayer, rotasLayer, pontosLayer; // Camadas
-    let salaSelecionadaAtual = null; // Inicia sem seleção de sala
-    let andarSelecionadoAtual = '1'; // Inicia no Térreo
+    let salasLayer, rotasLayer, pontosLayer, salasLabelsLayer;
+    let salaSelecionadaAtual = null;
+    let andarSelecionadoAtual = '0';
     let salasData, rotasData, pontosData;
-    let salasLabelsLayer;
 
     function initMap() {
         map = L.map("map-container", {
@@ -62,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }).addTo(map);
 
         loadGeoJSONData();
+        map.on('zoomend moveend', updateLabels);
     }
 
     async function loadGeoJSONData() {
@@ -77,103 +74,96 @@ document.addEventListener('DOMContentLoaded', function () {
             pontosData = await banheirosResponse.json();
 
             setupAutocomplete();
-            drawSalas();
-            drawPontos();
+            drawLayers();
         } catch (error) {
             console.error("Erro ao carregar dados GeoJSON:", error);
-            alert("Erro ao carregar dados do mapa. Verifique se a pasta 'data' está no local correto e tente novamente.");
+            alert("Não foi possível carregar os dados do mapa. Por favor, tente recarregar a página.");
         }
     }
     
+    function drawLayers() {
+        drawSalas();
+        updateLabels();
+    }
+
     function drawSalas() {
         if (salasLayer) map.removeLayer(salasLayer);
-    
-        // Filtra as salas com base no andar selecionado
+
         const salasFiltradas = salasData.features.filter(feature =>
             feature.properties.andar == andarSelecionadoAtual
         );
         const salasGeoJsonFiltrado = { ...salasData, features: salasFiltradas };
-    
-    
+
         salasLayer = L.geoJson(salasGeoJsonFiltrado, {
             style: (feature) => ({
                 fillColor: feature.properties.nome === salaSelecionadaAtual ? "#0056b3" : "gray",
-                color: feature.properties.nome === salaSelecionadaAtual ? "#003366" : "black", // Borda mais escura na seleção
+                color: feature.properties.nome === salaSelecionadaAtual ? "#003366" : "black",
                 weight: feature.properties.nome === salaSelecionadaAtual ? 2 : 1,
                 fillOpacity: 0.6,
             }),
             onEachFeature: (feature, layer) => {
-                // Evento de clique na sala
                 layer.on('click', (e) => {
                     salaSelecionadaAtual = feature.properties.nome;
                     document.getElementById('sala-input').value = salaSelecionadaAtual;
-                    drawSalas(); // Redesenha para destacar a sala clicada
-    
-                    // Cria e abre o popup
+                    drawLayers(); // Redesenha salas e atualiza rótulos
+
                     const props = feature.properties;
                     let popupContent = `<b>${props.nome || 'Sem nome'}</b><br>`;
                     popupContent += `<b>Bloco:</b> ${props.bloco || 'N/A'}<br>`;
                     popupContent += `<b>Andar:</b> ${props.andar == 0 ? 'Térreo' : props.andar + '° Andar'}<br>`;
                     popupContent += `<b>Tipo:</b> ${props.tipo || 'N/A'}`;
                     if (props.imagem) {
-                        popupContent += `<br><img src="${props.imagem}" alt="Imagem de ${props.nome}">`;
+                        popupContent += `<br><img src="${props.imagem}" alt="Imagem de ${props.nome}" style="width:100%; max-width:200px;">`;
                     }
-    
+
                     L.popup()
                         .setLatLng(e.latlng)
                         .setContent(popupContent)
                         .openOn(map);
                 });
-    
-                // Adiciona tooltip (ao passar o rato)
-                if (feature.properties && feature.properties.nome) {
-                    if (document.getElementById("mostrar-info-checkbox").checked) {
-                        layer.bindTooltip(feature.properties.nome);
-                    }
-                }
             },
         }).addTo(map);
     }
 
     function updateLabels() {
         if (!salasData) return;
-    
+
         if (salasLabelsLayer) map.removeLayer(salasLabelsLayer);
         salasLabelsLayer = L.layerGroup();
-    
+
         const showInfo = document.getElementById("mostrar-info-checkbox").checked;
         const currentZoom = map.getZoom();
-    
+
         if (showInfo && currentZoom >= LABEL_ZOOM_THRESHOLD) {
             const currentBounds = map.getBounds();
-    
+
             const salasParaEtiquetar = salasData.features.filter(
-            (feature) => feature.properties.andar == andarSelecionadoAtual
+                (feature) => feature.properties.andar == andarSelecionadoAtual
             );
-    
+
             salasParaEtiquetar.forEach((feature) => {
-            if (feature.properties && feature.properties.nome) {
-                const featureLayer = L.geoJson(feature);
-                const center = featureLayer.getBounds().getCenter();
-    
-                if (currentBounds.contains(center)) {
-                const label = L.marker(center, {
-                    icon: L.divIcon({
-                    className: "sala-label",
-                    html: feature.properties.nome,
-                    iconSize: [100, 20],
-                    iconAnchor: [50, 10],
-                    }),
-                    interactive: false,
-                });
-                salasLabelsLayer.addLayer(label);
+                // Rótulo só é criado se a sala não for a selecionada atualmente
+                if (feature.properties && feature.properties.nome && feature.properties.nome !== salaSelecionadaAtual) {
+                    const featureLayer = L.geoJson(feature);
+                    const center = featureLayer.getBounds().getCenter();
+
+                    if (currentBounds.contains(center)) {
+                        const label = L.marker(center, {
+                            icon: L.divIcon({
+                                className: "sala-label",
+                                html: `<span>${feature.properties.nome}</span>`,
+                                iconSize: [100, 20],
+                                iconAnchor: [50, 10],
+                            }),
+                            interactive: false,
+                        });
+                        salasLabelsLayer.addLayer(label);
+                    }
                 }
-            }
             });
         }
         salasLabelsLayer.addTo(map);
     }
-
 
     function drawPontos() {
         if (pontosLayer) map.removeLayer(pontosLayer);
@@ -185,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
                     iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41],
                 }),
-            }).bindPopup(feature.properties.nome || "Banheiro"),
+            }).bindPopup(feature.properties.nome || "Ponto de Interesse"),
         }).addTo(map);
     }
 
@@ -194,8 +184,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const filteredRoutes = rotasData.features.filter((feature) => {
             const isDestination = feature.properties.destino === destinationSalaName;
-            const hasAccessibility = feature.properties.acessibilidade === "true";
-            return isDestination && (accessibilityNeeded ? hasAccessibility : true);
+            const hasAccessibility = String(feature.properties.acessibilidade).toLowerCase() === "true";
+            return isDestination && (!accessibilityNeeded || hasAccessibility);
         });
 
         if (filteredRoutes.length > 0) {
@@ -209,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }).addTo(map);
             map.fitBounds(rotasLayer.getBounds());
         } else {
-            alert("Nenhuma rota encontrada para esta sala com o perfil escolhido.");
+            alert("Nenhuma rota encontrada para este local com o perfil de acessibilidade escolhido.");
         }
     }
 
@@ -218,11 +208,11 @@ document.addEventListener('DOMContentLoaded', function () {
         switch (type) {
             case "Híbrido":
                 tileUrl = "https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png";
-                attribution = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+                attribution = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, ...';
                 break;
             case "Satélite":
                 tileUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
-                attribution = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
+                attribution = 'Tiles &copy; Esri &mdash; Source: Esri, ...';
                 break;
             default:
                 tileUrl = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
@@ -250,17 +240,21 @@ document.addEventListener('DOMContentLoaded', function () {
             if (filteredSalas.length > 0) {
                 suggestionsContainer.style.display = 'block';
                 filteredSalas.forEach(feature => {
-                    const salaName = feature.properties.nome;
+                    const props = feature.properties;
                     const suggestionItem = document.createElement('div');
                     suggestionItem.classList.add('suggestion-item');
-                    suggestionItem.textContent = salaName;
+                    const andarLabel = props.andar == 0 ? 'Térreo' : `${props.andar}° Andar`;
+                    suggestionItem.textContent = `${props.nome} (${andarLabel})`;
+
                     suggestionItem.addEventListener('click', () => {
-                        salaInput.value = salaName;
+                        salaInput.value = props.nome;
                         suggestionsContainer.innerHTML = '';
                         suggestionsContainer.style.display = 'none';
 
-                        salaSelecionadaAtual = salaName;
-                        drawSalas();
+                        andarSelecionadoAtual = props.andar;
+                        salaSelecionadaAtual = props.nome;
+                        drawLayers();
+
                         const salaAlvo = salasData.features.find(f => f.properties.nome === salaSelecionadaAtual);
                         if (salaAlvo) {
                             const centroid = L.geoJson(salaAlvo).getBounds().getCenter();
@@ -272,7 +266,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Ocultar sugestões ao clicar fora
         document.addEventListener('click', (event) => {
             if (!event.target.closest('.autocomplete-container')) {
                 suggestionsContainer.innerHTML = '';
@@ -281,12 +274,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Iniciar o mapa
-    initMap();
-
-    // Adicionar Event Listeners para os controles do mapa
+    // --- Event Listeners ---
     document.getElementById("mostrar-rota-btn").addEventListener("click", () => {
-        // Atualiza a sala selecionada para o valor exato no input antes de traçar a rota
         const salaInputValue = document.getElementById("sala-input").value;
         const salaExists = salasData.features.some(f => f.properties.nome === salaInputValue);
 
@@ -295,25 +284,21 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
         salaSelecionadaAtual = salaInputValue;
-        drawSalas(); // Garante que a sala correta está destacada
+        drawSalas();
         drawRotas(salaSelecionadaAtual, document.getElementById("acessibilidade-checkbox").checked);
     });
 
     document.getElementById("map-type-select").addEventListener("change", (event) => updateMapTiles(event.target.value));
 
     document.getElementById("mostrar-pontos-checkbox").addEventListener("change", (event) => {
-        if (event.target.checked) drawPontos();
-        else if (pontosLayer) map.removeLayer(pontosLayer);
+        if (event.target.checked) {
+            drawPontos();
+        } else if (pontosLayer) {
+            map.removeLayer(pontosLayer);
+        }
     });
+    
+    document.getElementById("mostrar-info-checkbox").addEventListener("change", updateLabels);
 
-    document.getElementById("mostrar-info-checkbox").addEventListener("change", drawSalas);
+    initMap();
 });
-
-
-
-
-
-
-
-
-
