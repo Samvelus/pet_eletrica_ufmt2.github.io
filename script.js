@@ -56,6 +56,8 @@ document.addEventListener('DOMContentLoaded', function () {
             maxZoom: 25,
         }).addTo(map);
 
+        map.addControl(new L..Control.Rotate());
+
         loadGeoJSONData(); // Carrega os dados e desenha o mapa inicial
         map.on('zoomend moveend', updateLabels);
 
