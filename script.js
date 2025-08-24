@@ -49,13 +49,13 @@ document.addEventListener('DOMContentLoaded', function () {
             minZoom: 17,
             maxZoom: 25,
             maxBounds: [[MIN_LAT, MIN_LON], [MAX_LAT, MAX_LON]],
+            rotate: true,
         });
 
         L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: "abcd",
             maxZoom: 25,
-            rotate: true,
         }).addTo(map);
 
         loadGeoJSONData();
@@ -133,6 +133,46 @@ document.addEventListener('DOMContentLoaded', function () {
     
         updateLabels();
     }
+
+    function updateLabels() {
+        if (!salasData) return;
+    
+        if (salasLabelsLayer) map.removeLayer(salasLabelsLayer);
+        salasLabelsLayer = L.layerGroup();
+    
+        const showInfo = document.getElementById("mostrar-info-checkbox").checked;
+        const currentZoom = map.getZoom();
+    
+        if (showInfo && currentZoom >= LABEL_ZOOM_THRESHOLD) {
+            const currentBounds = map.getBounds();
+    
+            const salasParaEtiquetar = salasData.features.filter(
+            (feature) => feature.properties.andar == andarSelecionadoAtual
+            );
+    
+            salasParaEtiquetar.forEach((feature) => {
+            if (feature.properties && feature.properties.nome) {
+                const featureLayer = L.geoJson(feature);
+                const center = featureLayer.getBounds().getCenter();
+    
+                if (currentBounds.contains(center)) {
+                const label = L.marker(center, {
+                    icon: L.divIcon({
+                    className: "sala-label",
+                    html: feature.properties.nome,
+                    iconSize: [100, 20],
+                    iconAnchor: [50, 10],
+                    }),
+                    interactive: false,
+                });
+                salasLabelsLayer.addLayer(label);
+                }
+            }
+            });
+        }
+        salasLabelsLayer.addTo(map);
+        }
+
 
     function drawPontos() {
         if (pontosLayer) map.removeLayer(pontosLayer);
@@ -267,6 +307,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById("mostrar-info-checkbox").addEventListener("change", drawSalas);
 });
+
 
 
 
