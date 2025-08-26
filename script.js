@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
     async function loadGeoJSONData() {
         try {
             const [salasResponse, rotasResponse, banheirosResponse] = await Promise.all([
-                fetch("salas_1.geojson"),
+                fetch("salas.geojson"),
                 fetch("rotas.geojson"),
                 fetch("banheiros.geojson"),
             ]);
