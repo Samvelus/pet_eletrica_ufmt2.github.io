@@ -35,10 +35,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const LABEL_ZOOM_THRESHOLD = 19; // Nível de zoom para mostrar as etiquetas
 
     let map;
-    let salasLayer, rotasLayer, pontosLayer, salasLabelsLayer;
+    let salasLayer, rotasLayer, pontosLayer, floorLayer, salasLabelsLayer;
     let salaSelecionadaAtual = null;
     let andarSelecionadoAtual = '0'; // Inicia no Térreo
-    let salasData, rotasData, pontosData;
+    let salasData, floorData, rotasData, pontosData;
 
     function initMap() {
         map = L.map("map-container", {
@@ -63,15 +63,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function loadGeoJSONData() {
         try {
-            const [salasResponse, rotasResponse, banheirosResponse] = await Promise.all([
+            const [salasResponse, floorResponse, rotasResponse, pontosResponse] = await Promise.all([
                 fetch("salas.geojson"),
+                fetch("floor_1.geojson"),
                 fetch("rotas.geojson"),
                 fetch("banheiros.geojson"),
             ]);
 
             salasData = await salasResponse.json();
+            floorData = await floorResponse.json();
             rotasData = await rotasResponse.json();
-            pontosData = await banheirosResponse.json();
+            pontosData = await pontosResponse.json();
             
             setupAutocomplete();
             drawSalas();
@@ -159,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         const label = L.marker(center, {
                             icon: L.divIcon({
                                 className: 'sala-label',
-                                html: feature.properties.nome,
+                                html: feature.properties.nome[8],
                                 iconSize: [100, 20],
                                 iconAnchor: [50, 10]
                             }),
