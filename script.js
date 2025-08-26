@@ -55,6 +55,14 @@ document.addEventListener('DOMContentLoaded', function() {
             subdomains: "abcd",
             maxZoom: 25,
         }).addTo(map);
+
+    map.on('click', function() {
+        if (salaSelecionadaAtual !== null) { // Apenas executa se algo estiver selecionado
+            salaSelecionadaAtual = null; // 1. Limpa a variável de seleção
+            document.getElementById('sala-input').value = ''; // Opcional: limpa o campo de busca
+            drawSalas(); // 2. Redesenha as salas para aplicar o estilo padrão (sem borda)
+        }
+    });
         
         loadGeoJSONData();
         
@@ -97,8 +105,8 @@ document.addEventListener('DOMContentLoaded', function() {
         salasLayer = L.geoJson(salasGeoJsonFiltrado, {
             style: (feature) => ({
                 fillColor: feature.properties.nome === salaSelecionadaAtual ? "#0056b3" : "gray",
-                color: feature.properties.nome === salaSelecionadaAtual ? "#003366" : "black", // Borda mais escura na seleção
-                weight: feature.properties.nome === salaSelecionadaAtual ? 2 : 1,
+                color:"black", // Borda mais escura na seleção
+                weight: feature.properties.nome === salaSelecionadaAtual ? 0 : 1,
                 fillOpacity: 0.6,
             }),
             onEachFeature: (feature, layer) => {
