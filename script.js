@@ -166,10 +166,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     const center = featureLayer.getBounds().getCenter();
 
                     if (currentBounds.contains(center)) {
+const nomeCompleto = feature.properties.nome;
+            const partesDoNome = nomeCompleto.split(' '); // Divide o nome em um array de palavras
+            let nomeAbreviado = nomeCompleto; // Por padrão, usa o nome completo
+
+            // Se o nome tiver mais de uma palavra, cria a abreviação
+            if (partesDoNome.length > 1) {
+                nomeAbreviado = `${partesDoNome[0]} ${partesDoNome[1].substring(0, 3)}`;
+            }
                         const label = L.marker(center, {
                             icon: L.divIcon({
                                 className: 'sala-label',
-                                html: feature.properties.nome[8],
+                                html: nomeAbreviado,
                                 iconSize: [100, 20],
                                 iconAnchor: [50, 10]
                             }),
