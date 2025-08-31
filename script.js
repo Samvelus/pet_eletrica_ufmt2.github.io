@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             maxZoom: 25,
             maxBounds: [[MIN_LAT, MIN_LON], [MAX_LAT, MAX_LON]],
             rotate: true, // Ativa a funcionalidade de rotação
-            bearing: 30
+            bearing: 30, // 30 graus início 
         });
 
         L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 fetch("salas.geojson"),
                 fetch("floor_1.geojson"),
                 fetch("rotas.geojson"),
-                fetch("banheiros.geojson"),
+                fetch("pontos.geojson"),
             ]);
 
             salasData = await salasResponse.json();
