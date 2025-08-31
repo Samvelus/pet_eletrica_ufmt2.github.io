@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             maxZoom: 25,
             maxBounds: [[MIN_LAT, MIN_LON], [MAX_LAT, MAX_LON]],
             rotate: true, // Ativa a funcionalidade de rotação
+            bearing: 30
         });
 
         L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
