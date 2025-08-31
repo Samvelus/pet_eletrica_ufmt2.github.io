@@ -4,7 +4,7 @@
         {
             "id": "i4t1WsWLzGUVivhWoSPZ19tmoZjKhCDZ",
             "type": "Feature",
-            "properties": {},
+            "properties": {"andar": 1},
             "geometry": {
                 "coordinates": [
                     [
@@ -48,7 +48,7 @@
         {
             "id": "Uc8l9q2Fs3Sl0S3I1MEZzZwR4dZY8JRH",
             "type": "Feature",
-            "properties": {},
+            "properties": {"andar": 1},
             "geometry": {
                 "coordinates": [
                     [
@@ -88,7 +88,7 @@
         {
             "id": "iD5Oxp9OHpQUGbrq8X19lzo3hLQbqjGV",
             "type": "Feature",
-            "properties": {},
+            "properties": {"andar": 1},
             "geometry": {
                 "coordinates": [
                     [
@@ -172,7 +172,7 @@
         {
             "id": "9BRSdksXtqQ7Uz7wjSDnLaNjBaoguBrw",
             "type": "Feature",
-            "properties": {},
+            "properties": {"andar": 1},
             "geometry": {
                 "coordinates": [
                     [
