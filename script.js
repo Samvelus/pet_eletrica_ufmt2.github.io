@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
             zoom: 18,
             minZoom: 17,
             maxZoom: 25,
-            maxBounds: [[MIN_LAT, MIN_LON], [MAX_LAT, MAX_LON]],
+           // maxBounds: [[MIN_LAT, MIN_LON], [MAX_LAT, MAX_LON]],
             rotate: true,
             bearing: 30,
         });
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 fillColor: feature.properties.nome === salaSelecionadaAtual ? "#0056b3" : "gray",
                 color: "black",
                 weight: feature.properties.nome === salaSelecionadaAtual ? 2.5 : 1, // Borda mais grossa
-                fillOpacity: 0.6,
+                fillOpacity: 0.3,
             }),
             onEachFeature: (feature, layer) => {
                 layer.on('click', (e) => {
