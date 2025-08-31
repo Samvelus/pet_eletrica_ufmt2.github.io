@@ -137,12 +137,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // --- NOVO: Função para desenhar o fundo do andar ---
+    // --- Função para desenhar o fundo do andar ---
     function drawFloor() {
         if (floorLayer) map.removeLayer(floorLayer);
 
         // Filtra o polígono do chão para o andar atual
-        const floorFeature = floorData.features.find(feature => 
+        const floorFeature = floorData.features.filter(feature => 
             feature.properties.andar == andarSelecionadoAtual
         );
 
