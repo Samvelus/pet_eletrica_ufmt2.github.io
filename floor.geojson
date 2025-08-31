@@ -3,7 +3,7 @@
     "features": [
         {
             "type": "Feature",
-            "properties": {},
+            "properties": {"andar": 0},
             "geometry": {
                 "coordinates": [
                     [
@@ -98,7 +98,7 @@
         },
         {
             "type": "Feature",
-            "properties": {},
+            "properties": {"andar": 0},
             "geometry": {
                 "coordinates": [
                     [
@@ -185,7 +185,7 @@
         },
         {
             "type": "Feature",
-            "properties": {},
+            "properties": {"andar": 0},
             "geometry": {
                 "coordinates": [
                     [
@@ -232,7 +232,7 @@
         },
         {
             "type": "Feature",
-            "properties": {},
+            "properties": {"andar": 0},
             "geometry": {
                 "coordinates": [
                     [
