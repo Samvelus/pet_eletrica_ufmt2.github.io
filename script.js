@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     fillColor: floorColors[andarSelecionadoAtual] || "#f0f0f0", // Cor padrão
                     color: "transparent",
                     weight: 0,
-                    fillOpacity: 0.8,
+                    fillOpacity: 1,
                 }),
                 interactive: false // O chão não é clicável
             }).addTo(map);
