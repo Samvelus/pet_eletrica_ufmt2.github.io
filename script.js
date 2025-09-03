@@ -45,10 +45,9 @@ document.addEventListener('DOMContentLoaded', function() {
         '0': '#ffffe0', // Amarelo Claro
         '1': '#add8e6', // Azul Claro
         '2': '#ffc0cb'  // Vermelho Claro (Rosa)
-        // Adicione outros andares se necessário, ex: '2': '#d3d3d3'
     };
     
-    // --- NOVO: Ícones personalizados para os pontos de interesse ---
+    // ---Ícones personalizados para os pontos de interesse ---
     const customIcons = {
         'banheiro': L.icon({
             iconUrl: 'https://img.icons8.com/ios-filled/50/000000/toilet-bowl.png',
@@ -129,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
             pontosData = await pontosResponse.json();
             
             setupAutocomplete();
-            // --- MODIFICADO: Chama a função principal de atualização ---
+            // Chama a função principal de atualização ---
             updateFloorView(); 
         } catch (error) {
             console.error("Erro ao carregar dados GeoJSON:", error);
@@ -150,9 +149,9 @@ document.addEventListener('DOMContentLoaded', function() {
              floorLayer = L.geoJson(floorFeature, {
                 style: () => ({
                     fillColor: floorColors[andarSelecionadoAtual] || "#f0f0f0", // Cor padrão
-                    color: "transparent", // Sem borda
+                    color: "transparent",
                     weight: 0,
-                    fillOpacity: 0.5,
+                    fillOpacity: 0.8,
                 }),
                 interactive: false // O chão não é clicável
             }).addTo(map);
