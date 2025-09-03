@@ -92,7 +92,8 @@ document.addEventListener('DOMContentLoaded', function() {
             maxZoom: 25,
            // maxBounds: [[MIN_LAT, MIN_LON], [MAX_LAT, MAX_LON]],
             rotate: true,
-            bearing: 30,
+            rotateControl: { closeOnZeroBearing: false }, 
+            bearing: 0
         });
 
         L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
@@ -308,25 +309,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function updateMapTiles(type) {
-        // (sem alterações nesta função)
-        let tileUrl, attribution;
-        switch (type) {
-            case "Híbrido":
-                tileUrl = "https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}{r}.png";
-                attribution = 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-                break;
-            case "Satélite":
-                 tileUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
-                 attribution = 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community';
-                break;
-            default:
-                tileUrl = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
-                attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
+        function updateMapTiles(type) {
+            let url, attr;
+            map.eachLayer(l => { if (l instanceof L.TileLayer) map.removeLayer(l); });
+            switch (type) {
+                case "Híbrido": url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"; attr = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'; break;
+                case "Satélite": url = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'; attr = 'Tiles &copy; Esri'; break;
+                default: url = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"; attr = '&copy; <a href="https://carto.com/attributions">CARTO</a>';
+            }
+            L.tileLayer(url, { attribution: attr, maxZoom: 25 }).addTo(map);
         }
-        map.eachLayer((layer) => { if (layer instanceof L.TileLayer) map.removeLayer(layer); });
-        L.tileLayer(tileUrl, { attribution, subdomains: "abcd", maxZoom: 25 }).addTo(map);
-    }
     
     function setupAutocomplete() {
         const salaInput = document.getElementById('sala-input');
@@ -413,7 +405,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById("map-type-select").addEventListener("change", (event) => updateMapTiles(event.target.value));
 
-    // --- MODIFICADO: Checkbox de pontos agora chama a função correta ---
+    // --- Checkbox de pontos agora chama a função correta ---
     document.getElementById("mostrar-pontos-checkbox").addEventListener("change", (event) => {
         // A função drawPontos já verifica internamente se deve ou não adicionar a camada
         drawPontos();
@@ -421,7 +413,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.getElementById("mostrar-info-checkbox").addEventListener("change", updateLabels);
     
-    // --- MODIFICADO: Seletor de andar agora usa a função central ---
+    //Seletor de andar agora usa a função central ---
     document.getElementById("andar-filter-select").addEventListener('change', (event) => {
         andarSelecionadoAtual = event.target.value;
         salaSelecionadaAtual = null; // Limpa a seleção ao mudar de andar manualmente
