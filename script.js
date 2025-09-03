@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // --- CORREÇÃO 1: Função dedicada para limpar a camada da rota ---
+    // ---Função dedicada para limpar a camada da rota ---
     function limparRota() {
         if (rotasLayer && map.hasLayer(rotasLayer)) {
             map.removeLayer(rotasLayer);
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     salaSelecionadaAtual = feature.properties.nome;
                     document.getElementById('sala-input').value = salaSelecionadaAtual;
                     
-                    limparRota(); // --- CORREÇÃO 1: Limpa rota antiga ao selecionar nova sala
+                    limparRota(); // --- Limpa rota antiga ao selecionar nova sala
                     
                     const novoAndar = feature.properties.andar;
                     document.getElementById('andar-filter-select').value = novoAndar;
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateZoomDependentLayers(); // Atualiza os labels após desenhar as salas
     }
 
-    // --- CORREÇÃO 4: Renomeada e agora controla labels E pontos ---
+    // ---Renomeada e agora controla labels E pontos ---
     function updateZoomDependentLayers() {
         if (!salasData) return;
 
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         salasLabelsLayer.addTo(map);
 
-        // --- CORREÇÃO 4: Adicionado gerenciamento dos pontos aqui ---
+        // ---Adicionado gerenciamento dos pontos aqui ---
         drawPontos();
     }
 
@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
             map.removeLayer(pontosLayer);
         }
 
-        // --- CORREÇÃO 4: Condição de visibilidade baseada no zoom e no checkbox ---
+        // ---Condição de visibilidade baseada no zoom e no checkbox ---
         const currentZoom = map.getZoom();
         const checkboxChecked = document.getElementById("mostrar-pontos-checkbox").checked;
         if (!checkboxChecked || currentZoom < LABEL_ZOOM_THRESHOLD) {
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function() {
             pointToLayer: (feature, latlng) => {
                 const tipo = feature.properties.tipo ? feature.properties.tipo.toLowerCase() : 'default';
                 const icon = customIcons[tipo] || customIcons['default'];
-                // --- CORREÇÃO 3: Adiciona a opção 'draggable: false' ---
+                // ---Adiciona a opção 'draggable: false' ---
                 return L.marker(latlng, { icon: icon, draggable: false });
             },
             onEachFeature: (feature, layer) => {
@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     function drawRotas(destinationSalaName, accessibilityNeeded) {
-        limparRota(); // --- CORREÇÃO 1: Garante que qualquer rota antiga seja limpa primeiro
+        limparRota(); // ---Garante que qualquer rota antiga seja limpa primeiro
 
         const filteredRoutes = rotasData.features.filter((feature) => {
             const isDestination = feature.properties.destino === destinationSalaName;
