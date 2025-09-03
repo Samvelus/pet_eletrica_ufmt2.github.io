@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- NOVO: Mapeamento de cores para os andares ---
     const floorColors = {
-        '0': '#ffffe0', // Amarelo Claro
+        '0': '#fdfd96', // Amarelo Claro
         '1': '#add8e6', // Azul Claro
         '2': '#ffc0cb'  // Vermelho Claro (Rosa)
     };
