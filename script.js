@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    
+
     // --- LÓGICA DA SIDEBAR (sem alterações) ---
     const toggleButton = document.getElementById('toggle-sidebar-btn');
     const sidebar = document.getElementById('sidebar');
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function toggleSidebar() {
         sidebar.classList.toggle('visible');
         if (sidebar.classList.contains('visible')) {
-            toggleButton.style.right = '355px'; // 340px da sidebar + 15px de margem
+            toggleButton.style.right = '355px';
         } else {
             toggleButton.style.right = '15px';
         }
@@ -40,22 +40,22 @@ document.addEventListener('DOMContentLoaded', function() {
     let andarSelecionadoAtual = '0'; // Inicia no Térreo
     let salasData, floorData, rotasData, pontosData;
 
-    // --- NOVO: Mapeamento de cores para os andares ---
     const floorColors = {
         '0': '#fdfd96', // Amarelo Claro
         '1': '#add8e6', // Azul Claro
         '2': '#ffc0cb'  // Vermelho Claro (Rosa)
     };
-    
- // Definição dos ícones personalizados com CSS
-            const customIcons = {
-                'banheiro': L.divIcon({ className: 'poi-marker poi-marker-banheiro', html: '<div class="icon-content"></div>', iconSize: [32, 32], iconAnchor: [16, 32], popupAnchor: [0, -34] }),
-                'elevador': L.divIcon({ className: 'poi-marker poi-marker-elevador', html: '<div class="icon-content"></div>', iconSize: [32, 32], iconAnchor: [16, 32], popupAnchor: [0, -34] }),
-                'rampa': L.divIcon({ className: 'poi-marker poi-marker-rampa', html: '<div class="icon-content"></div>', iconSize: [32, 32], iconAnchor: [16, 32], popupAnchor: [0, -34] }),
-                'escada': L.divIcon({ className: 'poi-marker poi-marker-escada', html: '<div class="icon-content"></div>', iconSize: [32, 32], iconAnchor: [16, 32], popupAnchor: [0, -34] }),
-                'totem': L.divIcon({ className: 'poi-marker poi-marker-totem', html: '<div class="icon-content"></div>', iconSize: [40, 40], iconAnchor: [20, 40], popupAnchor: [0, -42] }),
-                'default': L.icon({ iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png', shadowSize: [41, 41]})
-            };
+
+    // Definição dos ícones personalizados com CSS
+    // IMPORTANTE: Você precisa definir os estilos CSS correspondentes a estas classes!
+    const customIcons = {
+        'banheiro': L.divIcon({ className: 'poi-marker poi-marker-banheiro', html: '', iconSize: [28, 28], iconAnchor: [14, 28], popupAnchor: [0, -28] }),
+        'elevador': L.divIcon({ className: 'poi-marker poi-marker-elevador', html: '', iconSize: [28, 28], iconAnchor: [14, 28], popupAnchor: [0, -28] }),
+        'rampa':    L.divIcon({ className: 'poi-marker poi-marker-rampa',    html: '', iconSize: [28, 28], iconAnchor: [14, 28], popupAnchor: [0, -28] }),
+        'escada':   L.divIcon({ className: 'poi-marker poi-marker-escada',   html: '', iconSize: [28, 28], iconAnchor: [14, 28], popupAnchor: [0, -28] }),
+        'totem':    L.divIcon({ className: 'poi-marker poi-marker-totem',    html: '', iconSize: [32, 32], iconAnchor: [16, 32], popupAnchor: [0, -32] }),
+        'default':  L.icon({ iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png', shadowSize: [41, 41]})
+    };
 
     function initMap() {
         map = L.map("map-container", {
@@ -63,7 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
             zoom: 18,
             minZoom: 17,
             maxZoom: 25,
-           // maxBounds: [[MIN_LAT, MIN_LON], [MAX_LAT, MAX_LON]],
             rotate: true,
             rotateControl: { closeOnZeroBearing: false }, 
             bearing: 0
@@ -79,19 +78,21 @@ document.addEventListener('DOMContentLoaded', function() {
             if (salaSelecionadaAtual !== null) {
                 salaSelecionadaAtual = null;
                 document.getElementById('sala-input').value = '';
+                limparRota(); // --- CORREÇÃO 1: Limpa a rota ao clicar no mapa
                 drawSalas(); 
             }
         });
-        
+
         loadGeoJSONData();
-        map.on('zoomend moveend', updateLabels);
+        // --- CORREÇÃO 4: Chama a função que atualiza labels E pontos no zoom ---
+        map.on('zoomend moveend', updateZoomDependentLayers); 
     }
 
     async function loadGeoJSONData() {
         try {
             const [salasResponse, floorResponse, rotasResponse, pontosResponse] = await Promise.all([
                 fetch("salas.geojson"),
-                fetch("floor.geojson"), // Assumindo um único arquivo para todos os andares
+                fetch("floor.geojson"),
                 fetch("rotas.geojson"),
                 fetch("pontos.geojson"),
             ]);
@@ -100,21 +101,24 @@ document.addEventListener('DOMContentLoaded', function() {
             floorData = await floorResponse.json();
             rotasData = await rotasResponse.json();
             pontosData = await pontosResponse.json();
-            
+
             setupAutocomplete();
-            // Chama a função principal de atualização ---
             updateFloorView(); 
         } catch (error) {
             console.error("Erro ao carregar dados GeoJSON:", error);
             alert("Erro ao carregar dados do mapa. Verifique se os arquivos GeoJSON estão corretos e tente novamente.");
         }
     }
-    
-    // --- Função para desenhar o fundo do andar ---
+
+    // --- CORREÇÃO 1: Função dedicada para limpar a camada da rota ---
+    function limparRota() {
+        if (rotasLayer && map.hasLayer(rotasLayer)) {
+            map.removeLayer(rotasLayer);
+        }
+    }
+
     function drawFloor() {
         if (floorLayer) map.removeLayer(floorLayer);
-
-        // Filtra o polígono do chão para o andar atual
         const floorFeature = floorData.features.filter(feature => 
             feature.properties.andar == andarSelecionadoAtual
         );
@@ -122,14 +126,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (floorFeature) {
              floorLayer = L.geoJson(floorFeature, {
                 style: () => ({
-                    fillColor: floorColors[andarSelecionadoAtual] || "#f0f0f0", // Cor padrão
+                    fillColor: floorColors[andarSelecionadoAtual] || "#f0f0f0",
                     color: "transparent",
                     weight: 0,
                     fillOpacity: 1,
                 }),
-                interactive: false // O chão não é clicável
+                interactive: false
             }).addTo(map);
-            // Envia o chão para o fundo do mapa
             floorLayer.bringToBack();
         }
     }
@@ -147,140 +150,120 @@ document.addEventListener('DOMContentLoaded', function() {
             style: (feature) => ({
                 fillColor: feature.properties.nome === salaSelecionadaAtual ? "#0056b3" : "gray",
                 color: "black",
-                weight: feature.properties.nome === salaSelecionadaAtual ? 2.5 : 1, // Borda mais grossa
+                weight: feature.properties.nome === salaSelecionadaAtual ? 2.5 : 1,
                 fillOpacity: 0.3,
             }),
             onEachFeature: (feature, layer) => {
                 layer.on('click', (e) => {
-                    L.DomEvent.stopPropagation(e); // Impede que o clique se propague para o mapa
+                    L.DomEvent.stopPropagation(e);
                     salaSelecionadaAtual = feature.properties.nome;
                     document.getElementById('sala-input').value = salaSelecionadaAtual;
                     
-                    // --- Atualiza a visualização completa do andar ---
+                    limparRota(); // --- CORREÇÃO 1: Limpa rota antiga ao selecionar nova sala
+                    
                     const novoAndar = feature.properties.andar;
                     document.getElementById('andar-filter-select').value = novoAndar;
                     andarSelecionadoAtual = novoAndar;
                     updateFloorView();
 
-                    // Popup
-const props = feature.properties;
-                        const popupContent = `
-                            <div class="custom-popup">
-                                <img src="${props.img || 'https://placehold.co/400x200/eeeeee/cccccc?text=Sem+Imagem'}" alt="Imagem da sala ${props.nome}" class="popup-image" onerror="this.src='https://placehold.co/400x200/eeeeee/cccccc?text=Erro'">
-                                <div class="popup-content">
-                                    <div class="popup-header">${props.nome || 'Sem nome'}</div>
-                                    <div class="popup-details">
-                                        <b>Bloco:</b> ${props.bloco || 'N/A'}<br>
-                                        <b>Andar:</b> ${props.andar == 0 ? 'Térreo' : props.andar + '° Andar'}<br>
-                                        <b>Tipo:</b> ${props.tipo || 'N/A'}
-                                    </div>
-                                    <a href="${props.link || '#'}" target="_blank" rel="noopener noreferrer" class="popup-button">Mais Informações</a>
+                    const props = feature.properties;
+                    const popupContent = `
+                        <div class="custom-popup">
+                            <img src="${props.img || 'https://placehold.co/400x200/eeeeee/cccccc?text=Sem+Imagem'}" alt="Imagem da sala ${props.nome}" class="popup-image" onerror="this.src='https://placehold.co/400x200/eeeeee/cccccc?text=Erro'">
+                            <div class="popup-content">
+                                <div class="popup-header">${props.nome || 'Sem nome'}</div>
+                                <div class="popup-details">
+                                    <b>Bloco:</b> ${props.bloco || 'N/A'}<br>
+                                    <b>Andar:</b> ${props.andar == 0 ? 'Térreo' : props.andar + '° Andar'}<br>
+                                    <b>Tipo:</b> ${props.tipo || 'N/A'}
                                 </div>
+                                <a href="${props.link || '#'}" target="_blank" rel="noopener noreferrer" class="popup-button">Mais Informações</a>
                             </div>
-                        `;
-
-                        L.popup({ minWidth: 280 })
-                            .setLatLng(e.latlng)
-                            .setContent(popupContent)
-                            .openOn(map);
-
+                        </div>
+                    `;
+                    L.popup({ minWidth: 280 }).setLatLng(e.latlng).setContent(popupContent).openOn(map);
                 });
             },
         }).addTo(map);
-        
-        updateLabels();
+
+        updateZoomDependentLayers(); // Atualiza os labels após desenhar as salas
     }
-    
-    function updateLabels() {
-        // (sem alterações nesta função)
+
+    // --- CORREÇÃO 4: Renomeada e agora controla labels E pontos ---
+    function updateZoomDependentLayers() {
         if (!salasData) return;
-        
+
+        // Gerencia Labels
         if (salasLabelsLayer) map.removeLayer(salasLabelsLayer);
         salasLabelsLayer = L.layerGroup();
-
         const showInfo = document.getElementById("mostrar-info-checkbox").checked;
         const currentZoom = map.getZoom();
 
         if (showInfo && currentZoom >= LABEL_ZOOM_THRESHOLD) {
-            const currentBounds = map.getBounds();
-            
             const salasParaEtiquetar = salasData.features.filter(feature => 
                 feature.properties.andar == andarSelecionadoAtual
             );
-
             salasParaEtiquetar.forEach(feature => {
                 if (feature.properties && feature.properties.nome) {
                     const featureLayer = L.geoJson(feature);
                     const center = featureLayer.getBounds().getCenter();
-
-                    if (currentBounds.contains(center)) {
-                        const nomeCompleto = feature.properties.nome;
-                        const partesDoNome = nomeCompleto.split(' ');
-                        let nomeAbreviado = nomeCompleto; 
-
-                        if (partesDoNome.length > 1) {
-                            nomeAbreviado = `${partesDoNome[0]} ${partesDoNome[1].substring(0, 3)}`;
-                        }
-                        const label = L.marker(center, {
-                            icon: L.divIcon({
-                                className: 'sala-label',
-                                html: nomeAbreviado,
-                                iconSize: [100, 20],
-                                iconAnchor: [50, 10]
-                            }),
-                            interactive: false
-                        });
-                        salasLabelsLayer.addLayer(label);
-                    }
+                    const nomeCompleto = feature.properties.nome;
+                    const partesDoNome = nomeCompleto.split(' ');
+                    let nomeAbreviado = partesDoNome.length > 1 ? `${partesDoNome[0]} ${partesDoNome[1].substring(0, 3)}` : nomeCompleto; 
+                    
+                    const label = L.marker(center, {
+                        icon: L.divIcon({ className: 'sala-label', html: nomeAbreviado, iconSize: [100, 20], iconAnchor: [50, 10] }),
+                        interactive: false
+                    });
+                    salasLabelsLayer.addLayer(label);
                 }
             });
         }
         salasLabelsLayer.addTo(map);
+
+        // --- CORREÇÃO 4: Adicionado gerenciamento dos pontos aqui ---
+        drawPontos();
     }
 
-    // ---  Função para desenhar pontos filtrados e com ícones ---
     function drawPontos() {
-                // Remove a camada de pontos anterior, se ela existir
-                if (pontosLayer && map.hasLayer(pontosLayer)) {
-                    map.removeLayer(pontosLayer);
-                }
+        if (pontosLayer && map.hasLayer(pontosLayer)) {
+            map.removeLayer(pontosLayer);
+        }
 
-                // 1. Filtra os pontos pelo andar selecionado
-                const pontosFiltrados = pontosData.features.filter(feature => 
-                    feature.properties.andar == andarSelecionadoAtual
-                );
+        // --- CORREÇÃO 4: Condição de visibilidade baseada no zoom e no checkbox ---
+        const currentZoom = map.getZoom();
+        const checkboxChecked = document.getElementById("mostrar-pontos-checkbox").checked;
+        if (!checkboxChecked || currentZoom < LABEL_ZOOM_THRESHOLD) {
+            return; // Sai da função se não for para mostrar os pontos
+        }
+        
+        const pontosFiltrados = pontosData.features.filter(feature => 
+            feature.properties.andar == andarSelecionadoAtual
+        );
+        if (pontosFiltrados.length === 0) return;
 
-                if (pontosFiltrados.length === 0) return; // Sai se não houver pontos para este andar
+        const pontosGeoJsonFiltrado = { ...pontosData, features: pontosFiltrados };
 
-                const pontosGeoJsonFiltrado = { ...pontosData, features: pontosFiltrados };
-
-                pontosLayer = L.geoJson(pontosGeoJsonFiltrado, {
-                    pointToLayer: (feature, latlng) => {
-                        // 2. Escolhe o ícone com base na propriedade 'tipo'
-                        const tipo = feature.properties.tipo ? feature.properties.tipo.toLowerCase() : 'default';
-                        const icon = customIcons[tipo] || customIcons['default'];
-
-                        // Cria o marcador com o ícone correto
-                        return L.marker(latlng, { icon: icon });
-                    },
-                    onEachFeature: (feature, layer) => {
-                        // Adiciona um popup a cada ponto
-                        if (feature.properties && feature.properties.nome) {
-                            layer.bindPopup(`<b>${feature.properties.nome}</b>`);
-                        }
-                    }
-                });
-
-                // Adiciona ao mapa apenas se o checkbox estiver marcado
-                if (document.getElementById("mostrar-pontos-checkbox").checked) {
-                    pontosLayer.addTo(map);
+        pontosLayer = L.geoJson(pontosGeoJsonFiltrado, {
+            pointToLayer: (feature, latlng) => {
+                const tipo = feature.properties.tipo ? feature.properties.tipo.toLowerCase() : 'default';
+                const icon = customIcons[tipo] || customIcons['default'];
+                // --- CORREÇÃO 3: Adiciona a opção 'draggable: false' ---
+                return L.marker(latlng, { icon: icon, draggable: false });
+            },
+            onEachFeature: (feature, layer) => {
+                if (feature.properties && feature.properties.nome) {
+                    layer.bindPopup(`<b>${feature.properties.nome}</b>`);
                 }
             }
+        });
+        
+        pontosLayer.addTo(map);
+    }
 
-    
+
     function drawRotas(destinationSalaName, accessibilityNeeded) {
-        // (sem alterações nesta função)
-        if (rotasLayer) map.removeLayer(rotasLayer);
+        limparRota(); // --- CORREÇÃO 1: Garante que qualquer rota antiga seja limpa primeiro
 
         const filteredRoutes = rotasData.features.filter((feature) => {
             const isDestination = feature.properties.destino === destinationSalaName;
@@ -303,17 +286,17 @@ const props = feature.properties;
         }
     }
 
-        function updateMapTiles(type) {
-            let url, attr;
-            map.eachLayer(l => { if (l instanceof L.TileLayer) map.removeLayer(l); });
-            switch (type) {
-                case "Híbrido": url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"; attr = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'; break;
-                case "Satélite": url = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'; attr = 'Tiles &copy; Esri'; break;
-                default: url = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"; attr = '&copy; <a href="https://carto.com/attributions">CARTO</a>';
-            }
-            L.tileLayer(url, { attribution: attr, maxZoom: 25 }).addTo(map);
+    function updateMapTiles(type) {
+        let url, attr;
+        map.eachLayer(l => { if (l instanceof L.TileLayer) map.removeLayer(l); });
+        switch (type) {
+            case "Híbrido": url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"; attr = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'; break;
+            case "Satélite": url = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'; attr = 'Tiles &copy; Esri'; break;
+            default: url = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"; attr = '&copy; <a href="https://carto.com/attributions">CARTO</a>';
         }
-    
+        L.tileLayer(url, { attribution: attr, maxZoom: 25 }).addTo(map);
+    }
+
     function setupAutocomplete() {
         const salaInput = document.getElementById('sala-input');
         const suggestionsContainer = document.getElementById('suggestions-container');
@@ -340,21 +323,17 @@ const props = feature.properties;
                         salaInput.value = salaName;
                         suggestionsContainer.innerHTML = '';
                         suggestionsContainer.style.display = 'none';
-                        
-                        // --- MODIFICADO: Lógica de seleção de sala ---
+
                         const salaAlvo = salasData.features.find(f => f.properties.nome === salaName);
                         if (salaAlvo) {
                             salaSelecionadaAtual = salaName;
                             const novoAndar = salaAlvo.properties.andar;
-                            
-                            // Atualiza o estado global e o seletor
                             andarSelecionadoAtual = novoAndar;
                             document.getElementById('andar-filter-select').value = novoAndar;
-
-                            // Redesenha tudo com base no novo andar
+                            
+                            limparRota(); // --- CORREÇÃO 1: Limpa a rota ao escolher nova sala pelo autocomplete
                             updateFloorView(); 
 
-                            // Centraliza na sala
                             const centroid = L.geoJson(salaAlvo).getBounds().getCenter();
                             map.setView(centroid, 21);
                         }
@@ -363,7 +342,7 @@ const props = feature.properties;
                 });
             }
         });
-        
+
         document.addEventListener('click', (event) => {
             if (!event.target.closest('.autocomplete-container')) {
                 suggestionsContainer.innerHTML = '';
@@ -372,12 +351,11 @@ const props = feature.properties;
         });
     }
 
-    // --- NOVO: Função central para atualizar todas as camadas baseadas no andar ---
     function updateFloorView() {
+        limparRota(); // --- CORREÇÃO 1: Limpa a rota ao mudar de andar
         drawFloor();
         drawSalas();
-        drawPontos();
-        updateLabels(); // Labels também dependem do andar
+        // drawPontos e updateLabels são chamados por updateZoomDependentLayers
     }
 
     // --- Iniciar o mapa ---
@@ -393,24 +371,21 @@ const props = feature.properties;
             return;
         }
         salaSelecionadaAtual = salaInputValue;
-        drawSalas(); // Apenas para destacar a sala antes da rota
+        drawSalas();
         drawRotas(salaSelecionadaAtual, document.getElementById("acessibilidade-checkbox").checked);
     });
 
     document.getElementById("map-type-select").addEventListener("change", (event) => updateMapTiles(event.target.value));
 
-    // --- Checkbox de pontos agora chama a função correta ---
-    document.getElementById("mostrar-pontos-checkbox").addEventListener("change", (event) => {
-        // A função drawPontos já verifica internamente se deve ou não adicionar a camada
-        drawPontos();
-    });
-    
-    document.getElementById("mostrar-info-checkbox").addEventListener("change", updateLabels);
-    
-    //Seletor de andar agora usa a função central ---
+    // --- CORREÇÃO 4: Checkbox de pontos agora chama a função de atualização geral ---
+    document.getElementById("mostrar-pontos-checkbox").addEventListener("change", updateZoomDependentLayers);
+
+    // --- CORREÇÃO 4: Checkbox de info agora chama a função de atualização geral ---
+    document.getElementById("mostrar-info-checkbox").addEventListener("change", updateZoomDependentLayers);
+
     document.getElementById("andar-filter-select").addEventListener('change', (event) => {
         andarSelecionadoAtual = event.target.value;
-        salaSelecionadaAtual = null; // Limpa a seleção ao mudar de andar manualmente
+        salaSelecionadaAtual = null;
         document.getElementById('sala-input').value = '';
         updateFloorView();
     });
