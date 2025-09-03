@@ -47,42 +47,15 @@ document.addEventListener('DOMContentLoaded', function() {
         '2': '#ffc0cb'  // Vermelho Claro (Rosa)
     };
     
-    // ---Ícones personalizados para os pontos de interesse ---
-    const customIcons = {
-        'banheiro': L.icon({
-            iconUrl: 'https://img.icons8.com/ios-filled/50/000000/toilet-bowl.png',
-            iconSize: [28, 28],
-            iconAnchor: [14, 28],
-            popupAnchor: [0, -28]
-        }),
-        'elevador': L.icon({
-            iconUrl: 'https://img.icons8.com/ios-filled/50/000000/elevator.png',
-            iconSize: [28, 28],
-            iconAnchor: [14, 28],
-            popupAnchor: [0, -28]
-        }),
-        'rampa': L.icon({
-            iconUrl: 'https://img.icons8.com/ios-filled/50/000000/wheelchair.png',
-            iconSize: [28, 28],
-            iconAnchor: [14, 28],
-            popupAnchor: [0, -28]
-        }),
-        'escada': L.icon({
-            iconUrl: 'https://img.icons8.com/ios-filled/50/000000/stairs.png',
-            iconSize: [28, 28],
-            iconAnchor: [14, 28],
-            popupAnchor: [0, -28]
-        }),
-        'default': L.icon({ // Ícone padrão caso o tipo não seja encontrado
-            iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
-            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-            shadowSize: [41, 41]
-        })
-    };
-
+ // Definição dos ícones personalizados com CSS
+            const customIcons = {
+                'banheiro': L.divIcon({ className: 'poi-marker poi-marker-banheiro', html: '<div class="icon-content"></div>', iconSize: [32, 32], iconAnchor: [16, 32], popupAnchor: [0, -34] }),
+                'elevador': L.divIcon({ className: 'poi-marker poi-marker-elevador', html: '<div class="icon-content"></div>', iconSize: [32, 32], iconAnchor: [16, 32], popupAnchor: [0, -34] }),
+                'rampa': L.divIcon({ className: 'poi-marker poi-marker-rampa', html: '<div class="icon-content"></div>', iconSize: [32, 32], iconAnchor: [16, 32], popupAnchor: [0, -34] }),
+                'escada': L.divIcon({ className: 'poi-marker poi-marker-escada', html: '<div class="icon-content"></div>', iconSize: [32, 32], iconAnchor: [16, 32], popupAnchor: [0, -34] }),
+                'totem': L.divIcon({ className: 'poi-marker poi-marker-totem', html: '<div class="icon-content"></div>', iconSize: [40, 40], iconAnchor: [20, 40], popupAnchor: [0, -42] }),
+                'default': L.icon({ iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png', shadowSize: [41, 41]})
+            };
 
     function initMap() {
         map = L.map("map-container", {
@@ -183,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     salaSelecionadaAtual = feature.properties.nome;
                     document.getElementById('sala-input').value = salaSelecionadaAtual;
                     
-                    // --- MODIFICADO: Atualiza a visualização completa do andar ---
+                    // --- Atualiza a visualização completa do andar ---
                     const novoAndar = feature.properties.andar;
                     document.getElementById('andar-filter-select').value = novoAndar;
                     andarSelecionadoAtual = novoAndar;
@@ -265,35 +238,45 @@ const props = feature.properties;
         salasLabelsLayer.addTo(map);
     }
 
-    // --- MODIFICADO: Função para desenhar pontos filtrados e com ícones ---
+    // ---  Função para desenhar pontos filtrados e com ícones ---
     function drawPontos() {
-        if (pontosLayer) map.removeLayer(pontosLayer);
-        
-        // 1. Filtra os pontos pelo andar selecionado
-        const pontosFiltrados = pontosData.features.filter(feature => 
-            feature.properties.andar == andarSelecionadoAtual
-        );
-        
-        if (pontosFiltrados.length === 0) return; // Sai se não houver pontos para este andar
+                // Remove a camada de pontos anterior, se ela existir
+                if (pontosLayer && map.hasLayer(pontosLayer)) {
+                    map.removeLayer(pontosLayer);
+                }
 
-        const pontosGeoJsonFiltrado = { ...pontosData, features: pontosFiltrados };
+                // 1. Filtra os pontos pelo andar selecionado
+                const pontosFiltrados = pontosData.features.filter(feature => 
+                    feature.properties.andar == andarSelecionadoAtual
+                );
 
-        pontosLayer = L.geoJson(pontosGeoJsonFiltrado, {
-            pointToLayer: (feature, latlng) => {
-                // 2. Escolhe o ícone com base na propriedade 'tipo'
-                const tipo = feature.properties.tipo ? feature.properties.tipo.toLowerCase() : 'default';
-                const icon = customIcons[tipo] || customIcons['default'];
-                
-                return L.marker(latlng, { icon: icon })
-                        .bindPopup(`<b>${feature.properties.nome || 'Ponto de Interesse'}</b>`);
-            },
-        });
+                if (pontosFiltrados.length === 0) return; // Sai se não houver pontos para este andar
 
-        // Adiciona ao mapa apenas se o checkbox estiver marcado
-        if (document.getElementById("mostrar-pontos-checkbox").checked) {
-            pontosLayer.addTo(map);
-        }
-    }
+                const pontosGeoJsonFiltrado = { ...pontosData, features: pontosFiltrados };
+
+                pontosLayer = L.geoJson(pontosGeoJsonFiltrado, {
+                    pointToLayer: (feature, latlng) => {
+                        // 2. Escolhe o ícone com base na propriedade 'tipo'
+                        const tipo = feature.properties.tipo ? feature.properties.tipo.toLowerCase() : 'default';
+                        const icon = customIcons[tipo] || customIcons['default'];
+
+                        // Cria o marcador com o ícone correto
+                        return L.marker(latlng, { icon: icon });
+                    },
+                    onEachFeature: (feature, layer) => {
+                        // Adiciona um popup a cada ponto
+                        if (feature.properties && feature.properties.nome) {
+                            layer.bindPopup(`<b>${feature.properties.nome}</b>`);
+                        }
+                    }
+                });
+
+                // Adiciona ao mapa apenas se o checkbox estiver marcado
+                if (document.getElementById("mostrar-pontos-checkbox").checked) {
+                    pontosLayer.addTo(map);
+                }
+            }
+
     
     function drawRotas(destinationSalaName, accessibilityNeeded) {
         // (sem alterações nesta função)
