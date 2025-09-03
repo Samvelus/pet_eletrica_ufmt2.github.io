@@ -285,7 +285,7 @@ body, html {
             z-index: 1000 !important; animation: pulse 2s infinite;
         }
 .poi-marker-totem .icon-content { font-size: 22px; }
-        .poi-marker-totem .icon-content::before { font-family: "Font Awesome 6 Free"; font-weight: 900; content: "\f005"; }
+.poi-marker-totem .icon-content::before { font-family: "Font Awesome 6 Free"; font-weight: 900; content: "\f005"; }
 @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7); }
             70% { box-shadow: 0 0 0 12px rgba(0, 123, 255, 0); }
