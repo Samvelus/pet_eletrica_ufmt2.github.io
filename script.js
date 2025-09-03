@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const props = feature.properties;
                     const popupContent = `
                         <div class="custom-popup">
-                            <img src="${props.img || 'https://placehold.co/400x200/eeeeee/cccccc?text=Sem+Imagem'}" alt="Imagem da sala ${props.nome}" class="popup-image" onerror="this.src='https://placehold.co/400x200/eeeeee/cccccc?text=Erro'">
+                            <img src="${props.imagem || 'https://placehold.co/400x200/eeeeee/cccccc?text=Sem+Imagem'}" alt="Imagem da sala ${props.nome}" class="popup-image" onerror="this.src='https://placehold.co/400x200/eeeeee/cccccc?text=Erro'">
                             <div class="popup-content">
                                 <div class="popup-header">${props.nome || 'Sem nome'}</div>
                                 <div class="popup-details">
