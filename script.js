@@ -190,16 +190,27 @@ document.addEventListener('DOMContentLoaded', function() {
                     updateFloorView();
 
                     // Popup
-                    const props = feature.properties;
-                    let popupContent = `<b>${props.nome || 'Sem nome'}</b><br>`;
-                    popupContent += `<b>Bloco:</b> ${props.bloco || 'N/A'}<br>`;
-                    popupContent += `<b>Andar:</b> ${props.andar == 0 ? 'Térreo' : props.andar + '° Andar'}<br>`;
-                    popupContent += `<b>Tipo:</b> ${props.tipo || 'N/A'}`;
-                    
-                    L.popup()
-                        .setLatLng(e.latlng)
-                        .setContent(popupContent)
-                        .openOn(map);
+const props = feature.properties;
+                        const popupContent = `
+                            <div class="custom-popup">
+                                <img src="${props.img || 'https://placehold.co/400x200/eeeeee/cccccc?text=Sem+Imagem'}" alt="Imagem da sala ${props.nome}" class="popup-image" onerror="this.src='https://placehold.co/400x200/eeeeee/cccccc?text=Erro'">
+                                <div class="popup-content">
+                                    <div class="popup-header">${props.nome || 'Sem nome'}</div>
+                                    <div class="popup-details">
+                                        <b>Bloco:</b> ${props.bloco || 'N/A'}<br>
+                                        <b>Andar:</b> ${props.andar == 0 ? 'Térreo' : props.andar + '° Andar'}<br>
+                                        <b>Tipo:</b> ${props.tipo || 'N/A'}
+                                    </div>
+                                    <a href="${props.link || '#'}" target="_blank" rel="noopener noreferrer" class="popup-button">Mais Informações</a>
+                                </div>
+                            </div>
+                        `;
+
+                        L.popup({ minWidth: 280 })
+                            .setLatLng(e.latlng)
+                            .setContent(popupContent)
+                            .openOn(map);
+
                 });
             },
         }).addTo(map);
