@@ -264,3 +264,28 @@ body, html {
         .custom-popup .popup-button:hover {
             background-color: #003366;
         }
+
+.poi-marker {
+            background-color: #5a5a5a; color: white; border-radius: 50% 50% 50% 0;
+            border: 2px solid #ffffff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            width: 32px; height: 32px; transform: rotate(-45deg);
+            display: flex; justify-content: center; align-items: center;
+            transition: transform 0.2s ease-in-out; cursor: pointer;
+        }
+        .poi-marker .icon-content { transform: rotate(45deg); font-size: 16px; }
+        .poi-marker:hover { transform: rotate(-45deg) scale(1.15); }
+        .poi-marker-banheiro .icon-content::before { font-family: "Font Awesome 6 Free"; font-weight: 900; content: "\f7d8"; }
+        .poi-marker-elevador .icon-content::before { font-family: "Font Awesome 6 Free"; font-weight: 900; content: "\f07d"; }
+        .poi-marker-rampa .icon-content::before { font-family: "Font Awesome 6 Free"; font-weight: 900; content: "\f193"; }
+        .poi-marker-escada .icon-content::before { font-family: "Font Awesome 6 Free"; font-weight: 900; content: "\e55e"; }
+        .poi-marker-totem {
+            background: linear-gradient(145deg, #007bff, #0056b3); width: 40px; height: 40px;
+            z-index: 1000 !important; animation: pulse 2s infinite;
+        }
+        .poi-marker-totem .icon-content { font-size: 22px; }
+        .poi-marker-totem .icon-content::before { font-family: "Font Awesome 6 Free"; font-weight: 900; content: "\f005"; }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7); }
+            70% { box-shadow: 0 0 0 12px rgba(0, 123, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 123, 255, 0); }
+        }
