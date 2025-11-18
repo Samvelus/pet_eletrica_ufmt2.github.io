@@ -74,6 +74,18 @@ document.addEventListener('DOMContentLoaded', function() {
             maxZoom: 25,
         }).addTo(map);
 
+        var lc = L.control.locate({
+  position: 'topright',       // posição do botão
+  strings: {
+    title: "Mostrar minha localização atual"
+  },
+  drawCircle: true,           // desenha círculo de precisão
+  showPopup: true,            // mostra popup com coordenadas
+  locateOptions: {
+    maxZoom: 16               // zoom ao localizar posição
+  }
+}).addTo(map);
+
         map.on('click', function() {
             if (salaSelecionadaAtual !== null) {
                 salaSelecionadaAtual = null;
