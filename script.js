@@ -95,7 +95,7 @@ const Utils = {
         notification.textContent = message;
         notification.style.cssText = `
             position: fixed;
-            top: 20px;
+            bottom: 20px;
             right: 20px;
             background: ${type === 'error' ? '#f44336' : type === 'success' ? '#4CAF50' : '#2196F3'};
             color: white;
@@ -678,14 +678,16 @@ class MapaInterativo {
 
         // Controle de localização
         L.control.locate({
-            position: 'topright',
+            position: 'topleft',
             strings: {
                 title: "Mostrar minha localização atual"
             },
-            drawCircle: true,
+            icon: 'fa-solid fa-location-crosshairs',
+            iconLoading: 'fa-solid fa-spinner fa-spin',
+            drawCircle: false,
             showPopup: true,
             locateOptions: {
-                maxZoom: 16
+                maxZoom: 20
             }
         }).addTo(this.state.map);
 
