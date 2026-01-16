@@ -21,7 +21,18 @@ const CONFIG = {
         },
         selected: '#0056b3',
         default: 'gray',
-        route: '#0056b3'
+        route: {
+            active: '#0056b3',      // Caminho à frente
+            completed: '#90CAF9',   // Caminho já percorrido
+            current: '#FFA726'      // Segmento atual
+        }
+    },
+    navigation: {
+        UPDATE_INTERVAL: 1000,           // Atualizar posição a cada 1 segundo
+        PROXIMITY_THRESHOLD: 5,          // Metros para considerar que chegou ao waypoint
+        RECALCULATE_THRESHOLD: 15,       // Metros de desvio para recalcular rota
+        INSTRUCTION_DISTANCE: 20,        // Distância para mostrar próxima instrução (metros)
+        ARRIVAL_DISTANCE: 3              // Distância para considerar chegada (metros)
     },
     debounce: {
         autocomplete: 300
@@ -39,17 +50,30 @@ class MapaInterativoState {
             rotas: null,
             pontos: null,
             floor: null,
-            salasLabels: null
+            salasLabels: null,
+            activeRoute: null,
+            completedRoute: null,
+            userMarker: null
         };
         this.data = {
             salas: null,
             floor: null,
             rotas: null,
-            pontos: null
+            pontos: null,
+            navigationGraph: null
         };
         this.selection = {
             sala: null,
             andar: '0'
+        };
+        this.navigation = {
+            isActive: false,
+            currentPosition: null,
+            destination: null,
+            route: null,
+            currentSegmentIndex: 0,
+            watchId: null,
+            instructions: []
         };
         this.isLoading = false;
     }
@@ -71,7 +95,6 @@ class MapaInterativoState {
 // UTILITÁRIOS
 // ===================================================================
 const Utils = {
-    // Debounce para otimizar eventos frequentes
     debounce(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -84,9 +107,7 @@ const Utils = {
         };
     },
 
-    // Mostrar notificação em vez de alert
     showNotification(message, type = 'info') {
-        // Remove notificações anteriores
         const existing = document.querySelector('.map-notification');
         if (existing) existing.remove();
 
@@ -113,7 +134,6 @@ const Utils = {
         }, 3000);
     },
 
-    // Loading spinner
     showLoading(show = true) {
         let loader = document.getElementById('map-loader');
         if (show && !loader) {
@@ -138,7 +158,6 @@ const Utils = {
         }
     },
 
-    // Abreviar nome de sala de forma inteligente
     abbreviateName(name, maxLength = 15) {
         if (!name || name.length <= maxLength) return name;
         
@@ -147,7 +166,6 @@ const Utils = {
             return name.substring(0, maxLength) + '...';
         }
         
-        // Mantém primeira palavra e abrevia as seguintes
         let result = parts[0];
         for (let i = 1; i < parts.length; i++) {
             const abbreviated = parts[i].substring(0, 3);
@@ -157,7 +175,6 @@ const Utils = {
         return result;
     },
 
-    // Validar dados GeoJSON
     validateGeoJSON(data, type) {
         if (!data || !data.features || !Array.isArray(data.features)) {
             throw new Error(`Dados GeoJSON inválidos para ${type}`);
@@ -165,11 +182,74 @@ const Utils = {
         return true;
     },
 
-    // Calcular centro do mapa
     getMapCenter() {
         const centerLat = (CONFIG.map.MIN_LAT + CONFIG.map.MAX_LAT) / 2;
         const centerLon = (CONFIG.map.MIN_LON + CONFIG.map.MAX_LON) / 2;
         return [centerLat, centerLon];
+    },
+
+    // Calcular distância entre dois pontos (Haversine)
+    calculateDistance(lat1, lon1, lat2, lon2) {
+        const R = 6371e3; // Raio da Terra em metros
+        const φ1 = lat1 * Math.PI / 180;
+        const φ2 = lat2 * Math.PI / 180;
+        const Δφ = (lat2 - lat1) * Math.PI / 180;
+        const Δλ = (lon2 - lon1) * Math.PI / 180;
+
+        const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+                Math.cos(φ1) * Math.cos(φ2) *
+                Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        return R * c;
+    },
+
+    // Calcular bearing (direção) entre dois pontos
+    calculateBearing(lat1, lon1, lat2, lon2) {
+        const φ1 = lat1 * Math.PI / 180;
+        const φ2 = lat2 * Math.PI / 180;
+        const Δλ = (lon2 - lon1) * Math.PI / 180;
+
+        const y = Math.sin(Δλ) * Math.cos(φ2);
+        const x = Math.cos(φ1) * Math.sin(φ2) -
+                Math.sin(φ1) * Math.cos(φ2) * Math.cos(Δλ);
+        const θ = Math.atan2(y, x);
+
+        return (θ * 180 / Math.PI + 360) % 360;
+    },
+
+    // Converter bearing em direção cardeal
+    bearingToDirection(bearing) {
+        const directions = ['norte', 'nordeste', 'leste', 'sudeste', 'sul', 'sudoeste', 'oeste', 'noroeste'];
+        const index = Math.round(bearing / 45) % 8;
+        return directions[index];
+    },
+
+    // Determinar tipo de curva baseado em mudança de ângulo
+    getTurnType(angle) {
+        const absAngle = Math.abs(angle);
+        if (absAngle < 20) return 'siga em frente';
+        if (absAngle < 60) return angle > 0 ? 'vire levemente à direita' : 'vire levemente à esquerda';
+        if (absAngle < 120) return angle > 0 ? 'vire à direita' : 'vire à esquerda';
+        return angle > 0 ? 'vire fortemente à direita' : 'vire fortemente à esquerda';
+    },
+
+    // Obter centro de um polígono ou ponto de entrada
+    getFeatureEntryPoint(feature) {
+        const props = feature.properties;
+        
+        // Se tem ponto de entrada definido, usar ele
+        if (props.porta && props.porta.coordinates) {
+            return {
+                lat: props.porta.coordinates[1],
+                lng: props.porta.coordinates[0]
+            };
+        }
+
+        // Senão, calcular centroid
+        const geojsonLayer = L.geoJson(feature);
+        const center = geojsonLayer.getBounds().getCenter();
+        return center;
     }
 };
 
@@ -180,38 +260,44 @@ const IconManager = {
     customIcons: {
         'banheiro': L.divIcon({ 
             className: 'poi-marker poi-marker-banheiro', 
-            html: '', 
+            html: '🚻', 
             iconSize: [28, 28], 
             iconAnchor: [14, 28], 
             popupAnchor: [0, -28] 
         }),
         'elevador': L.divIcon({ 
             className: 'poi-marker poi-marker-elevador', 
-            html: '', 
+            html: '🛗', 
             iconSize: [28, 28], 
             iconAnchor: [14, 28], 
             popupAnchor: [0, -28] 
         }),
         'rampa': L.divIcon({ 
             className: 'poi-marker poi-marker-rampa', 
-            html: '', 
+            html: '♿', 
             iconSize: [28, 28], 
             iconAnchor: [14, 28], 
             popupAnchor: [0, -28] 
         }),
         'escada': L.divIcon({ 
             className: 'poi-marker poi-marker-escada', 
-            html: '', 
+            html: '🪜', 
             iconSize: [28, 28], 
             iconAnchor: [14, 28], 
             popupAnchor: [0, -28] 
         }),
         'totem': L.divIcon({ 
             className: 'poi-marker poi-marker-totem', 
-            html: '', 
+            html: 'ℹ️', 
             iconSize: [32, 32], 
             iconAnchor: [16, 32], 
             popupAnchor: [0, -32] 
+        }),
+        'user': L.divIcon({
+            className: 'user-location-marker',
+            html: '📍',
+            iconSize: [32, 32],
+            iconAnchor: [16, 32]
         }),
         'default': L.icon({ 
             iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png', 
@@ -228,6 +314,649 @@ const IconManager = {
         return this.customIcons[tipoLower] || this.customIcons['default'];
     }
 };
+
+// ===================================================================
+// GRAFO DE NAVEGAÇÃO
+// ===================================================================
+class NavigationGraph {
+    constructor(pontosData, salasData) {
+        this.nodes = new Map();
+        this.edges = [];
+        this.buildGraph(pontosData, salasData);
+    }
+
+    buildGraph(pontosData, salasData) {
+        // Adicionar pontos de interesse como nós
+        pontosData.features.forEach(feature => {
+            const coords = feature.geometry.coordinates;
+            const nodeId = `poi_${feature.properties.nome}_${feature.properties.andar}`;
+            
+            this.nodes.set(nodeId, {
+                id: nodeId,
+                lat: coords[1],
+                lng: coords[0],
+                andar: feature.properties.andar,
+                tipo: feature.properties.tipo,
+                acessivel: feature.properties.acessibilidade === 'true',
+                nome: feature.properties.nome
+            });
+        });
+
+        // Adicionar salas como nós (usando ponto de entrada ou centroid)
+        salasData.features.forEach(feature => {
+            const entryPoint = Utils.getFeatureEntryPoint(feature);
+            const nodeId = `sala_${feature.properties.nome}_${feature.properties.andar}`;
+            
+            this.nodes.set(nodeId, {
+                id: nodeId,
+                lat: entryPoint.lat,
+                lng: entryPoint.lng,
+                andar: feature.properties.andar,
+                tipo: 'sala',
+                nome: feature.properties.nome,
+                acessivel: true
+            });
+        });
+
+        // Criar arestas automáticas (conectar nós próximos no mesmo andar)
+        this.autoConnectNodes();
+        
+        // Conectar escadas/elevadores entre andares
+        this.connectVerticalTransitions();
+    }
+
+    autoConnectNodes() {
+        const nodesArray = Array.from(this.nodes.values());
+        const MAX_CONNECTION_DISTANCE = 50; // metros
+
+        for (let i = 0; i < nodesArray.length; i++) {
+            for (let j = i + 1; j < nodesArray.length; j++) {
+                const node1 = nodesArray[i];
+                const node2 = nodesArray[j];
+
+                // Só conectar nós do mesmo andar
+                if (node1.andar !== node2.andar) continue;
+
+                const distance = Utils.calculateDistance(
+                    node1.lat, node1.lng,
+                    node2.lat, node2.lng
+                );
+
+                if (distance <= MAX_CONNECTION_DISTANCE) {
+                    this.edges.push({
+                        from: node1.id,
+                        to: node2.id,
+                        distance: distance,
+                        acessivel: node1.acessivel && node2.acessivel
+                    });
+                }
+            }
+        }
+    }
+
+    connectVerticalTransitions() {
+        const escadas = Array.from(this.nodes.values()).filter(n => n.tipo === 'escada');
+        const elevadores = Array.from(this.nodes.values()).filter(n => n.tipo === 'elevador');
+        const rampas = Array.from(this.nodes.values()).filter(n => n.tipo === 'rampa');
+
+        // Conectar escadas com mesma localização em andares diferentes
+        this.connectVerticalNodes(escadas, false);
+        
+        // Conectar elevadores (acessíveis)
+        this.connectVerticalNodes(elevadores, true);
+        
+        // Conectar rampas (acessíveis)
+        this.connectVerticalNodes(rampas, true);
+    }
+
+    connectVerticalNodes(nodes, acessivel) {
+        const VERTICAL_PROXIMITY = 5; // metros de tolerância horizontal
+
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const node1 = nodes[i];
+                const node2 = nodes[j];
+
+                // Não conectar o mesmo andar
+                if (node1.andar === node2.andar) continue;
+
+                const horizontalDist = Utils.calculateDistance(
+                    node1.lat, node1.lng,
+                    node2.lat, node2.lng
+                );
+
+                if (horizontalDist <= VERTICAL_PROXIMITY) {
+                    // Custo maior para mudança de andar
+                    const verticalCost = 10 + Math.abs(parseInt(node1.andar) - parseInt(node2.andar)) * 5;
+                    
+                    this.edges.push({
+                        from: node1.id,
+                        to: node2.id,
+                        distance: verticalCost,
+                        acessivel: acessivel,
+                        vertical: true
+                    });
+                }
+            }
+        }
+    }
+
+    findNearestNode(lat, lng, andar) {
+        let nearest = null;
+        let minDistance = Infinity;
+
+        this.nodes.forEach(node => {
+            if (node.andar !== andar) return;
+
+            const distance = Utils.calculateDistance(lat, lng, node.lat, node.lng);
+            if (distance < minDistance) {
+                minDistance = distance;
+                nearest = node;
+            }
+        });
+
+        return nearest;
+    }
+
+    // Algoritmo A* para encontrar melhor caminho
+    findPath(startLat, startLng, startAndar, endNodeId, requireAccessible = false) {
+        const startNode = this.findNearestNode(startLat, startLng, startAndar);
+        if (!startNode) return null;
+
+        const endNode = this.nodes.get(endNodeId);
+        if (!endNode) return null;
+
+        const openSet = new Set([startNode.id]);
+        const cameFrom = new Map();
+        const gScore = new Map();
+        const fScore = new Map();
+
+        this.nodes.forEach((_, id) => {
+            gScore.set(id, Infinity);
+            fScore.set(id, Infinity);
+        });
+
+        gScore.set(startNode.id, 0);
+        fScore.set(startNode.id, this.heuristic(startNode, endNode));
+
+        while (openSet.size > 0) {
+            let current = this.getLowestFScore(openSet, fScore);
+            
+            if (current === endNode.id) {
+                return this.reconstructPath(cameFrom, current);
+            }
+
+            openSet.delete(current);
+
+            const neighbors = this.getNeighbors(current, requireAccessible);
+            neighbors.forEach(({ nodeId, distance }) => {
+                const tentativeGScore = gScore.get(current) + distance;
+
+                if (tentativeGScore < gScore.get(nodeId)) {
+                    cameFrom.set(nodeId, current);
+                    gScore.set(nodeId, tentativeGScore);
+                    
+                    const neighbor = this.nodes.get(nodeId);
+                    fScore.set(nodeId, tentativeGScore + this.heuristic(neighbor, endNode));
+
+                    openSet.add(nodeId);
+                }
+            });
+        }
+
+        return null; // Sem caminho encontrado
+    }
+
+    heuristic(node1, node2) {
+        const horizontalDist = Utils.calculateDistance(
+            node1.lat, node1.lng,
+            node2.lat, node2.lng
+        );
+        const verticalDist = Math.abs(parseInt(node1.andar) - parseInt(node2.andar)) * 10;
+        return horizontalDist + verticalDist;
+    }
+
+    getLowestFScore(openSet, fScore) {
+        let lowest = null;
+        let lowestScore = Infinity;
+
+        openSet.forEach(nodeId => {
+            const score = fScore.get(nodeId);
+            if (score < lowestScore) {
+                lowestScore = score;
+                lowest = nodeId;
+            }
+        });
+
+        return lowest;
+    }
+
+    getNeighbors(nodeId, requireAccessible) {
+        const neighbors = [];
+        
+        this.edges.forEach(edge => {
+            if (requireAccessible && !edge.acessivel) return;
+
+            if (edge.from === nodeId) {
+                neighbors.push({ nodeId: edge.to, distance: edge.distance });
+            } else if (edge.to === nodeId) {
+                neighbors.push({ nodeId: edge.from, distance: edge.distance });
+            }
+        });
+
+        return neighbors;
+    }
+
+    reconstructPath(cameFrom, current) {
+        const path = [current];
+        
+        while (cameFrom.has(current)) {
+            current = cameFrom.get(current);
+            path.unshift(current);
+        }
+
+        return path.map(nodeId => this.nodes.get(nodeId));
+    }
+}
+
+// ===================================================================
+// GERENCIADOR DE NAVEGAÇÃO
+// ===================================================================
+class NavigationManager {
+    constructor(state, layerManager) {
+        this.state = state;
+        this.layerManager = layerManager;
+        this.instructionPanel = this.createInstructionPanel();
+    }
+
+    createInstructionPanel() {
+        const panel = document.createElement('div');
+        panel.id = 'navigation-panel';
+        panel.style.cssText = `
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
+            max-width: 400px;
+            display: none;
+        `;
+        document.body.appendChild(panel);
+        return panel;
+    }
+
+    async startNavigation(destinationName) {
+        // Solicitar permissão de localização
+        if (!navigator.geolocation) {
+            Utils.showNotification('Geolocalização não suportada', 'error');
+            return;
+        }
+
+        Utils.showLoading(true);
+
+        try {
+            // Obter posição atual
+            const position = await this.getCurrentPosition();
+            const currentLat = position.coords.latitude;
+            const currentLng = position.coords.longitude;
+
+            // Encontrar nó de destino
+            const destinationFeature = this.state.data.salas.features.find(
+                f => f.properties.nome === destinationName
+            );
+
+            if (!destinationFeature) {
+                throw new Error('Destino não encontrado');
+            }
+
+            const destNodeId = `sala_${destinationName}_${destinationFeature.properties.andar}`;
+            const requireAccessible = document.getElementById("acessibilidade-checkbox").checked;
+
+            // Calcular rota
+            const path = this.state.data.navigationGraph.findPath(
+                currentLat,
+                currentLng,
+                this.state.selection.andar,
+                destNodeId,
+                requireAccessible
+            );
+
+            if (!path || path.length === 0) {
+                throw new Error('Nenhuma rota encontrada');
+            }
+
+            // Configurar navegação
+            this.state.navigation.isActive = true;
+            this.state.navigation.currentPosition = { lat: currentLat, lng: currentLng };
+            this.state.navigation.route = path;
+            this.state.navigation.currentSegmentIndex = 0;
+            this.state.navigation.destination = destinationName;
+            this.state.navigation.instructions = this.generateInstructions(path);
+
+            // Desenhar rota
+            this.drawNavigationRoute();
+
+            // Adicionar marcador do usuário
+            this.updateUserMarker(currentLat, currentLng);
+
+            // Iniciar rastreamento
+            this.startTracking();
+
+            // Mostrar primeira instrução
+            this.showCurrentInstruction();
+
+            Utils.showLoading(false);
+            Utils.showNotification('Navegação iniciada!', 'success');
+
+        } catch (error) {
+            Utils.showLoading(false);
+            Utils.showNotification(error.message, 'error');
+            console.error('Erro ao iniciar navegação:', error);
+        }
+    }
+
+    getCurrentPosition() {
+        return new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject, {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            });
+        });
+    }
+
+    generateInstructions(path) {
+        const instructions = [];
+
+        for (let i = 0; i < path.length - 1; i++) {
+            const current = path[i];
+            const next = path[i + 1];
+            const distance = Utils.calculateDistance(
+                current.lat, current.lng,
+                next.lat, next.lng
+            );
+
+            let instruction = '';
+
+            // Mudança de andar
+            if (current.andar !== next.andar) {
+                if (next.tipo === 'elevador') {
+                    instruction = `Use o elevador para o ${next.andar === '0' ? 'térreo' : next.andar + 'º andar'}`;
+                } else if (next.tipo === 'escada') {
+                    instruction = `Suba/desça as escadas para o ${next.andar === '0' ? 'térreo' : next.andar + 'º andar'}`;
+                } else if (next.tipo === 'rampa') {
+                    instruction = `Use a rampa para o ${next.andar === '0' ? 'térreo' : next.andar + 'º andar'}`;
+                }
+            } else {
+                // Instrução de direção
+                if (i > 0) {
+                    const prev = path[i - 1];
+                    const bearing1 = Utils.calculateBearing(prev.lat, prev.lng, current.lat, current.lng);
+                    const bearing2 = Utils.calculateBearing(current.lat, current.lng, next.lat, next.lng);
+                    const angle = bearing2 - bearing1;
+                    const normalizedAngle = ((angle + 180) % 360) - 180;
+                    
+                    instruction = Utils.getTurnType(normalizedAngle);
+                } else {
+                    const direction = Utils.bearingToDirection(
+                        Utils.calculateBearing(current.lat, current.lng, next.lat, next.lng)
+                    );
+                    instruction = `Siga em direção ao ${direction}`;
+                }
+
+                instruction += ` por ${Math.round(distance)} metros`;
+            }
+
+            instructions.push({
+                step: i + 1,
+                instruction: instruction,
+                distance: distance,
+                from: current,
+                to: next
+            });
+        }
+
+        // Instrução final
+        instructions.push({
+            step: instructions.length + 1,
+            instruction: `Você chegou ao destino: ${this.state.navigation.destination}`,
+            distance: 0,
+            from: path[path.length - 1],
+            to: path[path.length - 1]
+        });
+
+        return instructions;
+    }
+
+    drawNavigationRoute() {
+        // Limpar rotas anteriores
+        this.layerManager.removeLayer('activeRoute');
+        this.layerManager.removeLayer('completedRoute');
+
+        const route = this.state.navigation.route;
+        const currentIndex = this.state.navigation.currentSegmentIndex;
+
+        // Rota já percorrida (cinza/azul claro)
+        if (currentIndex > 0) {
+            const completedCoords = route.slice(0, currentIndex + 1).map(node => [node.lat, node.lng]);
+            this.state.layers.completedRoute = L.polyline(completedCoords, {
+                color: CONFIG.colors.route.completed,
+                weight: 6,
+                opacity: 0.6
+            }).addTo(this.state.map);
+        }
+
+        // Rota ativa (azul escuro)
+        if (currentIndex < route.length - 1) {
+            const activeCoords = route.slice(currentIndex).map(node => [node.lat, node.lng]);
+            this.state.layers.activeRoute = L.polyline(activeCoords, {
+                color: CONFIG.colors.route.active,
+                weight: 6,
+                opacity: 0.9
+            }).addTo(this.state.map);
+        }
+
+        // Ajustar visualização para mostrar toda a rota
+        const allCoords = route.map(node => [node.lat, node.lng]);
+        this.state.map.fitBounds(L.polyline(allCoords).getBounds(), { padding: [50, 50] });
+    }
+
+    updateUserMarker(lat, lng) {
+        if (this.state.layers.userMarker) {
+            this.state.layers.userMarker.setLatLng([lat, lng]);
+        } else {
+            this.state.layers.userMarker = L.marker([lat, lng], {
+                icon: IconManager.getIcon('user'),
+                zIndexOffset: 1000
+            }).addTo(this.state.map);
+        }
+    }
+
+    startTracking() {
+        if (this.state.navigation.watchId) {
+            navigator.geolocation.clearWatch(this.state.navigation.watchId);
+        }
+
+        this.state.navigation.watchId = navigator.geolocation.watchPosition(
+            (position) => this.handlePositionUpdate(position),
+            (error) => console.error('Erro de geolocalização:', error),
+            {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+            }
+        );
+    }
+
+    handlePositionUpdate(position) {
+        if (!this.state.navigation.isActive) return;
+
+        const currentLat = position.coords.latitude;
+        const currentLng = position.coords.longitude;
+
+        this.state.navigation.currentPosition = { lat: currentLat, lng: currentLng };
+        this.updateUserMarker(currentLat, currentLng);
+
+        const route = this.state.navigation.route;
+        const currentIndex = this.state.navigation.currentSegmentIndex;
+
+        if (currentIndex >= route.length - 1) {
+            // Chegou ao destino
+            this.handleArrival();
+            return;
+        }
+
+        const nextWaypoint = route[currentIndex + 1];
+        const distanceToNext = Utils.calculateDistance(
+            currentLat, currentLng,
+            nextWaypoint.lat, nextWaypoint.lng
+        );
+
+        // Verificar se chegou ao próximo waypoint
+        if (distanceToNext <= CONFIG.navigation.PROXIMITY_THRESHOLD) {
+            this.state.navigation.currentSegmentIndex++;
+            this.drawNavigationRoute();
+            this.showCurrentInstruction();
+        }
+
+        // Verificar se desviou da rota
+        const distanceToRoute = this.calculateDistanceToRoute(currentLat, currentLng);
+        if (distanceToRoute > CONFIG.navigation.RECALCULATE_THRESHOLD) {
+            Utils.showNotification('Recalculando rota...', 'info');
+            this.recalculateRoute();
+        }
+
+        // Atualizar instrução se estiver próximo
+        if (distanceToNext <= CONFIG.navigation.INSTRUCTION_DISTANCE) {
+            this.showCurrentInstruction();
+        }
+    }
+
+    calculateDistanceToRoute(lat, lng) {
+        const route = this.state.navigation.route;
+        const currentIndex = this.state.navigation.currentSegmentIndex;
+        
+        if (currentIndex >= route.length - 1) return 0;
+
+        const nextWaypoint = route[currentIndex + 1];
+        return Utils.calculateDistance(lat, lng, nextWaypoint.lat, nextWaypoint.lng);
+    }
+
+    async recalculateRoute() {
+        const pos = this.state.navigation.currentPosition;
+        const destName = this.state.navigation.destination;
+        
+        this.stopNavigation(false);
+        await this.startNavigation(destName);
+    }
+
+    showCurrentInstruction() {
+        const index = this.state.navigation.currentSegmentIndex;
+        const instructions = this.state.navigation.instructions;
+        
+        if (index >= instructions.length) {
+            this.handleArrival();
+            return;
+        }
+
+        const current = instructions[index];
+        const next = instructions[index + 1];
+
+        let html = `
+            <div style="text-align: center;">
+                <h3 style="margin: 0 0 10px 0; color: #0056b3;">
+                    ${current.instruction}
+                </h3>
+        `;
+
+        if (next && next.instruction !== current.instruction) {
+            html += `
+                <p style="margin: 10px 0; color: #666; font-size: 14px;">
+                    <strong>Próximo:</strong> ${next.instruction}
+                </p>
+            `;
+        }
+
+        const totalDistance = this.calculateRemainingDistance();
+        html += `
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #ddd;">
+                    <p style="margin: 5px 0; font-size: 13px; color: #888;">
+                        Distância restante: ${Math.round(totalDistance)} metros
+                    </p>
+                    <p style="margin: 5px 0; font-size: 13px; color: #888;">
+                        Passo ${index + 1} de ${instructions.length}
+                    </p>
+                </div>
+                <button onclick="window.mapaApp.navigationManager.stopNavigation()" 
+                        style="margin-top: 15px; padding: 10px 20px; background: #f44336; 
+                               color: white; border: none; border-radius: 4px; cursor: pointer;">
+                    Cancelar Navegação
+                </button>
+            </div>
+        `;
+
+        this.instructionPanel.innerHTML = html;
+        this.instructionPanel.style.display = 'block';
+    }
+
+    calculateRemainingDistance() {
+        const route = this.state.navigation.route;
+        const currentIndex = this.state.navigation.currentSegmentIndex;
+        let total = 0;
+
+        for (let i = currentIndex; i < route.length - 1; i++) {
+            total += Utils.calculateDistance(
+                route[i].lat, route[i].lng,
+                route[i + 1].lat, route[i + 1].lng
+            );
+        }
+
+        return total;
+    }
+
+    handleArrival() {
+        this.instructionPanel.innerHTML = `
+            <div style="text-align: center;">
+                <h2 style="color: #4CAF50; margin: 0 0 10px 0;">🎯</h2>
+                <h3 style="margin: 0 0 10px 0;">Você chegou!</h3>
+                <p style="color: #666;">${this.state.navigation.destination}</p>
+                <button onclick="window.mapaApp.navigationManager.stopNavigation()" 
+                        style="margin-top: 15px; padding: 10px 20px; background: #4CAF50; 
+                               color: white; border: none; border-radius: 4px; cursor: pointer;">
+                    Finalizar
+                </button>
+            </div>
+        `;
+
+        Utils.showNotification('Você chegou ao destino!', 'success');
+    }
+
+    stopNavigation(showMessage = true) {
+        if (this.state.navigation.watchId) {
+            navigator.geolocation.clearWatch(this.state.navigation.watchId);
+            this.state.navigation.watchId = null;
+        }
+
+        this.state.navigation.isActive = false;
+        this.instructionPanel.style.display = 'none';
+
+        this.layerManager.removeLayer('activeRoute');
+        this.layerManager.removeLayer('completedRoute');
+        
+        if (this.state.layers.userMarker) {
+            this.state.map.removeLayer(this.state.layers.userMarker);
+            this.state.layers.userMarker = null;
+        }
+
+        if (showMessage) {
+            Utils.showNotification('Navegação cancelada', 'info');
+        }
+    }
+}
 
 // ===================================================================
 // GERENCIADOR DE LAYERS
@@ -247,6 +976,8 @@ class LayerManager {
 
     clearRoute() {
         this.removeLayer('rotas');
+        this.removeLayer('activeRoute');
+        this.removeLayer('completedRoute');
     }
 
     drawFloor() {
@@ -329,7 +1060,7 @@ class LayerManager {
     }
 
     createPopupContent(props) {
-        const andarText = props.andar === '0' ? 'Térreo' : `${props.andar}° Andar`;
+        const andarText = props.andar === '0' ? 'Térreo' : `${props.andar}º Andar`;
         return `
             <div class="custom-popup">
                 <img src="${props.imagem || 'https://placehold.co/400x200/eeeeee/cccccc?text=Sem+Imagem'}" 
@@ -430,48 +1161,6 @@ class LayerManager {
         this.state.layers.salasLabels.addTo(this.state.map);
     }
 
-    drawRotas(destinationSalaName, accessibilityNeeded) {
-        this.clearRoute();
-
-        if (!this.state.data.rotas) {
-            Utils.showNotification('Dados de rotas não carregados', 'error');
-            return;
-        }
-
-        const filteredRoutes = this.state.data.rotas.features.filter((feature) => {
-            const isDestination = feature.properties.destino === destinationSalaName;
-            const hasAccessibility = feature.properties.acessibilidade === "true";
-            return isDestination && (accessibilityNeeded ? hasAccessibility : true);
-        });
-
-        if (filteredRoutes.length === 0) {
-            Utils.showNotification(
-                'Nenhuma rota encontrada para esta sala com o perfil escolhido', 
-                'error'
-            );
-            return;
-        }
-
-        this.state.layers.rotas = L.geoJson(
-            { type: "FeatureCollection", features: filteredRoutes }, 
-            {
-                style: () => ({ 
-                    color: CONFIG.colors.route, 
-                    weight: 5, 
-                    opacity: 0.9 
-                }),
-                onEachFeature: (feature, layer) => {
-                    if (feature.properties && feature.properties.destino) {
-                        layer.bindTooltip("Rota até " + feature.properties.destino);
-                    }
-                },
-            }
-        ).addTo(this.state.map);
-
-        this.state.map.fitBounds(this.state.layers.rotas.getBounds());
-        Utils.showNotification('Rota traçada com sucesso!', 'success');
-    }
-
     updateZoomDependentLayers() {
         this.drawLabels();
         this.drawPontos();
@@ -485,8 +1174,9 @@ class LayerManager {
 }
 
 // ===================================================================
-// GERENCIADOR DE AUTOCOMPLETE
+// [CONTINUA: AUTOCOMPLETE, TILES, APLICAÇÃO PRINCIPAL...]
 // ===================================================================
+
 class AutocompleteManager {
     constructor(state, layerManager) {
         this.state = state;
@@ -590,9 +1280,6 @@ class AutocompleteManager {
     }
 }
 
-// ===================================================================
-// GERENCIADOR DE TILES DO MAPA
-// ===================================================================
 class TileManager {
     constructor(map) {
         this.map = map;
@@ -602,7 +1289,6 @@ class TileManager {
     updateMapTiles(type) {
         let url, attr;
         
-        // Remove camada de tiles atual
         this.map.eachLayer(layer => {
             if (layer instanceof L.TileLayer) {
                 this.map.removeLayer(layer);
@@ -639,6 +1325,7 @@ class MapaInterativo {
         this.layerManager = null;
         this.tileManager = null;
         this.autocompleteManager = null;
+        this.navigationManager = null;
     }
 
     async init() {
@@ -676,7 +1363,6 @@ class MapaInterativo {
         this.tileManager = new TileManager(this.state.map);
         this.tileManager.updateMapTiles('Padrão');
 
-        // Controle de localização
         L.control.locate({
             position: 'topleft',
             strings: {
@@ -691,7 +1377,6 @@ class MapaInterativo {
             }
         }).addTo(this.state.map);
 
-        // Evento de clique no mapa
         this.state.map.on('click', () => {
             if (this.state.selection.sala !== null) {
                 this.state.clearSelection();
@@ -701,7 +1386,6 @@ class MapaInterativo {
             }
         });
 
-        // Eventos de zoom
         this.state.map.on('zoomend moveend', () => {
             if (this.layerManager) {
                 this.layerManager.updateZoomDependentLayers();
@@ -729,14 +1413,23 @@ class MapaInterativo {
             this.state.data.rotas = await rotasResponse.json();
             this.state.data.pontos = await pontosResponse.json();
 
-            // Validar dados
             Utils.validateGeoJSON(this.state.data.salas, 'salas');
             Utils.validateGeoJSON(this.state.data.floor, 'floor');
             Utils.validateGeoJSON(this.state.data.rotas, 'rotas');
             Utils.validateGeoJSON(this.state.data.pontos, 'pontos');
 
+            // Construir grafo de navegação
+            this.state.data.navigationGraph = new NavigationGraph(
+                this.state.data.pontos,
+                this.state.data.salas
+            );
+
             this.layerManager = new LayerManager(this.state);
             this.autocompleteManager = new AutocompleteManager(this.state, this.layerManager);
+            this.navigationManager = new NavigationManager(this.state, this.layerManager);
+            
+            // Expor globalmente para botões inline
+            window.mapaApp = this;
             
             this.layerManager.updateFloorView();
         } catch (error) {
@@ -746,27 +1439,22 @@ class MapaInterativo {
     }
 
     setupEventListeners() {
-        // Botão mostrar rota
         document.getElementById("mostrar-rota-btn").addEventListener("click", () => {
             this.handleMostrarRota();
         });
 
-        // Seletor de tipo de mapa
         document.getElementById("map-type-select").addEventListener("change", (event) => {
             this.tileManager.updateMapTiles(event.target.value);
         });
 
-        // Checkbox de pontos
         document.getElementById("mostrar-pontos-checkbox").addEventListener("change", () => {
             this.layerManager.updateZoomDependentLayers();
         });
 
-        // Checkbox de info
         document.getElementById("mostrar-info-checkbox").addEventListener("change", () => {
             this.layerManager.updateZoomDependentLayers();
         });
 
-        // Seletor de andar
         document.getElementById("andar-filter-select").addEventListener('change', (event) => {
             this.state.setAndar(event.target.value);
             this.state.clearSelection();
@@ -774,7 +1462,6 @@ class MapaInterativo {
             this.layerManager.updateFloorView();
         });
 
-        // Botão limpar (se existir)
         const clearBtn = document.getElementById("limpar-btn");
         if (clearBtn) {
             clearBtn.addEventListener('click', () => {
@@ -807,15 +1494,19 @@ class MapaInterativo {
         }
 
         this.state.setSala(salaInputValue);
-        this.layerManager.drawSalas();
         
-        const accessibilityNeeded = document.getElementById("acessibilidade-checkbox").checked;
-        this.layerManager.drawRotas(this.state.selection.sala, accessibilityNeeded);
+        // Iniciar navegação em tempo real
+        this.navigationManager.startNavigation(salaInputValue);
     }
 
     handleLimpar() {
         this.state.clearSelection();
         document.getElementById('sala-input').value = '';
+        
+        if (this.navigationManager && this.state.navigation.isActive) {
+            this.navigationManager.stopNavigation(false);
+        }
+        
         this.layerManager.clearRoute();
         this.layerManager.drawSalas();
         Utils.showNotification('Seleção limpa', 'info');
