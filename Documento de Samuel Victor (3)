@@ -1,0 +1,1263 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "id": "polygon_1753383408561_pfoeu8hlr",
+            "type": "Feature",
+            "properties": {
+                "nome": "Sala 120",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T18:56:48.561Z",
+                "created": "2025-07-24T18:56:48.561Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.064121,
+                            -15.607666
+                        ],
+                        [
+                            -56.064194,
+                            -15.607728
+                        ],
+                        [
+                            -56.064149,
+                            -15.607779
+                        ],
+                        [
+                            -56.064074,
+                            -15.607722
+                        ],
+                        [
+                            -56.064121,
+                            -15.607666
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753383446920_jynis4q39",
+            "type": "Feature",
+            "properties": {
+                "nome": "Sala 121",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T18:57:26.920Z",
+                "created": "2025-07-24T18:57:26.921Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.064074,
+                            -15.607726
+                        ],
+                        [
+                            -56.064149,
+                            -15.607781
+                        ],
+                        [
+                            -56.064101,
+                            -15.607833
+                        ],
+                        [
+                            -56.064032,
+                            -15.607771
+                        ],
+                        [
+                            -56.064074,
+                            -15.607726
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753383511768_5kszowoch",
+            "type": "Feature",
+            "properties": {
+                "nome": "E3 TECHI",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T18:58:31.768Z",
+                "created": "2025-07-24T18:58:31.768Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.064027,
+                            -15.607846
+                        ],
+                        [
+                            -56.064064,
+                            -15.607799
+                        ],
+                        [
+                            -56.064102,
+                            -15.60783
+                        ],
+                        [
+                            -56.064062,
+                            -15.607876
+                        ],
+                        [
+                            -56.064027,
+                            -15.607846
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753383480856_g2cw9en96",
+            "type": "Feature",
+            "properties": {
+                "nome": "Sala 128",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T18:58:00.856Z",
+                "created": "2025-07-24T18:58:00.856Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.064034,
+                            -15.607769
+                        ],
+                        [
+                            -56.063988,
+                            -15.607818
+                        ],
+                        [
+                            -56.064024,
+                            -15.607846
+                        ],
+                        [
+                            -56.064066,
+                            -15.607797
+                        ],
+                        [
+                            -56.064034,
+                            -15.607769
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753383621511_ajmcbkt2d",
+            "type": "Feature",
+            "properties": {
+                "nome": "Sala 123",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T19:00:21.511Z",
+                "created": "2025-07-24T19:00:21.511Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.064046,
+                            -15.607909
+                        ],
+                        [
+                            -56.063988,
+                            -15.607972
+                        ],
+                        [
+                            -56.063944,
+                            -15.607941
+                        ],
+                        [
+                            -56.063999,
+                            -15.607876
+                        ],
+                        [
+                            -56.064046,
+                            -15.607909
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753383573431_gjdghzv6v",
+            "type": "Feature",
+            "properties": {
+                "nome": "Sala 127",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T18:59:33.431Z",
+                "created": "2025-07-24T18:59:33.432Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.063956,
+                            -15.607846
+                        ],
+                        [
+                            -56.063901,
+                            -15.607908
+                        ],
+                        [
+                            -56.063948,
+                            -15.607936
+                        ],
+                        [
+                            -56.063997,
+                            -15.607874
+                        ],
+                        [
+                            -56.063956,
+                            -15.607846
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753384497279_a0dmhez6g",
+            "type": "Feature",
+            "properties": {
+                "nome": "Sala 124",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T19:14:57.279Z",
+                "created": "2025-07-24T19:14:57.299Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.063948,
+                            -15.60794
+                        ],
+                        [
+                            -56.063989,
+                            -15.607974
+                        ],
+                        [
+                            -56.06393,
+                            -15.60804
+                        ],
+                        [
+                            -56.063887,
+                            -15.608007
+                        ],
+                        [
+                            -56.063948,
+                            -15.60794
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753384459071_j1evmqvcb",
+            "type": "Feature",
+            "properties": {
+                "nome": "Sala 124",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T19:14:19.071Z",
+                "created": "2025-07-24T19:14:19.071Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.063902,
+                            -15.607905
+                        ],
+                        [
+                            -56.06395,
+                            -15.607937
+                        ],
+                        [
+                            -56.063889,
+                            -15.608004
+                        ],
+                        [
+                            -56.063843,
+                            -15.607974
+                        ],
+                        [
+                            -56.063902,
+                            -15.607905
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753384559486_vmkcaqp2y",
+            "type": "Feature",
+            "properties": {
+                "nome": "Sala de estudos ENC",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": 1,
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T19:15:59.487Z",
+                "created": "2025-07-24T19:15:59.487Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.063843,
+                            -15.607975
+                        ],
+                        [
+                            -56.063761,
+                            -15.60808
+                        ],
+                        [
+                            -56.063802,
+                            -15.60811
+                        ],
+                        [
+                            -56.063882,
+                            -15.608008
+                        ],
+                        [
+                            -56.063843,
+                            -15.607975
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753384595992_4zp9s1tjq",
+            "type": "Feature",
+            "properties": {
+                "nome": "Sala de estudos ENE",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T19:16:35.993Z",
+                "created": "2025-07-24T19:16:35.993Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.063888,
+                            -15.608011
+                        ],
+                        [
+                            -56.063802,
+                            -15.608108
+                        ],
+                        [
+                            -56.063838,
+                            -15.608139
+                        ],
+                        [
+                            -56.06393,
+                            -15.608038
+                        ],
+                        [
+                            -56.063888,
+                            -15.608011
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753384726901_44450c3t9",
+            "type": "Feature",
+            "properties": {
+                "nome": "DOUTORADO ENE",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T19:18:46.902Z",
+                "created": "2025-07-24T19:18:46.902Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.064357,
+                            -15.607472
+                        ],
+                        [
+                            -56.064296,
+                            -15.607541
+                        ],
+                        [
+                            -56.064327,
+                            -15.607571
+                        ],
+                        [
+                            -56.064388,
+                            -15.607498
+                        ],
+                        [
+                            -56.064357,
+                            -15.607472
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753384699205_q1tdq7wae",
+            "type": "Feature",
+            "properties": {
+                "nome": "DOUTORADO ENE",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T19:18:19.205Z",
+                "created": "2025-07-24T19:18:19.205Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.06432,
+                            -15.60744
+                        ],
+                        [
+                            -56.064259,
+                            -15.607512
+                        ],
+                        [
+                            -56.064294,
+                            -15.607539
+                        ],
+                        [
+                            -56.064353,
+                            -15.607468
+                        ],
+                        [
+                            -56.06432,
+                            -15.60744
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753384810366_5hdv4hept",
+            "type": "Feature",
+            "properties": {
+                "nome": "DOUTORADO ENE",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T19:20:10.366Z",
+                "created": "2025-07-24T19:20:10.366Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.064296,
+                            -15.607542
+                        ],
+                        [
+                            -56.064235,
+                            -15.6076
+                        ],
+                        [
+                            -56.064273,
+                            -15.607631
+                        ],
+                        [
+                            -56.064331,
+                            -15.607569
+                        ],
+                        [
+                            -56.064296,
+                            -15.607542
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753384762184_89tt2fkyl",
+            "type": "Feature",
+            "properties": {
+                "nome": "DOUTORADO ENE",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T19:19:22.184Z",
+                "created": "2025-07-24T19:19:22.185Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.064257,
+                            -15.607515
+                        ],
+                        [
+                            -56.064205,
+                            -15.607574
+                        ],
+                        [
+                            -56.064238,
+                            -15.607601
+                        ],
+                        [
+                            -56.064293,
+                            -15.607541
+                        ],
+                        [
+                            -56.064257,
+                            -15.607515
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753384875496_xygmjbdcu",
+            "type": "Feature",
+            "properties": {
+                "nome": "DOUTORADO ENE",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T19:21:15.497Z",
+                "created": "2025-07-24T19:21:15.498Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.064237,
+                            -15.6076
+                        ],
+                        [
+                            -56.064191,
+                            -15.607653
+                        ],
+                        [
+                            -56.064229,
+                            -15.607682
+                        ],
+                        [
+                            -56.064272,
+                            -15.60763
+                        ],
+                        [
+                            -56.064237,
+                            -15.6076
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753384839389_y1pv1xccw",
+            "type": "Feature",
+            "properties": {
+                "nome": "DOUTORADO ENE",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T19:20:39.389Z",
+                "created": "2025-07-24T19:20:39.390Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.064205,
+                            -15.607575
+                        ],
+                        [
+                            -56.064155,
+                            -15.607627
+                        ],
+                        [
+                            -56.064191,
+                            -15.607654
+                        ],
+                        [
+                            -56.064234,
+                            -15.607598
+                        ],
+                        [
+                            -56.064205,
+                            -15.607575
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753378180800_o0y65u34u",
+            "type": "Feature",
+            "properties": {
+                "nome": "Departamento de Engenharia Elétrica",
+                "tipo": "Departamento",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T17:29:40.800Z",
+                "created": "2025-07-24T17:29:40.801Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.0649,
+                            -15.608357
+                        ],
+                        [
+                            -56.065031,
+                            -15.608444
+                        ],
+                        [
+                            -56.064946,
+                            -15.608545
+                        ],
+                        [
+                            -56.06482,
+                            -15.608443
+                        ],
+                        [
+                            -56.0649,
+                            -15.608357
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753378053058_czj36jp23",
+            "type": "Feature",
+            "properties": {
+                "nome": "Departamento de Arquitetura e  Engenharia Civil",
+                "tipo": "Departamento",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T17:27:33.058Z",
+                "created": "2025-07-24T17:27:33.059Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.064798,
+                            -15.608419
+                        ],
+                        [
+                            -56.064693,
+                            -15.608332
+                        ],
+                        [
+                            -56.064806,
+                            -15.608207
+                        ],
+                        [
+                            -56.064909,
+                            -15.608288
+                        ],
+                        [
+                            -56.064798,
+                            -15.608419
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753378168968_45vv3hfa8",
+            "type": "Feature",
+            "properties": {
+                "nome": "PPGHR",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T17:29:28.968Z",
+                "created": "2025-07-24T17:29:28.969Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.064939,
+                            -15.608311
+                        ],
+                        [
+                            -56.064998,
+                            -15.608353
+                        ],
+                        [
+                            -56.064953,
+                            -15.608398
+                        ],
+                        [
+                            -56.064902,
+                            -15.608359
+                        ],
+                        [
+                            -56.064939,
+                            -15.608311
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753378134209_iia66gzr5",
+            "type": "Feature",
+            "properties": {
+                "nome": "Sala 02",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T17:28:54.209Z",
+                "created": "2025-07-24T17:28:54.209Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.065001,
+                            -15.608241
+                        ],
+                        [
+                            -56.065059,
+                            -15.608286
+                        ],
+                        [
+                            -56.065108,
+                            -15.608228
+                        ],
+                        [
+                            -56.065055,
+                            -15.608181
+                        ],
+                        [
+                            -56.065001,
+                            -15.608241
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753378195992_av0b56pnj",
+            "type": "Feature",
+            "properties": {
+                "nome": "Secretaria da FAET",
+                "tipo": "Secretaria",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T17:29:55.992Z",
+                "created": "2025-07-24T17:29:55.993Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.065056,
+                            -15.608179
+                        ],
+                        [
+                            -56.065177,
+                            -15.608273
+                        ],
+                        [
+                            -56.065263,
+                            -15.608171
+                        ],
+                        [
+                            -56.065145,
+                            -15.608082
+                        ],
+                        [
+                            -56.065056,
+                            -15.608179
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "polygon_1753378104681_lifqtykf9",
+            "type": "Feature",
+            "properties": {
+                "nome": "Departamento de Matemática",
+                "tipo": "Departamento",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T17:28:24.681Z",
+                "created": "2025-07-24T17:28:24.682Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.064855,
+                            -15.608136
+                        ],
+                        [
+                            -56.064973,
+                            -15.608221
+                        ],
+                        [
+                            -56.065107,
+                            -15.608061
+                        ],
+                        [
+                            -56.064996,
+                            -15.60797
+                        ],
+                        [
+                            -56.064855,
+                            -15.608136
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "PVgZqVkse7HHhJXfv9zGrr276j5wESaa",
+            "type": "Feature",
+            "properties": {
+                "nome": "AU 22",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T17:27:33.058Z",
+                "created": "2025-07-24T17:27:33.059Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.064653292987416,
+                            -15.608501462181977
+                        ],
+                        [
+                            -56.06471150376855,
+                            -15.608545539044272
+                        ],
+                        [
+                            -56.06466902062064,
+                            -15.60859472006996
+                        ],
+                        [
+                            -56.064612343222116,
+                            -15.608549978065277
+                        ],
+                        [
+                            -56.064653292987416,
+                            -15.608501462181977
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "XnRv8Brwf03PqHKAUPTHETv1jBPg1MXP",
+            "type": "Feature",
+            "properties": {
+                "nome": "AU 24",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T17:27:33.058Z",
+                "created": "2025-07-24T17:27:33.059Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.06477856428714,
+                            -15.608513601036293
+                        ],
+                        [
+                            -56.06481890898267,
+                            -15.608545234409533
+                        ],
+                        [
+                            -56.06477653572669,
+                            -15.60859729082786
+                        ],
+                        [
+                            -56.0647354997253,
+                            -15.60856419336308
+                        ],
+                        [
+                            -56.06477856428714,
+                            -15.608513601036293
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "wdhoCkK11KE6X3JSmhsZaS9Z5kD5Jtaa",
+            "type": "Feature",
+            "properties": {
+                "nome": "AU 21",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T17:27:33.058Z",
+                "created": "2025-07-24T17:27:33.059Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.06454681842803,
+                            -15.608498919898622
+                        ],
+                        [
+                            -56.064589049416654,
+                            -15.608450533722532
+                        ],
+                        [
+                            -56.06465311191556,
+                            -15.608501227106146
+                        ],
+                        [
+                            -56.06461246141316,
+                            -15.608549443539573
+                        ],
+                        [
+                            -56.06454681842803,
+                            -15.608498919898622
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "mcif47Jmu4Wr9GCGCv5dwlxYiNYOi0dy",
+            "type": "Feature",
+            "properties": {
+                "nome": "AU 23",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T17:27:33.058Z",
+                "created": "2025-07-24T17:27:33.059Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.064711253549646,
+                            -15.608545708828288
+                        ],
+                        [
+                            -56.06477647784435,
+                            -15.608597407614553
+                        ],
+                        [
+                            -56.064734738735666,
+                            -15.608647688866569
+                        ],
+                        [
+                            -56.06466929127808,
+                            -15.60859493632475
+                        ],
+                        [
+                            -56.064711253549646,
+                            -15.608545708828288
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "Fj4nOFlZrYtO0fmjNT1FLKuI6macW0Ob",
+            "type": "Feature",
+            "properties": {
+                "nome": "PROAD 10",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T17:27:33.058Z",
+                "created": "2025-07-24T17:27:33.059Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.064703906036385,
+                            -15.608657808809781
+                        ],
+                        [
+                            -56.064662654861294,
+                            -15.608702943979907
+                        ],
+                        [
+                            -56.06460975567202,
+                            -15.608660132854055
+                        ],
+                        [
+                            -56.06465159995602,
+                            -15.60861529639807
+                        ],
+                        [
+                            -56.064703906036385,
+                            -15.608657808809781
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "cASKsPhnjDEBpQEPFRRbezgWIhPwSNvS",
+            "type": "Feature",
+            "properties": {
+                "nome": "PROAD 09",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T17:27:33.058Z",
+                "created": "2025-07-24T17:27:33.059Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.06460655061818,
+                            -15.608658742089446
+                        ],
+                        [
+                            -56.064557587155704,
+                            -15.608618079983586
+                        ],
+                        [
+                            -56.064596118660944,
+                            -15.608574214802829
+                        ],
+                        [
+                            -56.06464870560987,
+                            -15.608614357430511
+                        ],
+                        [
+                            -56.06460655061818,
+                            -15.608658742089446
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "vsJ0lNFcSUoMEmnFM8TYlmLCJLgo0Huy",
+            "type": "Feature",
+            "properties": {
+                "nome": "PROAD 8",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T17:27:33.058Z",
+                "created": "2025-07-24T17:27:33.059Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.06467147318959,
+                            -15.60878498332805
+                        ],
+                        [
+                            -56.06462246011699,
+                            -15.608834627036984
+                        ],
+                        [
+                            -56.06456577300838,
+                            -15.608788703091236
+                        ],
+                        [
+                            -56.06461784046208,
+                            -15.608737905131676
+                        ],
+                        [
+                            -56.06467147318959,
+                            -15.60878498332805
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "vCBtlDlzL4jOuzOAreZwv7rlaqm58b4W",
+            "type": "Feature",
+            "properties": {
+                "nome": "PROAD 7",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T17:27:33.058Z",
+                "created": "2025-07-24T17:27:33.059Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.06461553371973,
+                            -15.608735653600533
+                        ],
+                        [
+                            -56.06456608598181,
+                            -15.608693461620376
+                        ],
+                        [
+                            -56.06451636961421,
+                            -15.60874390488479
+                        ],
+                        [
+                            -56.06456345484449,
+                            -15.608790190315432
+                        ],
+                        [
+                            -56.06461553371973,
+                            -15.608735653600533
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "9FdLn2gvviuP6R7YkmdS6Y93ewk9B0L7",
+            "type": "Feature",
+            "properties": {
+                "nome": "PROAD 6",
+                "tipo": "Sala",
+                "bloco": "FAET",
+                "andar": "2",
+                "acessibilidade": false,
+                "addedToStore": "2025-07-24T17:27:33.058Z",
+                "created": "2025-07-24T17:27:33.059Z"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.06456065309487,
+                            -15.60868967933348
+                        ],
+                        [
+                            -56.06451312745739,
+                            -15.608647897609487
+                        ],
+                        [
+                            -56.064463468919186,
+                            -15.60870102130933
+                        ],
+                        [
+                            -56.06451560125156,
+                            -15.608742419005424
+                        ],
+                        [
+                            -56.06456065309487,
+                            -15.60868967933348
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "5JICXYO3h5gowiC2xKBce1uxiybHguH5",
+            "type": "Feature",
+            "properties": {},
+            "geometry": {
+                "coordinates": [
+                    [
+                        -56.06485329339476,
+                        -15.608244853759274
+                    ],
+                    [
+                        -56.06474683503012,
+                        -15.60837301943431
+                    ]
+                ],
+                "type": "LineString"
+            }
+        }
+    ]
+}

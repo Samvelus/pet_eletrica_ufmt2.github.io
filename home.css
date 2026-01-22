@@ -1,0 +1,453 @@
+/* ===================================================================
+   HOMEPAGE STYLES - Mapa Totem PET
+   =================================================================== */
+
+/* Reset e Base */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(135deg, #f0f2f5 0%, #e8ecef 100%);
+    color: #333;
+    min-height: 100vh;
+}
+
+/* ===================================================================
+   CONTAINER PRINCIPAL
+   =================================================================== */
+.home-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ===================================================================
+   HEADER
+   =================================================================== */
+.home-header {
+    text-align: center;
+    padding: 20px 0 30px;
+}
+
+.home-header .logo {
+    max-width: 180px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.home-header h1 {
+    color: #003366;
+    font-size: 2rem;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.home-header p {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* ===================================================================
+   SLIDER
+   =================================================================== */
+.slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 40px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 51, 102, 0.2);
+}
+
+.slider {
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.slide-content {
+    text-align: center;
+    color: white;
+    padding: 30px;
+}
+
+.slide-content i {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.slide-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.slide-content p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Slider Buttons */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.slider-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn {
+    left: 15px;
+}
+
+.next-btn {
+    right: 15px;
+}
+
+/* Slider Dots */
+.slider-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot:hover {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.dot.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+/* ===================================================================
+   NAVIGATION BUTTONS
+   =================================================================== */
+.nav-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 10px;
+    flex: 1;
+}
+
+.nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 15px;
+    background: white;
+    border-radius: 16px;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 51, 102, 0.15);
+}
+
+.nav-btn:active {
+    transform: translateY(-2px);
+}
+
+.nav-btn-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #003366 0%, #0056b3 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover .nav-btn-icon {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #0056b3 0%, #007bff 100%);
+}
+
+.nav-btn-icon i {
+    font-size: 1.8rem;
+    color: white;
+}
+
+.nav-btn span {
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: center;
+    color: #003366;
+}
+
+/* Button specific colors */
+.nav-btn:nth-child(1) .nav-btn-icon {
+    background: linear-gradient(135deg, #0056b3 0%, #007bff 100%);
+}
+
+.nav-btn:nth-child(2) .nav-btn-icon {
+    background: linear-gradient(135deg, #28a745 0%, #34ce57 100%);
+}
+
+.nav-btn:nth-child(3) .nav-btn-icon {
+    background: linear-gradient(135deg, #003366 0%, #004d99 100%);
+}
+
+.nav-btn:nth-child(4) .nav-btn-icon {
+    background: linear-gradient(135deg, #6f42c1 0%, #8b5cf6 100%);
+}
+
+.nav-btn:nth-child(5) .nav-btn-icon {
+    background: linear-gradient(135deg, #fd7e14 0%, #ffc107 100%);
+}
+
+.nav-btn:nth-child(6) .nav-btn-icon {
+    background: linear-gradient(135deg, #dc3545 0%, #f06595 100%);
+}
+
+/* ===================================================================
+   FOOTER
+   =================================================================== */
+.home-footer {
+    text-align: center;
+    padding: 25px 0 15px;
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+/* ===================================================================
+   RESPONSIVIDADE
+   =================================================================== */
+@media screen and (max-width: 768px) {
+    .home-container {
+        padding: 15px;
+    }
+
+    .home-header .logo {
+        max-width: 140px;
+    }
+
+    .home-header h1 {
+        font-size: 1.6rem;
+    }
+
+    .home-header p {
+        font-size: 0.9rem;
+    }
+
+    .slider {
+        height: 250px;
+    }
+
+    .slide-content i {
+        font-size: 3rem;
+    }
+
+    .slide-content h2 {
+        font-size: 1.4rem;
+    }
+
+    .slide-content p {
+        font-size: 1rem;
+    }
+
+    .slider-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+    }
+
+    .prev-btn {
+        left: 10px;
+    }
+
+    .next-btn {
+        right: 10px;
+    }
+
+    .nav-buttons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .nav-btn {
+        padding: 20px 12px;
+    }
+
+    .nav-btn-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .nav-btn-icon i {
+        font-size: 1.5rem;
+    }
+
+    .nav-btn span {
+        font-size: 0.85rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .home-header {
+        padding: 15px 0 20px;
+    }
+
+    .home-header .logo {
+        max-width: 120px;
+    }
+
+    .home-header h1 {
+        font-size: 1.4rem;
+    }
+
+    .slider {
+        height: 220px;
+    }
+
+    .slider-container {
+        margin-bottom: 30px;
+        border-radius: 12px;
+    }
+
+    .slide-content {
+        padding: 20px;
+    }
+
+    .slide-content i {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+
+    .slide-content h2 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
+
+    .slide-content p {
+        font-size: 0.9rem;
+    }
+
+    .nav-buttons {
+        gap: 12px;
+    }
+
+    .nav-btn {
+        padding: 18px 10px;
+        border-radius: 12px;
+    }
+
+    .nav-btn-icon {
+        width: 55px;
+        height: 55px;
+        margin-bottom: 12px;
+    }
+
+    .nav-btn-icon i {
+        font-size: 1.3rem;
+    }
+
+    .nav-btn span {
+        font-size: 0.8rem;
+    }
+
+    .home-footer {
+        padding: 20px 0 10px;
+        font-size: 0.8rem;
+    }
+}
+
+/* ===================================================================
+   ACESSIBILIDADE
+   =================================================================== */
+*:focus-visible {
+    outline: 3px solid #0056b3;
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .slide {
+        transition: none;
+    }
+}
+
+/* Alto contraste */
+@media (prefers-contrast: high) {
+    .nav-btn {
+        border: 2px solid #003366;
+    }
+
+    .slider-container {
+        border: 2px solid #003366;
+    }
+}

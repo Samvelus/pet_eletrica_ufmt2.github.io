@@ -1,0 +1,1176 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.064121,
+              -15.607666
+            ],
+            [
+              -56.064194,
+              -15.607728
+            ],
+            [
+              -56.064149,
+              -15.607779
+            ],
+            [
+              -56.064074,
+              -15.607722
+            ],
+            [
+              -56.064121,
+              -15.607666
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753383408561_pfoeu8hlr",
+        "featureId": "polygon_1753383408561_pfoeu8hlr",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T18:56:48.561Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T18:56:48.561Z",
+        "created": "2025-07-24T18:56:48.561Z"
+      },
+      "id": "polygon_1753383408561_pfoeu8hlr"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.064074,
+              -15.607726
+            ],
+            [
+              -56.064149,
+              -15.607781
+            ],
+            [
+              -56.064101,
+              -15.607833
+            ],
+            [
+              -56.064032,
+              -15.607771
+            ],
+            [
+              -56.064074,
+              -15.607726
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753383446920_jynis4q39",
+        "featureId": "polygon_1753383446920_jynis4q39",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T18:57:26.920Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T18:57:26.920Z",
+        "created": "2025-07-24T18:57:26.921Z"
+      },
+      "id": "polygon_1753383446920_jynis4q39"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.064027,
+              -15.607846
+            ],
+            [
+              -56.064064,
+              -15.607799
+            ],
+            [
+              -56.064102,
+              -15.60783
+            ],
+            [
+              -56.064062,
+              -15.607876
+            ],
+            [
+              -56.064027,
+              -15.607846
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753383511768_5kszowoch",
+        "featureId": "polygon_1753383511768_5kszowoch",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T18:58:31.768Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T18:58:31.768Z",
+        "created": "2025-07-24T18:58:31.768Z"
+      },
+      "id": "polygon_1753383511768_5kszowoch"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.064034,
+              -15.607769
+            ],
+            [
+              -56.063988,
+              -15.607818
+            ],
+            [
+              -56.064024,
+              -15.607846
+            ],
+            [
+              -56.064066,
+              -15.607797
+            ],
+            [
+              -56.064034,
+              -15.607769
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753383480856_g2cw9en96",
+        "featureId": "polygon_1753383480856_g2cw9en96",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T18:58:00.856Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T18:58:00.856Z",
+        "created": "2025-07-24T18:58:00.856Z"
+      },
+      "id": "polygon_1753383480856_g2cw9en96"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.064046,
+              -15.607909
+            ],
+            [
+              -56.063988,
+              -15.607972
+            ],
+            [
+              -56.063944,
+              -15.607941
+            ],
+            [
+              -56.063999,
+              -15.607876
+            ],
+            [
+              -56.064046,
+              -15.607909
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753383621511_ajmcbkt2d",
+        "featureId": "polygon_1753383621511_ajmcbkt2d",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T19:00:21.511Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T19:00:21.511Z",
+        "created": "2025-07-24T19:00:21.511Z"
+      },
+      "id": "polygon_1753383621511_ajmcbkt2d"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.063956,
+              -15.607846
+            ],
+            [
+              -56.063901,
+              -15.607908
+            ],
+            [
+              -56.063948,
+              -15.607936
+            ],
+            [
+              -56.063997,
+              -15.607874
+            ],
+            [
+              -56.063956,
+              -15.607846
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753383573431_gjdghzv6v",
+        "featureId": "polygon_1753383573431_gjdghzv6v",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T18:59:33.431Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T18:59:33.431Z",
+        "created": "2025-07-24T18:59:33.432Z"
+      },
+      "id": "polygon_1753383573431_gjdghzv6v"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.063948,
+              -15.60794
+            ],
+            [
+              -56.063989,
+              -15.607974
+            ],
+            [
+              -56.06393,
+              -15.60804
+            ],
+            [
+              -56.063887,
+              -15.608007
+            ],
+            [
+              -56.063948,
+              -15.60794
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753384497279_a0dmhez6g",
+        "featureId": "polygon_1753384497279_a0dmhez6g",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T19:14:57.279Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T19:14:57.279Z",
+        "created": "2025-07-24T19:14:57.299Z"
+      },
+      "id": "polygon_1753384497279_a0dmhez6g"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.063902,
+              -15.607905
+            ],
+            [
+              -56.06395,
+              -15.607937
+            ],
+            [
+              -56.063889,
+              -15.608004
+            ],
+            [
+              -56.063843,
+              -15.607974
+            ],
+            [
+              -56.063902,
+              -15.607905
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753384459071_j1evmqvcb",
+        "featureId": "polygon_1753384459071_j1evmqvcb",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T19:14:19.071Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T19:14:19.071Z",
+        "created": "2025-07-24T19:14:19.071Z"
+      },
+      "id": "polygon_1753384459071_j1evmqvcb"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.063843,
+              -15.607975
+            ],
+            [
+              -56.063761,
+              -15.60808
+            ],
+            [
+              -56.063802,
+              -15.60811
+            ],
+            [
+              -56.063882,
+              -15.608008
+            ],
+            [
+              -56.063843,
+              -15.607975
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753384559486_vmkcaqp2y",
+        "featureId": "polygon_1753384559486_vmkcaqp2y",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T19:15:59.486Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T19:15:59.487Z",
+        "created": "2025-07-24T19:15:59.487Z"
+      },
+      "id": "polygon_1753384559486_vmkcaqp2y"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.063888,
+              -15.608011
+            ],
+            [
+              -56.063802,
+              -15.608108
+            ],
+            [
+              -56.063838,
+              -15.608139
+            ],
+            [
+              -56.06393,
+              -15.608038
+            ],
+            [
+              -56.063888,
+              -15.608011
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753384595992_4zp9s1tjq",
+        "featureId": "polygon_1753384595992_4zp9s1tjq",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T19:16:35.992Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T19:16:35.993Z",
+        "created": "2025-07-24T19:16:35.993Z"
+      },
+      "id": "polygon_1753384595992_4zp9s1tjq"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.064357,
+              -15.607472
+            ],
+            [
+              -56.064296,
+              -15.607541
+            ],
+            [
+              -56.064327,
+              -15.607571
+            ],
+            [
+              -56.064388,
+              -15.607498
+            ],
+            [
+              -56.064357,
+              -15.607472
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753384726901_44450c3t9",
+        "featureId": "polygon_1753384726901_44450c3t9",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T19:18:46.901Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T19:18:46.902Z",
+        "created": "2025-07-24T19:18:46.902Z"
+      },
+      "id": "polygon_1753384726901_44450c3t9"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.06432,
+              -15.60744
+            ],
+            [
+              -56.064259,
+              -15.607512
+            ],
+            [
+              -56.064294,
+              -15.607539
+            ],
+            [
+              -56.064353,
+              -15.607468
+            ],
+            [
+              -56.06432,
+              -15.60744
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753384699205_q1tdq7wae",
+        "featureId": "polygon_1753384699205_q1tdq7wae",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T19:18:19.205Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T19:18:19.205Z",
+        "created": "2025-07-24T19:18:19.205Z"
+      },
+      "id": "polygon_1753384699205_q1tdq7wae"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.064296,
+              -15.607542
+            ],
+            [
+              -56.064235,
+              -15.6076
+            ],
+            [
+              -56.064273,
+              -15.607631
+            ],
+            [
+              -56.064331,
+              -15.607569
+            ],
+            [
+              -56.064296,
+              -15.607542
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753384810366_5hdv4hept",
+        "featureId": "polygon_1753384810366_5hdv4hept",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T19:20:10.366Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T19:20:10.366Z",
+        "created": "2025-07-24T19:20:10.366Z"
+      },
+      "id": "polygon_1753384810366_5hdv4hept"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.064257,
+              -15.607515
+            ],
+            [
+              -56.064205,
+              -15.607574
+            ],
+            [
+              -56.064238,
+              -15.607601
+            ],
+            [
+              -56.064293,
+              -15.607541
+            ],
+            [
+              -56.064257,
+              -15.607515
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753384762184_89tt2fkyl",
+        "featureId": "polygon_1753384762184_89tt2fkyl",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T19:19:22.184Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T19:19:22.184Z",
+        "created": "2025-07-24T19:19:22.185Z"
+      },
+      "id": "polygon_1753384762184_89tt2fkyl"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.064237,
+              -15.6076
+            ],
+            [
+              -56.064191,
+              -15.607653
+            ],
+            [
+              -56.064229,
+              -15.607682
+            ],
+            [
+              -56.064272,
+              -15.60763
+            ],
+            [
+              -56.064237,
+              -15.6076
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753384875496_xygmjbdcu",
+        "featureId": "polygon_1753384875496_xygmjbdcu",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T19:21:15.496Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T19:21:15.497Z",
+        "created": "2025-07-24T19:21:15.498Z"
+      },
+      "id": "polygon_1753384875496_xygmjbdcu"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.064205,
+              -15.607575
+            ],
+            [
+              -56.064155,
+              -15.607627
+            ],
+            [
+              -56.064191,
+              -15.607654
+            ],
+            [
+              -56.064234,
+              -15.607598
+            ],
+            [
+              -56.064205,
+              -15.607575
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753384839389_y1pv1xccw",
+        "featureId": "polygon_1753384839389_y1pv1xccw",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T19:20:39.389Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T19:20:39.389Z",
+        "created": "2025-07-24T19:20:39.390Z"
+      },
+      "id": "polygon_1753384839389_y1pv1xccw"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.0649,
+              -15.608357
+            ],
+            [
+              -56.065031,
+              -15.608444
+            ],
+            [
+              -56.064946,
+              -15.608545
+            ],
+            [
+              -56.06482,
+              -15.608443
+            ],
+            [
+              -56.0649,
+              -15.608357
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753378180800_o0y65u34u",
+        "featureId": "polygon_1753378180800_o0y65u34u",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T17:29:40.800Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T17:29:40.800Z",
+        "created": "2025-07-24T17:29:40.801Z"
+      },
+      "id": "polygon_1753378180800_o0y65u34u"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.064798,
+              -15.608419
+            ],
+            [
+              -56.064693,
+              -15.608332
+            ],
+            [
+              -56.064806,
+              -15.608207
+            ],
+            [
+              -56.064909,
+              -15.608288
+            ],
+            [
+              -56.064798,
+              -15.608419
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753378053058_czj36jp23",
+        "featureId": "polygon_1753378053058_czj36jp23",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T17:27:33.058Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T17:27:33.058Z",
+        "created": "2025-07-24T17:27:33.059Z"
+      },
+      "id": "polygon_1753378053058_czj36jp23"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.064939,
+              -15.608311
+            ],
+            [
+              -56.064998,
+              -15.608353
+            ],
+            [
+              -56.064953,
+              -15.608398
+            ],
+            [
+              -56.064902,
+              -15.608359
+            ],
+            [
+              -56.064939,
+              -15.608311
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753378168968_45vv3hfa8",
+        "featureId": "polygon_1753378168968_45vv3hfa8",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T17:29:28.968Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T17:29:28.968Z",
+        "created": "2025-07-24T17:29:28.969Z"
+      },
+      "id": "polygon_1753378168968_45vv3hfa8"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.065001,
+              -15.608241
+            ],
+            [
+              -56.065059,
+              -15.608286
+            ],
+            [
+              -56.065108,
+              -15.608228
+            ],
+            [
+              -56.065055,
+              -15.608181
+            ],
+            [
+              -56.065001,
+              -15.608241
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753378134209_iia66gzr5",
+        "featureId": "polygon_1753378134209_iia66gzr5",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T17:28:54.209Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T17:28:54.209Z",
+        "created": "2025-07-24T17:28:54.209Z"
+      },
+      "id": "polygon_1753378134209_iia66gzr5"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.065056,
+              -15.608179
+            ],
+            [
+              -56.065177,
+              -15.608273
+            ],
+            [
+              -56.065263,
+              -15.608171
+            ],
+            [
+              -56.065145,
+              -15.608082
+            ],
+            [
+              -56.065056,
+              -15.608179
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753378195992_av0b56pnj",
+        "featureId": "polygon_1753378195992_av0b56pnj",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T17:29:55.992Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T17:29:55.992Z",
+        "created": "2025-07-24T17:29:55.993Z"
+      },
+      "id": "polygon_1753378195992_av0b56pnj"
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.064855,
+              -15.608136
+            ],
+            [
+              -56.064973,
+              -15.608221
+            ],
+            [
+              -56.065107,
+              -15.608061
+            ],
+            [
+              -56.064996,
+              -15.60797
+            ],
+            [
+              -56.064855,
+              -15.608136
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "polygon_1753378104681_lifqtykf9",
+        "featureId": "polygon_1753378104681_lifqtykf9",
+        "layerId": "vector_layer_1753377950612_udg0tdqvc",
+        "layerName": "2° Piso",
+        "_created": "2025-07-24T17:28:24.681Z",
+        "_geometry_type": "Polygon",
+        "nome": "???",
+        "tipo": "Sala",
+        "bloco": "FAET",
+        "andar": 1,
+        "capacidade": null,
+        "acessibilidade": false,
+        "addedToStore": "2025-07-24T17:28:24.681Z",
+        "created": "2025-07-24T17:28:24.682Z"
+      },
+      "id": "polygon_1753378104681_lifqtykf9"
+    },
+    {
+            "id": "PVgZqVkse7HHhJXfv9zGrr276j5wESaa",
+            "type": "Feature",
+            "properties": {},
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.064653292987416,
+                            -15.608501462181977
+                        ],
+                        [
+                            -56.06471150376855,
+                            -15.608545539044272
+                        ],
+                        [
+                            -56.06466902062064,
+                            -15.60859472006996
+                        ],
+                        [
+                            -56.064612343222116,
+                            -15.608549978065277
+                        ],
+                        [
+                            -56.064653292987416,
+                            -15.608501462181977
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "XnRv8Brwf03PqHKAUPTHETv1jBPg1MXP",
+            "type": "Feature",
+            "properties": {},
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.06477856428714,
+                            -15.608513601036293
+                        ],
+                        [
+                            -56.06481890898267,
+                            -15.608545234409533
+                        ],
+                        [
+                            -56.06477653572669,
+                            -15.60859729082786
+                        ],
+                        [
+                            -56.0647354997253,
+                            -15.60856419336308
+                        ],
+                        [
+                            -56.06477856428714,
+                            -15.608513601036293
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "wdhoCkK11KE6X3JSmhsZaS9Z5kD5Jtaa",
+            "type": "Feature",
+            "properties": {
+                "1234": ""
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.06454681842803,
+                            -15.608498919898622
+                        ],
+                        [
+                            -56.064589049416654,
+                            -15.608450533722532
+                        ],
+                        [
+                            -56.06465311191556,
+                            -15.608501227106146
+                        ],
+                        [
+                            -56.06461246141316,
+                            -15.608549443539573
+                        ],
+                        [
+                            -56.06454681842803,
+                            -15.608498919898622
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "id": "mcif47Jmu4Wr9GCGCv5dwlxYiNYOi0dy",
+            "type": "Feature",
+            "properties": {},
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            -56.064711253549646,
+                            -15.608545708828288
+                        ],
+                        [
+                            -56.06477647784435,
+                            -15.608597407614553
+                        ],
+                        [
+                            -56.064734738735666,
+                            -15.608647688866569
+                        ],
+                        [
+                            -56.06466929127808,
+                            -15.60859493632475
+                        ],
+                        [
+                            -56.064711253549646,
+                            -15.608545708828288
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        }
+  ],
+  "metadata": {
+    "name": "2° Piso",
+    "exportDate": "2025-07-24T20:23:47.677Z",
+    "featureCount": 22,
+    "coordinateSystem": "EPSG:4326",
+    "precision": 6
+  }
+}

@@ -1,121 +1,669 @@
-body {
-    font-family: Arial, sans-serif;
+/* ===================================================================
+   ESTILOS GERAIS
+   =================================================================== */
+body, html {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f0f2f5;
     color: #333;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* ===================================================================
+   CONTEÚDO PRINCIPAL (MAPA)
+   =================================================================== */
+#main-content {
+    transition: margin-right 0.3s ease;
+    height: 100%;
+}
+
+#map-container {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+
+/* ===================================================================
+   POPUP DO LEAFLET
+   =================================================================== */
+.leaflet-popup-content-wrapper {
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: none;
+}
+
+.leaflet-popup-content {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.leaflet-popup-tip-container {
+    display: none; /* Esconde a seta para um visual mais limpo */
+}
+
+/* Estilo do conteúdo customizado dentro do popup */
+.custom-popup {
+    min-width: 250px;
+}
+
+.custom-popup .popup-image {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.custom-popup .popup-content {
+    padding: 15px;
+}
+
+.custom-popup .popup-header {
+    font-size: 18px;
+    font-weight: bold;
+    color: #003366;
+    margin: 0 0 10px 0;
+}
+
+.custom-popup .popup-details b {
+    color: #333;
+    min-width: 60px;
+    display: inline-block;
+}
+
+.custom-popup .popup-button {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #0056b3;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.custom-popup .popup-button:hover {
+    background-color: #003366;
+}
+
+/* ===================================================================
+   SIDEBAR
+   =================================================================== */
+.sidebar {
+    height: 100%;
+    width: 340px;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    box-shadow: -2px 0 15px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
 }
 
-header {
-    text-align: center;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.sidebar.visible {
+    transform: translateX(0);
 }
 
-header h1 {
+.sidebar-header {
+    padding: 20px 25px;
     color: #003366;
-    margin-bottom: 5px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-bottom: 1px solid #e0e0e0;
+    flex-shrink: 0;
 }
 
-header p {
-    margin-top: 0;
-}
-
-hr {
-    border: 1px solid #003366;
-    width: 80%;
-    margin: 10px auto;
-}
-
-main {
+.sidebar-menu {
+    overflow-y: auto;
     flex-grow: 1;
-    padding: 20px;
 }
 
-.container {
-    display: flex;
-    gap: 20px;
-    max-width: 1400px;
-    margin: 0 auto;
-    height: calc(100vh - 180px); /* Ajuste para o cabeçalho e padding */
+/* ===================================================================
+   CONTROLES DO MAPA
+   =================================================================== */
+.map-controls {
+    padding: 20px 25px;
 }
 
-#map {
-    flex: 3; /* Ocupa 3/4 do espaço */
-    height: 100%;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+.control-section {
+    margin-bottom: 25px;
 }
 
-#sidebar {
-    flex: 1; /* Ocupa 1/4 do espaço */
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    overflow-y: auto; /* Para rolagem se o conteúdo for muito grande */
-}
-
-#sidebar h2 {
-    color: #003366;
+.control-section h4 {
     margin-top: 0;
+    margin-bottom: 15px;
+    color: #003366;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+    font-size: 1rem;
 }
 
 .controls label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
+    font-size: 0.9rem;
 }
 
-.controls select,
+.controls select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+}
+
+.controls select:focus {
+    outline: none;
+    border-color: #0056b3;
+}
+
+/* ===================================================================
+   AUTOCOMPLETE
+   =================================================================== */
+.autocomplete-container {
+    position: relative;
+}
+
+#sala-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+}
+
+#sala-input:focus {
+    outline: none;
+    border-color: #0056b3;
+}
+
+.suggestions,
+#suggestions-container {
+    display: none;
+    position: absolute;
+    border: 1px solid #ddd;
+    border-top: none;
+    max-height: 150px;
+    overflow-y: auto;
+    width: 100%;
+    background-color: white;
+    z-index: 1001;
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.suggestion-item:hover,
+.suggestion-item:focus {
+    background-color: #f0f2f5;
+    outline: none;
+}
+
+/* ===================================================================
+   BOTÕES
+   =================================================================== */
 .controls button {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
+    margin-top: 10px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Inclui padding e borda na largura */
-}
-
-.controls button {
-    background-color: #0056b3;
+    background: linear-gradient(45deg, #0056b3, #003366);
     color: white;
     border: none;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .controls button:hover {
-    background-color: #004085;
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 86, 179, 0.3);
 }
 
-.radio-group label {
-    display: inline-block;
-    margin-right: 15px;
+.controls button:active {
+    transform: scale(0.98);
+}
+
+.controls button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Botão de limpar (se existir) */
+#limpar-btn {
+    background: linear-gradient(45deg, #6c757d, #495057);
+}
+
+#limpar-btn:hover {
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+/* ===================================================================
+   CHECKBOXES
+   =================================================================== */
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
     font-weight: normal;
+    cursor: pointer;
 }
 
-.radio-group input[type="radio"] {
-    margin-right: 5px;
+.checkbox-group input[type="checkbox"] {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
 }
 
-/* Estilos para checkboxes */
-.controls input[type="checkbox"] {
-    margin-right: 5px;
+/* ===================================================================
+   BOTÃO DE TOGGLE DA SIDEBAR
+   =================================================================== */
+.toggle-btn {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    left: auto;
+    z-index: 1001;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: right 0.3s ease-in-out, background-color 0.2s;
 }
 
-/* Mensagens de aviso */
-.warning-message {
-    background-color: #fff3cd;
-    border: 1px solid #ffeeba;
-    color: #856404;
-    padding: 10px;
+.toggle-btn:hover {
+    background-color: #f0f2f5;
+}
+
+/* ===================================================================
+   BOTÃO VOLTAR À PÁGINA INICIAL
+   =================================================================== */
+.back-btn {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1001;
+    background-color: #fff;
+    color: #003366;
+    border: 1px solid #ccc;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 1.3rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-btn:hover {
+    background-color: #003366;
+    color: #fff;
+    border-color: #003366;
+}
+
+.back-btn:active {
+    transform: scale(0.95);
+}
+
+/* ===================================================================
+   ETIQUETAS DE TEXTO NO MAPA
+   =================================================================== */
+.sala-label {
+    background: transparent;
+    border: none;
+    font-size: 11px;
+    font-weight: bold;
+    color: #003366;
+    text-shadow: 
+        1px 1px 2px #fff, 
+        -1px -1px 2px #fff, 
+        1px -1px 2px #fff, 
+        -1px 1px 2px #fff;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* ===================================================================
+   MARCADORES DE PONTOS DE INTERESSE (POI)
+   =================================================================== */
+.poi-marker {
+    background-color: #5a5a5a;
+    color: white;
+    border-radius: 50% 50% 50% 0;
+    border: 2px solid #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    width: 32px;
+    height: 32px;
+    transform: rotate(-45deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.poi-marker .icon-content {
+    transform: rotate(45deg);
+    font-size: 16px;
+}
+
+.poi-marker:hover {
+    transform: rotate(-45deg) scale(1.15);
+}
+
+/* Ícones específicos de cada tipo de POI */
+.poi-marker-banheiro .icon-content::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f7d8";
+}
+
+.poi-marker-elevador .icon-content::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f07d";
+}
+
+.poi-marker-rampa .icon-content::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f193";
+}
+
+.poi-marker-escada .icon-content::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\e55e";
+}
+
+.poi-marker-totem {
+    background: linear-gradient(145deg, #007bff, #0056b3);
+    width: 40px;
+    height: 40px;
+    z-index: 1000 !important;
+    animation: pulse 2s infinite;
+}
+
+.poi-marker-totem .icon-content {
+    font-size: 22px;
+}
+
+.poi-marker-totem .icon-content::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f005";
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 12px rgba(0, 123, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+    }
+}
+
+/* ===================================================================
+   NOTIFICAÇÕES TOAST (NOVAS)
+   =================================================================== */
+.map-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    min-width: 250px;
+    max-width: 400px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.map-notification-info {
+    background-color: #2196F3;
+    color: white;
+}
+
+.map-notification-success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.map-notification-error {
+    background-color: #f44336;
+    color: white;
+}
+
+.map-notification-warning {
+    background-color: #ff9800;
+    color: white;
+}
+
+/* Animações para as notificações */
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+}
+
+/* ===================================================================
+   LOADING SPINNER (NOVO)
+   =================================================================== */
+#map-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #0056b3;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===================================================================
+   RESPONSIVIDADE
+   =================================================================== */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        max-width: 340px;
+    }
+
+    .toggle-btn {
+        font-size: 1.2rem;
+        padding: 6px 10px;
+    }
+
+    .map-notification {
+        right: 10px;
+        left: 10px;
+        min-width: auto;
+    }
+
+    .custom-popup {
+        min-width: 200px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .sidebar-header {
+        font-size: 1.2rem;
+        padding: 15px 20px;
+    }
+
+    .map-controls {
+        padding: 15px 20px;
+    }
+
+    .control-section h4 {
+        font-size: 0.9rem;
+    }
+
+    .controls button {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}
+
+/* ===================================================================
+   ACESSIBILIDADE
+   =================================================================== */
+*:focus-visible {
+    outline: 2px solid #0056b3;
+    outline-offset: 2px;
+}
+
+/* Modo de alto contraste */
+@media (prefers-contrast: high) {
+    .controls button {
+        border: 2px solid #000;
+    }
+
+    .sidebar {
+        border-left: 2px solid #000;
+    }
+}
+
+/* Redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ===================================================================
+   UTILITÁRIOS
+   =================================================================== */
+.hidden {
+    display: none !important;
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.slide-up {
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ===================================================================
+   SCROLLBAR PERSONALIZADA (SIDEBAR)
+   =================================================================== */
+.sidebar-menu::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar-menu::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.sidebar-menu::-webkit-scrollbar-thumb {
+    background: #888;
     border-radius: 4px;
-    margin-top: 10px;
+}
+
+.sidebar-menu::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Firefox */
+.sidebar-menu {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
 }
