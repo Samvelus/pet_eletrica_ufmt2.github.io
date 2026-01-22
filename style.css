@@ -304,6 +304,39 @@ body, html {
 }
 
 /* ===================================================================
+   BOTÃO VOLTAR À PÁGINA INICIAL
+   =================================================================== */
+.back-btn {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1001;
+    background-color: #fff;
+    color: #003366;
+    border: 1px solid #ccc;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 1.3rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-btn:hover {
+    background-color: #003366;
+    color: #fff;
+    border-color: #003366;
+}
+
+.back-btn:active {
+    transform: scale(0.95);
+}
+
+/* ===================================================================
    ETIQUETAS DE TEXTO NO MAPA
    =================================================================== */
 .sala-label {

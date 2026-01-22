@@ -1,9 +1,11 @@
 
-const CACHE_NAME = "totem-pet-cache-v1";
+const CACHE_NAME = "totem-pet-cache-v2";
 const FILES_TO_CACHE = [
     "./",
     "./index.html",
+    "./mapa.html",
     "./style.css",
+    "./home.css",
     "./script.js"
 ];
 
