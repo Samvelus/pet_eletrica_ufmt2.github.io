@@ -222,3 +222,71 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa do Campus UFMT</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    <!-- Nosso CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Universidade Federal de Mato Grosso</h1>
+        <p>Bem-vindo ao Totem da UFMT!</p>
+        <hr>
+    </header>
+
+    <main>
+        <div class="container">
+            <div id="map"></div>
+            <div id="sidebar">
+                <h2>Mapa do Campus</h2>
+                <p>Explore o mapa do campus para encontrar locais importantes.</p>
+
+                <div class="controls">
+                    <label for="sala-select">PESQUISA LOCAL:</label>
+                    <select id="sala-select">
+                        <option value="">Selecione ou digite o local...</option>
+                    </select>
+
+                    <label>
+                        <input type="checkbox" id="acessibilidade-checkbox"> Preciso de acessibilidade
+                    </label>
+
+                    <button id="mostrar-rota-btn">Como chegar?</button>
+
+                    <h3>Tipo de Mapa</h3>
+                    <div class="radio-group">
+                        <label><input type="radio" name="map-type" value="Normal" checked> Normal</label>
+                        <label><input type="radio" name="map-type" value="Híbrido"> Híbrido</label>
+                        <label><input type="radio" name="map-type" value="Satélite"> Satélite</label>
+                    </div>
+
+                    <label>
+                        <input type="checkbox" id="mostrar-pontos-checkbox" checked> Mostrar Pontos de Interesse
+                    </label>
+                    <label>
+                        <input type="checkbox" id="mostrar-rotas-checkbox"> Mostrar Rotas
+                    </label>
+                    <label>
+                        <input type="checkbox" id="mostrar-info-checkbox" checked> Mostrar Informações do Local
+                    </label>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Leaflet JavaScript -->
+   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+    <!-- Nosso JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
