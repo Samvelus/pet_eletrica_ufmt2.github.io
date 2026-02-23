@@ -570,22 +570,115 @@ class NavigationManager {
     }
 
     createInstructionPanel() {
+        // Overlay de fundo
+        const overlay = document.createElement('div');
+        overlay.id = 'navigation-overlay';
+        overlay.style.cssText = `
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 10, 30, 0.55);
+            backdrop-filter: blur(2px);
+            z-index: 2000;
+            display: none;
+            pointer-events: none;
+        `;
+        document.body.appendChild(overlay);
+
+        // Painel principal
         const panel = document.createElement('div');
         panel.id = 'navigation-panel';
         panel.style.cssText = `
             position: fixed;
-            top: 20px;
+            top: 0;
             left: 50%;
             transform: translateX(-50%);
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            z-index: 1000;
-            max-width: 400px;
+            width: min(420px, 96vw);
+            background: linear-gradient(160deg, #0a1628 0%, #0d2147 100%);
+            border-radius: 0 0 24px 24px;
+            box-shadow: 0 8px 40px rgba(0,86,179,0.45), 0 2px 8px rgba(0,0,0,0.4);
+            z-index: 2100;
             display: none;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            border: 1px solid rgba(100,160,255,0.18);
+            border-top: none;
+            overflow: hidden;
         `;
+
+        // Barra de topo com título e botão X
+        const topBar = document.createElement('div');
+        topBar.style.cssText = `
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px 10px;
+            background: rgba(0,86,179,0.22);
+            border-bottom: 1px solid rgba(100,160,255,0.15);
+        `;
+
+        const titleEl = document.createElement('div');
+        titleEl.style.cssText = `
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #90CAF9;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        `;
+        titleEl.innerHTML = `<span style="font-size:16px;">🧭</span> Navegação`;
+
+        const closeBtn = document.createElement('button');
+        closeBtn.id = 'nav-close-btn';
+        closeBtn.innerHTML = '✕';
+        closeBtn.title = 'Fechar e voltar ao mapa';
+        closeBtn.style.cssText = `
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #aac8f0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, color 0.2s;
+            flex-shrink: 0;
+        `;
+        closeBtn.onmouseover = () => {
+            closeBtn.style.background = 'rgba(244,67,54,0.25)';
+            closeBtn.style.color = '#ff6b6b';
+            closeBtn.style.borderColor = 'rgba(244,67,54,0.4)';
+        };
+        closeBtn.onmouseout = () => {
+            closeBtn.style.background = 'rgba(255,255,255,0.08)';
+            closeBtn.style.color = '#aac8f0';
+            closeBtn.style.borderColor = 'rgba(255,255,255,0.15)';
+        };
+        closeBtn.addEventListener('click', () => {
+            if (window.mapaApp && window.mapaApp.navigationManager) {
+                window.mapaApp.navigationManager.stopNavigation();
+            }
+        });
+
+        topBar.appendChild(titleEl);
+        topBar.appendChild(closeBtn);
+
+        // Corpo do painel
+        const body = document.createElement('div');
+        body.id = 'navigation-panel-body';
+        body.style.cssText = `padding: 18px 20px 22px;`;
+
+        panel.appendChild(topBar);
+        panel.appendChild(body);
         document.body.appendChild(panel);
+
+        // Guardar referência ao overlay para uso posterior
+        this._overlay = overlay;
+        this._panelBody = body;
+
         return panel;
     }
 
@@ -866,41 +959,73 @@ class NavigationManager {
         const current = instructions[index];
         const next = instructions[index + 1];
 
+        const getArrowIcon = (instr) => {
+            if (!instr) return '⬆️';
+            if (instr.includes('direita')) return '↪️';
+            if (instr.includes('esquerda')) return '↩️';
+            if (instr.includes('elevador')) return '🛗';
+            if (instr.includes('escada')) return '🪜';
+            if (instr.includes('rampa')) return '♿';
+            if (instr.includes('chegou') || instr.includes('destino')) return '🎯';
+            return '⬆️';
+        };
+
+        const totalDistance = this.calculateRemainingDistance();
+        const progress = Math.round(((index + 1) / instructions.length) * 100);
+
         let html = `
-            <div style="text-align: center;">
-                <h3 style="margin: 0 0 10px 0; color: #0056b3;">
-                    ${current.instruction}
-                </h3>
+            <div style="display:flex; align-items:flex-start; gap:14px; margin-bottom:16px;">
+                <div style="
+                    width:52px; height:52px; flex-shrink:0;
+                    background: rgba(0,86,179,0.3);
+                    border: 2px solid rgba(100,160,255,0.35);
+                    border-radius: 14px;
+                    display:flex; align-items:center; justify-content:center;
+                    font-size:24px;
+                ">${getArrowIcon(current.instruction)}</div>
+                <div style="flex:1;">
+                    <div style="color:#e8f0fe; font-size:16px; font-weight:600; line-height:1.35;">
+                        ${current.instruction}
+                    </div>
+                    ${current.distance > 0 ? `<div style="color:#64b5f6; font-size:12px; margin-top:4px;">por ${Math.round(current.distance)} m</div>` : ''}
+                </div>
+            </div>
         `;
 
         if (next && next.instruction !== current.instruction) {
             html += `
-                <p style="margin: 10px 0; color: #666; font-size: 14px;">
-                    <strong>Próximo:</strong> ${next.instruction}
-                </p>
+            <div style="
+                display:flex; align-items:center; gap:10px;
+                background: rgba(255,255,255,0.05);
+                border-radius: 10px; padding: 10px 12px;
+                margin-bottom: 14px;
+                border: 1px solid rgba(255,255,255,0.07);
+            ">
+                <div style="font-size:18px; opacity:0.7;">${getArrowIcon(next.instruction)}</div>
+                <div>
+                    <div style="color:#78909c; font-size:10px; letter-spacing:1px; text-transform:uppercase; margin-bottom:2px;">Em seguida</div>
+                    <div style="color:#b0bec5; font-size:13px;">${next.instruction}</div>
+                </div>
+            </div>
             `;
         }
 
-        const totalDistance = this.calculateRemainingDistance();
         html += `
-                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #ddd;">
-                    <p style="margin: 5px 0; font-size: 13px; color: #888;">
-                        Distância restante: ${Math.round(totalDistance)} metros
-                    </p>
-                    <p style="margin: 5px 0; font-size: 13px; color: #888;">
-                        Passo ${index + 1} de ${instructions.length}
-                    </p>
+            <div style="margin-bottom:4px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                    <span style="color:#78909c; font-size:11px;">Passo ${index + 1} de ${instructions.length}</span>
+                    <span style="color:#64b5f6; font-size:11px; font-weight:600;">${Math.round(totalDistance)} m restantes</span>
                 </div>
-                <button onclick="window.mapaApp.navigationManager.stopNavigation()" 
-                        style="margin-top: 15px; padding: 10px 20px; background: #f44336; 
-                               color: white; border: none; border-radius: 4px; cursor: pointer;">
-                    Cancelar Navegação
-                </button>
+                <div style="height:4px; background:rgba(255,255,255,0.1); border-radius:2px; overflow:hidden;">
+                    <div style="height:100%; width:${progress}%; background: linear-gradient(90deg, #1565c0, #42a5f5); border-radius:2px; transition: width 0.4s;"></div>
+                </div>
             </div>
         `;
 
-        this.instructionPanel.innerHTML = html;
+        const body = this._panelBody || this.instructionPanel;
+        body.innerHTML = html;
         this.instructionPanel.style.display = 'block';
+        if (this._overlay) this._overlay.style.display = 'block';
     }
 
     calculateRemainingDistance() {
@@ -919,18 +1044,27 @@ class NavigationManager {
     }
 
     handleArrival() {
-        this.instructionPanel.innerHTML = `
-            <div style="text-align: center;">
-                <h2 style="color: #4CAF50; margin: 0 0 10px 0;">🎯</h2>
-                <h3 style="margin: 0 0 10px 0;">Você chegou!</h3>
-                <p style="color: #666;">${this.state.navigation.destination}</p>
-                <button onclick="window.mapaApp.navigationManager.stopNavigation()" 
-                        style="margin-top: 15px; padding: 10px 20px; background: #4CAF50; 
-                               color: white; border: none; border-radius: 4px; cursor: pointer;">
-                    Finalizar
+        const html = `
+            <div style="text-align:center; padding: 8px 0 4px;">
+                <div style="font-size:48px; margin-bottom:10px;">🎯</div>
+                <div style="color:#a5d6a7; font-size:20px; font-weight:700; margin-bottom:6px;">Você chegou!</div>
+                <div style="color:#b0bec5; font-size:14px; margin-bottom:18px;">${this.state.navigation.destination}</div>
+                <button onclick="window.mapaApp.navigationManager.stopNavigation()"
+                    style="
+                        padding: 11px 28px;
+                        background: linear-gradient(135deg, #2e7d32, #43a047);
+                        color: white; border: none; border-radius: 10px;
+                        cursor: pointer; font-size: 14px; font-weight: 600;
+                        box-shadow: 0 4px 14px rgba(67,160,71,0.4);
+                    ">
+                    Finalizar Navegação
                 </button>
             </div>
         `;
+        const body = this._panelBody || this.instructionPanel;
+        body.innerHTML = html;
+        this.instructionPanel.style.display = 'block';
+        if (this._overlay) this._overlay.style.display = 'block';
 
         Utils.showNotification('Você chegou ao destino!', 'success');
     }
@@ -943,6 +1077,7 @@ class NavigationManager {
 
         this.state.navigation.isActive = false;
         this.instructionPanel.style.display = 'none';
+        if (this._overlay) this._overlay.style.display = 'none';
 
         this.layerManager.removeLayer('activeRoute');
         this.layerManager.removeLayer('completedRoute');
