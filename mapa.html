@@ -3,112 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa Totem PET</title>
-
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#003366">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="apple-touch-icon" href="icon-192.png">
- <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-     crossorigin=""/>
-    <!-- Leaflet Rotate Plugin CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-rotate@0.1.1/dist/leaflet-rotate.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
-    <!-- Ficheiro de Estilos CSS -->
-    <link rel="stylesheet" href="style.css">
-    <!-- 2. Font Awesome (para os ícones) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
-    xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Rotas Acessíveis - PET Totem</title>
+    <!-- TailwindCSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-
-    <!-- A Barra Lateral (Sidebar) -->
-    <aside id="sidebar" class="sidebar">
-        <div class="sidebar-header">
-            <h3>Navegação</h3>
+<body class="bg-slate-100 flex flex-col h-screen overflow-hidden font-inter text-slate-800">
+    
+    <header class="bg-white shadow relative z-10 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <div class="bg-blue-600 text-white p-2 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                </svg>
+            </div>
+            <h1 class="text-xl font-bold">Totem Interativo <span class="text-slate-500 font-medium text-sm ml-2">UFMT</span></h1>
         </div>
-        <div class="sidebar-menu">
-            <div class="map-controls controls">
-                <div class="control-section">
-                    <label for="sala-input">Para onde quer ir?</label>
-                    <div class="autocomplete-container">
-                        <input type="text" id="sala-input" placeholder="Digite o nome da sala...">
-                        <div id="suggestions-container" class="suggestions"></div>
+        <!-- Loader dinâmico -->
+        <div id="app-loading" class="flex items-center gap-2 text-blue-600 font-medium">
+            <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Carregando Mapa...
+        </div>
+    </header>
+
+    <main class="flex-1 flex overflow-hidden opacity-0 transition-opacity duration-500" id="main-content">
+        <!-- Sidebar Controls -->
+        <aside class="w-96 bg-white border-r border-slate-200 overflow-y-auto flex flex-col z-20 shadow-lg relative">
+            
+            <div class="p-6 border-b border-slate-100 flex-shrink-0">
+                <h2 class="text-lg font-semibold mb-4 text-slate-800">Encontre o seu caminho</h2>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600 mb-1">Origem</label>
+                        <select id="select-origin" class="w-full border border-slate-300 rounded-lg px-3 py-2 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-colors">
+                            <option value="">Selecione a Origem...</option>
+                            <!-- Options filled via JS -->
+                        </select>
                     </div>
-                    <button id="mostrar-rota-btn">Como chegar?</button>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600 mb-1">Destino</label>
+                        <select id="select-destination" class="w-full border border-slate-300 rounded-lg px-3 py-2 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-colors">
+                            <option value="">Selecione o Destino...</option>
+                            <!-- Options filled via JS -->
+                        </select>
+                    </div>
                 </div>
 
-                <div class="control-section">
-                    <h4>Opções de Rota</h4>
-                    <div class="checkbox-group">
-                         <label>
-                            <input type="checkbox" id="acessibilidade-checkbox"> Rota Acessível
+                <!-- Accessibility Switch -->
+                <div class="mt-6 p-4 rounded-xl border border-blue-100 bg-blue-50 flex items-start gap-3">
+                    <div class="pt-0.5">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="toggle-accessible" class="peer sr-only">
+                            <div class="toggle-bg bg-slate-300 peer-checked:bg-blue-600"></div>
                         </label>
+                    </div>
+                    <div>
+                        <label for="toggle-accessible" class="text-sm font-medium text-blue-900 cursor-pointer block">Exigir rota acessível</label>
+                        <p class="text-xs text-blue-700 mt-1">Evita escadas. Prioriza rampas e elevadores para cadeiras de rodas ou carrinhos.</p>
                     </div>
                 </div>
-               
-                <div class="control-section">
-                    <h4>Exibição do Mapa</h4>
-                    <label>Andar:</label>
-                    <select id="andar-filter-select">
-                        <option value="0">Térreo</option>
-                        <option value="1">1° Andar</option>
-                        <option value="2">2° Andar</option>
-                    </select>
 
-                    <hr style="border: 1px solid #eee; margin: 15px 0;">
-                     <div class="checkbox-group">
-                        <label>
-                            <input type="checkbox" id="mostrar-pontos-checkbox" checked> Mostrar Banheiros
-                        </label>
-                        <label>
-                            <input type="checkbox" id="mostrar-info-checkbox" checked> Mostrar Nomes no Mapa
-                        </label>
-                        <label>
-                            <input type="checkbox" id="mostrar-acessivel-checkbox" checked> Acessibilidade
-                        </label>
-                    </div>
-                    <label>Tipo de Mapa:</label>
-                    <select id="map-type-select">
-                        <option value="Normal">Normal</option>
-                        <option value="Híbrido">Híbrido</option>
-                        <option value="Satélite">Satélite</option>
-                    </select>
+                <button id="btn-calculate" class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-xl shadow-sm transition-colors flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                    </svg>
+                    Traçar Caminho
+                </button>
+            </div>
+
+            <div class="p-6 flex-1 flex flex-col min-h-0">
+                <h3 class="text-xs font-bold tracking-wider text-slate-400 uppercase mb-3">Instruções da Rota</h3>
+                <div id="route-summary" class="mb-4 text-sm font-medium text-slate-700">
+                    Selecione origem e destino para ver as instruções.
+                </div>
+                
+                <div class="flex-1 overflow-y-auto pr-2 pb-4">
+                    <ul id="list-instructions" class="space-y-4">
+                        <!-- Li elements added via JS -->
+                    </ul>
                 </div>
             </div>
-        </div>
-    </aside>
+            
+        </aside>
 
-    <!-- Conteúdo Principal -->
-    <main id="main-content">
-        <a href="index.html" id="back-home-btn" class="back-btn" title="Voltar à Página Inicial">
-            <i class="fas fa-home"></i>
-        </a>
-        <button id="toggle-sidebar-btn" class="toggle-btn">
-            &#9776; <!-- Ícone "hamburger" -->
-        </button>
-        <div id="map-container">
-            <!-- O MAPA LEAFLET -->
-        </div>
+        <!-- Main Map Area using Leaflet -->
+        <section class="flex-1 relative z-10 bg-slate-50">
+            
+            <!-- Floor Selector Custom Control (Overlay over map) -->
+            <div class="absolute top-4 right-4 bg-white rounded-lg shadow-md p-2 flex flex-col gap-2 z-[1000] border border-slate-200">
+                <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider text-center mb-1">Andar</div>
+                <button id="btn-floor-2" class="floor-btn w-12 h-12 rounded bg-slate-100 font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors border border-transparent" data-floor="2">2</button>
+                <button id="btn-floor-1" class="floor-btn w-12 h-12 rounded bg-slate-100 font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors border border-transparent" data-floor="1">1</button>
+                <button id="btn-floor-0" class="floor-btn w-12 h-12 rounded bg-slate-100 font-bold text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors border border-transparent active-floor" data-floor="0">0</button>
+            </div>
+
+            <div id="map-container" class="w-full h-full"></div>
+            
+        </section>
     </main>
 
     <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script>
-    <!-- Leaflet Rotate Plugin JS -->
-    <script src="https://cdn.jsdelivr.net/npm/leaflet-rotate@0.1.1/dist/leaflet-rotate.min.js"></script>
-    <!-- Ficheiro de Script JS -->
-    <script src="script.js"></script>
-    <!--  WEB APP JS -->
-    <script>
-        if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("service-worker.js");
-        }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- App entry point -->
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>

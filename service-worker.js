@@ -4,9 +4,9 @@ const FILES_TO_CACHE = [
     "./",
     "./index.html",
     "./mapa.html",
-    "./style.css",
-    "./home.css",
-    "./script.js"
+    "./assets/css/style.css",
+    "./assets/css/home.css",
+    "./assets/js/script.js"
 ];
 
 self.addEventListener("install", (event) => {

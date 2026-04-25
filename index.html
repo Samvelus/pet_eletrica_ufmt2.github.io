@@ -8,20 +8,20 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#003366">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="apple-touch-icon" href="assets/images/icon-192.png">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Estilos da Homepage -->
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="assets/css/home.css">
 </head>
 <body>
     <div class="home-container">
         <!-- Header -->
         <header class="home-header">
-            <img src="Logo 10 Anos - Letra Preta.png" alt="PET Engenharia Elétrica UFMT" class="logo">
+            <img src="assets/images/Logo 10 Anos - Letra Preta.png" alt="PET Engenharia Elétrica UFMT" class="logo">
             <h1>Mapa Totem PET</h1>
             <p>Navegação Interativa - Engenharia Elétrica UFMT</p>
         </header>
@@ -85,28 +85,28 @@
                 <span>Mapa Interativo</span>
             </a>
 
-            <a href="https://www.ufmt.br/sigaa" target="_blank" rel="noopener noreferrer" class="nav-btn">
+            <a href="https://sistemas.ufmt.br/ufmt.portalsistemas/" target="_blank" rel="noopener noreferrer" class="nav-btn">
                 <div class="nav-btn-icon">
                     <i class="fas fa-graduation-cap"></i>
                 </div>
-                <span>SIGAA UFMT</span>
+                <span>Portal Aluno</span>
             </a>
 
-            <a href="https://www.ufmt.br" target="_blank" rel="noopener noreferrer" class="nav-btn">
+            <a href="https://www.ufmt.br/" target="_blank" rel="noopener noreferrer" class="nav-btn">
                 <div class="nav-btn-icon">
                     <i class="fas fa-university"></i>
                 </div>
-                <span>Portal UFMT</span>
+                <span>Site UFMT</span>
             </a>
 
-            <a href="https://www.ufmt.br/pet" target="_blank" rel="noopener noreferrer" class="nav-btn">
+            <a href="https://www.ufmt.br/unidade/peteletrica" target="_blank" rel="noopener noreferrer" class="nav-btn">
                 <div class="nav-btn-icon">
                     <i class="fas fa-users"></i>
                 </div>
                 <span>Programa PET</span>
             </a>
 
-            <a href="https://faet.ufmt.br" target="_blank" rel="noopener noreferrer" class="nav-btn">
+            <a href="https://www.ufmt.br/instituto-faculdade/faet" target="_blank" rel="noopener noreferrer" class="nav-btn">
                 <div class="nav-btn-icon">
                     <i class="fas fa-building-columns"></i>
                 </div>
@@ -220,73 +220,5 @@
             navigator.serviceWorker.register("service-worker.js");
         }
     </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa do Campus UFMT</title>
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-     crossorigin=""/>
-    <!-- Nosso CSS -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <h1>Universidade Federal de Mato Grosso</h1>
-        <p>Bem-vindo ao Totem da UFMT!</p>
-        <hr>
-    </header>
-
-    <main>
-        <div class="container">
-            <div id="map"></div>
-            <div id="sidebar">
-                <h2>Mapa do Campus</h2>
-                <p>Explore o mapa do campus para encontrar locais importantes.</p>
-
-                <div class="controls">
-                    <label for="sala-select">PESQUISA LOCAL:</label>
-                    <select id="sala-select">
-                        <option value="">Selecione ou digite o local...</option>
-                    </select>
-
-                    <label>
-                        <input type="checkbox" id="acessibilidade-checkbox"> Preciso de acessibilidade
-                    </label>
-
-                    <button id="mostrar-rota-btn">Como chegar?</button>
-
-                    <h3>Tipo de Mapa</h3>
-                    <div class="radio-group">
-                        <label><input type="radio" name="map-type" value="Normal" checked> Normal</label>
-                        <label><input type="radio" name="map-type" value="Híbrido"> Híbrido</label>
-                        <label><input type="radio" name="map-type" value="Satélite"> Satélite</label>
-                    </div>
-
-                    <label>
-                        <input type="checkbox" id="mostrar-pontos-checkbox" checked> Mostrar Pontos de Interesse
-                    </label>
-                    <label>
-                        <input type="checkbox" id="mostrar-rotas-checkbox"> Mostrar Rotas
-                    </label>
-                    <label>
-                        <input type="checkbox" id="mostrar-info-checkbox" checked> Mostrar Informações do Local
-                    </label>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Leaflet JavaScript -->
-   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script>
-    <!-- Nosso JavaScript -->
-    <script src="script.js"></script>
 </body>
 </html>
